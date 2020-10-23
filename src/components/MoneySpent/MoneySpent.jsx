@@ -9,6 +9,7 @@ import Card from "../Card/Card";
 import "./MoneySpent.css";
 
 //TODO: proptypes
+//TODO: Credit - (Un)/Planned Expenses instead of just displaying money spent
 
 const MoneySpent = ({ classNames, expenses, categories, ...props }) => {
   const month = new Date();
@@ -18,7 +19,9 @@ const MoneySpent = ({ classNames, expenses, categories, ...props }) => {
     <Card
       className={cn("MoneySpent", classNames)}
       {...props}
-      title={`Cash Flow - ${format(month, "MMMM")}`}
+      title={`Spending - ${format(month, "MMMM yyyy")}`}
+      centered
+      small
       wrapped
     >
       <p className="amount">${moneySpent}</p>

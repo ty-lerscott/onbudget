@@ -1,0 +1,22 @@
+.ExpenseOverview {
+    /* grid-area: expenseOverview; */
+}
+
+.overviewGroup {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.overviewGroup .title {
+    display: block;
+    font-size: 1rem;
+    color: var(--silver);
+}
+
+.overviewGroup .amount {
+    margin-top: 0.25rem;
+    display: block;
+    font-size: 1rem;
+    color: var(--woodsmoke);
+    font-weight: 600;
+}

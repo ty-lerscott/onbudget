@@ -1,12 +1,12 @@
 .MoneySpent {
-    grid-area: moneySpent;
+    /* grid-area: moneySpent; */
 }
 
 .content {
     height: calc(100% - 2rem);
 }
 
-.amount {
+.MoneySpent .amount {
     font-size: 2rem;
     font-weight: 600;
 }

@@ -5,12 +5,37 @@ import "./Card.css";
 
 //TODO: proptypes
 
-const Card = ({ className, children, title, wrapped = false, ...props }) => {
+const Card = ({
+  title,
+  children,
+  className,
+  small = false,
+  wrapped = false,
+  centered = false,
+  spaceBetween = false,
+  ...props
+}) => {
   return (
-    <div className={cn("Card", className)} {...props}>
+    <div
+      className={cn(
+        "Card",
+        {
+          CardSmall: small,
+        },
+        className
+      )}
+      {...props}
+    >
       {!!title && <p className="title">{title}</p>}
       {wrapped ? (
-        <div className="content flex centered">{children}</div>
+        <div
+          className={cn("content flex", {
+            centered: centered,
+            "space-between": spaceBetween,
+          })}
+        >
+          {children}
+        </div>
       ) : (
         children
       )}

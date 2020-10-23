@@ -20,6 +20,7 @@ const OverviewChart = ({ classNames, expenses, categories, ...props }) => {
       {...props}
       title="Overview"
       wrapped
+      centered
     >
       <Doughnut
         options={{

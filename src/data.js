@@ -71,6 +71,7 @@ export const expenses = [
     description: "Target",
     amount: 30.77,
     category_id: 3,
+    isBill: true,
     paid_on: "2020-10-02T03:03:56.000Z",
     created_on: "2020-10-21T03:04:58.710Z",
     updated_on: "2020-10-21T03:04:58.710Z",
@@ -143,6 +144,7 @@ export const expenses = [
     description: "Who Knows",
     amount: 85,
     category_id: 14,
+    isBill: true,
     paid_on: "2020-10-06T15:17:25.000Z",
     created_on: "2020-10-21T15:17:49.837Z",
     updated_on: "2020-10-21T15:17:49.837Z",
@@ -346,3 +348,5 @@ export const expenses = [
     updated_on: "2020-10-21T19:02:57.289Z",
   },
 ];
+
+export const balance = 2600;

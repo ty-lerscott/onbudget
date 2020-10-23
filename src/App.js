@@ -1,18 +1,14 @@
 import React from "react";
 import "./App.css";
 
-import { expenses, categories } from "./data";
+import { expenses, categories, balance } from "./data";
 
-import {
-  Header,
-  HeaderName,
-  HeaderGlobalBar,
-  HeaderGlobalAction,
-} from "carbon-components-react";
+import { Header, HeaderName } from "carbon-components-react";
 
 import Page from "./components/Page/Page";
-import OverviewChart from "./components/OverviewChart/OverviewChart";
 import MoneySpent from "./components/MoneySpent/MoneySpent";
+import ExpenseOverview from "./components/ExpenseOverview/ExpenseOverview";
+import OverviewChart from "./components/OverviewChart/OverviewChart";
 
 function App() {
   return (
@@ -22,14 +18,13 @@ function App() {
           OnBudget
         </HeaderName>
         {/* TODO: User Login */}
-        {/* <HeaderGlobalBar>
-			<HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-				<Search20 />
-			</HeaderGlobalAction>
-		</HeaderGlobalBar> */}
       </Header>
       <Page>
-        <MoneySpent expenses={expenses} />
+        <div className="cashFlow">
+          <MoneySpent expenses={expenses} />
+          <ExpenseOverview expenses={expenses} balance={balance} />
+        </div>
+
         <OverviewChart expenses={expenses} categories={categories} />
       </Page>
     </div>
