@@ -1,0 +1,8 @@
+.OverviewChart {
+    grid-area: overview;
+}
+
+.OverviewChart canvas {
+    max-width: 95%;
+    margin: 0 auto;
+}

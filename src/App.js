@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+import { expenses, categories } from "./data";
+
+import {
+  Header,
+  HeaderName,
+  HeaderGlobalBar,
+  HeaderGlobalAction,
+} from "carbon-components-react";
+
+import Page from "./components/Page/Page";
+import OverviewChart from "./components/OverviewChart/OverviewChart";
+import MoneySpent from "./components/MoneySpent/MoneySpent";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header aria-label="On Budget">
+        <HeaderName prefix="" href="#">
+          OnBudget
+        </HeaderName>
+        {/* TODO: User Login */}
+        {/* <HeaderGlobalBar>
+			<HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
+				<Search20 />
+			</HeaderGlobalAction>
+		</HeaderGlobalBar> */}
+      </Header>
+      <Page>
+        <MoneySpent expenses={expenses} />
+        <OverviewChart expenses={expenses} categories={categories} />
+      </Page>
     </div>
   );
 }
