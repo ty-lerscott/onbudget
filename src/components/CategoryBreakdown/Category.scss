@@ -1,0 +1,28 @@
+.Category {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .left {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    .transactions {
+        color: var(--silver);
+    }
+
+    .amount {
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+}
+
+.Category + .Category {
+    margin-top: 1rem;
+}

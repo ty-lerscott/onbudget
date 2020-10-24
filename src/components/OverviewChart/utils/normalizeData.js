@@ -11,9 +11,13 @@ export default ({ expenses, categories, month }) => {
   }, {});
 
   const named = Object.keys(grouped).reduce((acc, key) => {
-    const { name, ...category } = categories.find(
-      (category) => category.id === Number(key)
-    );
+    const { name = "", ...category } =
+      categories?.find((category) => category.id === Number(key)) || {};
+
+    if (!name) {
+      console.log({ key });
+      console.log(grouped[key]);
+    }
     acc[name] = { amount: grouped[key], ...category };
 
     return acc;
