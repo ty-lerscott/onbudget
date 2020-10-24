@@ -29,7 +29,6 @@ const OverviewChart = ({
     >
       <Doughnut
         options={{
-          width: "90%",
           cutoutPercentage: 75,
           circumference: Math.PI,
           rotation: Math.PI,
