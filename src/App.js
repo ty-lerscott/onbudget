@@ -6,10 +6,12 @@ import { lineItems, categories } from "./data";
 import { Header, HeaderName } from "carbon-components-react";
 
 import Page from "./components/Page/Page";
+import AddExpense from "./components/AddExpense/AddExpense";
 import MoneySpent from "./components/MoneySpent/MoneySpent";
 import MonthDisplay from "./components/MonthDisplay/MonthDisplay";
 import OverviewChart from "./components/OverviewChart/OverviewChart";
 import ExpenseOverview from "./components/ExpenseOverview/ExpenseOverview";
+import CategoryBreakdown from "./components/CategoryBreakdown/CategoryBreakdown";
 
 function App() {
   const [month, setMonth] = useState(new Date());
@@ -47,7 +49,14 @@ function App() {
 
         <div className="monthAndAdd">
           <MonthDisplay month={month} setMonth={setMonth} />
+          <AddExpense />
         </div>
+
+        <CategoryBreakdown
+          month={month}
+          expenses={expenses}
+          categories={categories}
+        />
       </Page>
     </div>
   );

@@ -81,6 +81,7 @@ export const lineItems = [
     description: "Amazon",
     amount: 35.04,
     categoryId: 4,
+    isBill: true,
     paidOn: "2020-10-02T03:03:56.000Z",
     createdOn: "2020-10-21T03:05:23.743Z",
     updatedOn: "2020-10-21T03:05:23.743Z",

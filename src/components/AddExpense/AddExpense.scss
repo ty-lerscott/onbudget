@@ -1,0 +1,24 @@
+.AddExpense {
+    display: grid;
+    padding: 0;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 1rem;
+
+    button {
+        cursor: pointer;
+        border: 1px solid rgba(0,0,0, 0.25);
+        background-color: var(--woodsmoke);
+        color: var(--white_lilac);
+        font-weight: 600;
+        letter-spacing: 0.1px;
+        opacity: 0.75;
+
+        &.Primary {
+            background-color: var(--primary);
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

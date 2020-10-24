@@ -8,4 +8,6 @@
     --silver: #cccccc;
 
     --shadow: #e8e8e8;
+
+    --primary: var(--fountain_blue);
 }
