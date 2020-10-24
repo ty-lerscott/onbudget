@@ -10,17 +10,22 @@ import "./OverviewChart.css";
 
 //TODO: proptypes
 
-const OverviewChart = ({ classNames, expenses, categories, ...props }) => {
-  const month = new Date();
+const OverviewChart = ({
+  classNames,
+  expenses,
+  categories,
+  month,
+  ...props
+}) => {
   const data = normalizeData({ expenses, categories, month });
 
   return (
     <Card
-      className={cn("OverviewChart", classNames)}
-      {...props}
-      title="Overview"
       wrapped
       centered
+      title="Overview"
+      className={cn("OverviewChart", classNames)}
+      {...props}
     >
       <Doughnut
         options={{

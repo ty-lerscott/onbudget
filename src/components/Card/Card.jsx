@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "classnames";
 
-import "./Card.css";
+import "./Card.scss";
 
 //TODO: proptypes
 
@@ -12,6 +12,7 @@ const Card = ({
   small = false,
   wrapped = false,
   centered = false,
+  transparent = false,
   spaceBetween = false,
   ...props
 }) => {
@@ -21,6 +22,7 @@ const Card = ({
         "Card",
         {
           CardSmall: small,
+          CardTransparent: transparent,
         },
         className
       )}

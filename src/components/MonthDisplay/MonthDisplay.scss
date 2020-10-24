@@ -1,0 +1,33 @@
+.MonthDisplay {
+    .wrapper {
+        height: 100%;
+    }
+
+    button {
+        outline: none;
+        cursor: pointer;
+        border: none;
+        height: 100%;
+        background-color: transparent;
+        padding: 0;
+        opacity: 0.5;
+
+        &:disabled {
+            opacity: 0.25;
+        }
+
+        &:not(:disabled):hover {
+            opacity: 1;
+        }
+    }
+
+    .Month {
+        color: var(--woodsmoke);
+        font-weight: 600;
+        font-size: 2rem;
+        line-height: 1;
+        letter-spacing: 0.1px;
+        position: relative;
+        top: -4px;
+    }
+}

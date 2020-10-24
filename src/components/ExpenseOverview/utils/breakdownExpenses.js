@@ -5,7 +5,7 @@ const round = (amount) => Math.round((amount + Number.EPSILON) * 100) / 100;
 export default ({ expenses, month }) => {
   const { bills, unplanned } = expenses.reduce(
     (acc, expense) => {
-      if (isSameMonth(new Date(expense.paid_on), month)) {
+      if (isSameMonth(new Date(expense.paidOn), month)) {
         if (expense.isBill) {
           acc.bills = (acc.bills || 0) + expense.amount;
         } else {

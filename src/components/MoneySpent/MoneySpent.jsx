@@ -11,15 +11,14 @@ import "./MoneySpent.css";
 //TODO: proptypes
 //TODO: Credit - (Un)/Planned Expenses instead of just displaying money spent
 
-const MoneySpent = ({ classNames, expenses, categories, ...props }) => {
-  const month = new Date();
+const MoneySpent = ({ classNames, expenses, categories, month, ...props }) => {
   const moneySpent = sumSpending({ expenses, month });
 
   return (
     <Card
       className={cn("MoneySpent", classNames)}
       {...props}
-      title={`Spending - ${format(month, "MMMM yyyy")}`}
+      title="Overall Spending"
       centered
       small
       wrapped

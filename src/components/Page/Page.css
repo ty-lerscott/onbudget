@@ -3,7 +3,7 @@
     margin: 4rem auto;
     padding: 0 1rem;
     grid-template-areas:
-        'cashFlow categoryOverview sidebar'
+        'cashFlow categoryOverview monthAndAdd'
         'chart chart sidebar';
     grid-row-gap: 1rem;
     grid-column-gap: 1rem;
@@ -17,5 +17,14 @@
     grid-template-areas:
         'moneySpent'
         'expenseOverview';
+    grid-row-gap: 1rem;
+}
+
+.monthAndAdd {
+    grid-area: monthAndAdd;
+    display: grid;
+    grid-template-areas:
+        'calendar'
+        'addExpense';
     grid-row-gap: 1rem;
 }

@@ -10,6 +10,11 @@
     height: calc(130px - 0.5rem);
 }
 
+.CardTransparent {
+    background-color: transparent;
+    box-shadow: none;
+}
+
 .title {
     color: var(--woodsmoke);
     font-weight: 600;

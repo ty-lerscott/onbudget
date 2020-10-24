@@ -2,9 +2,9 @@ import isSameMonth from "date-fns/isSameMonth";
 
 export default ({ expenses, categories, month }) => {
   const grouped = expenses.reduce((acc, expense) => {
-    if (isSameMonth(new Date(expense.paid_on), month)) {
-      acc[expense.category_id] =
-        (acc?.[expense.category_id] || 0) + expense.amount;
+    if (isSameMonth(new Date(expense.paidOn), month)) {
+      acc[expense.categoryId] =
+        (acc?.[expense.categoryId] || 0) + expense.amount;
     }
 
     return acc;
