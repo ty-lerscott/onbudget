@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 // TODO: PropTypes
 
-import "./Page.css";
+import "./Page.scss";
 
 const Page = ({ children, ...props }) => {
   return (

@@ -3,23 +3,30 @@
     padding: 0;
     grid-template-rows: 1fr 1fr;
     grid-row-gap: 1rem;
+}
 
-    button {
-        cursor: pointer;
-        border: 1px solid rgba(65, 65, 65, 0.25);
-        border-radius: 4px;
-        background-color: var(--woodsmoke);
-        color: var(--white_lilac);
-        font-weight: 600;
-        letter-spacing: 0.1px;
-        opacity: 0.75;
+.AddExpenseForm {
+    > div + div {
+        margin-top: 1rem;
+    }
 
-        &.Primary {
-            background-color: var(--primary);
+    .split {
+        > * {
+            width: calc(50% - 0.5rem);
         }
+    }
 
-        &:hover {
-            opacity: 1;
-        }
+    .bx--form-item {
+        display: block;
+    }
+
+    .bx--date-picker,
+    .bx--date-picker-container,
+    .bx--date-picker.bx--date-picker--single .bx--date-picker__input {
+        width: 100%;
+    }
+
+    .bx--date-picker-container .bx--label {
+        margin-bottom: 11px;
     }
 }

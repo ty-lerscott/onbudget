@@ -1,8 +1,0 @@
-.OverviewChart {
-    grid-area: categoryOverview;
-}
-
-.OverviewChart canvas {
-    max-width: 95%;
-    margin: 0 auto;
-}

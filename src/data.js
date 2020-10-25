@@ -17,7 +17,7 @@ export const categories = [
   },
   {
     id: 8,
-    name: "Balance",
+    name: "Credit (Income)",
     color: "#377ed4",
     createdOn: "2020-10-21T01:30:49.932Z",
     updatedOn: "2020-10-21T01:30:49.932Z",

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/reset.css";
 import "./styles/colors.css";
-import "./index.css";
+import "./index.scss";
 
 import App from "./App";
 

@@ -1,0 +1,13 @@
+.OverviewChart {
+    grid-area: categoryOverview;
+
+    canvas {
+        max-width: 95%;
+        margin: 0 auto;
+
+        @media screen and (max-width: 780px) {
+            max-width: 400px;
+            max-height: 200px;
+        }
+    }
+}

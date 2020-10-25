@@ -6,7 +6,7 @@ import normalizeData from "./utils/normalizeData";
 import Card from "../Card/Card";
 import { Doughnut } from "react-chartjs-2";
 
-import "./OverviewChart.css";
+import "./OverviewChart.scss";
 
 //TODO: proptypes
 
