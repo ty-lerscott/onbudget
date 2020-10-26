@@ -1,3 +1,6 @@
+@import "./reset";
+@import "./colors";
+
 body {
   background-color: var(--white_lilac);
 }
@@ -92,4 +95,18 @@ button {
       background-color: var(--woodsmoke);
     }
   }
+}
+
+.bx--header {
+  background-color: white;
+  box-shadow: 0px 0px 8px var(--shadow);
+  border-bottom-color: var(--white_lilac);
+}
+
+a.bx--header__name, a.bx--header__name:hover {
+  color: var(--woodsmoke);
+}
+
+.error {
+  color: var(--valencia);
 }

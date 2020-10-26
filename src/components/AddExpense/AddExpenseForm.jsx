@@ -86,7 +86,7 @@ const AddExpenseForm = ({ formValues, setFormValues }) => {
       </div>
       <div className="Row">
         <TextInput
-          id="Description"
+          id="description"
           labelText="Description"
           onChange={handleDescriptionChange}
         />

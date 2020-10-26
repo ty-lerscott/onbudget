@@ -1,0 +1,9 @@
+.SignIn {
+    .bx--modal-close {
+        display: none;
+    }
+
+    div + div {
+        margin-top: 1rem;
+    }
+}

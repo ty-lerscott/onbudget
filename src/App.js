@@ -3,8 +3,6 @@ import "./App.css";
 
 import { lineItems, categories } from "./data";
 
-import { Header, HeaderName } from "carbon-components-react";
-
 import Page from "./components/Page/Page";
 
 import AddExpense from "./components/AddExpense/AddExpense";
@@ -27,12 +25,6 @@ function App() {
 
   return (
     <div className="App">
-      <Header aria-label="On Budget">
-        <HeaderName prefix="" href="#">
-          OnBudget
-        </HeaderName>
-        {/* TODO: User Login */}
-      </Header>
       <Page>
         <div className="cashFlow">
           <MoneySpent expenses={expenses} month={month} />

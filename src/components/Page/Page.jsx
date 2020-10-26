@@ -1,13 +1,14 @@
 import React from "react";
+import cn from "classnames";
 import PropTypes from "prop-types";
 
 // TODO: PropTypes
 
 import "./Page.scss";
 
-const Page = ({ children, ...props }) => {
+const Page = ({ children, name, ...props }) => {
   return (
-    <div className="Page" {...props}>
+    <div className={cn("Page", `Page-${name}`)} {...props}>
       {children}
     </div>
   );
