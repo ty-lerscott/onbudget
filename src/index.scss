@@ -2,12 +2,21 @@ body {
   background-color: var(--white_lilac);
 }
 
+*:focus {
+  border-color: var(--primary)!important;
+  outline-color: var(--primary)!important;
+}
+
 .flex {
   display: flex;
 }
 
 .no-flex * {
   flex: none;
+}
+
+.no-margin {
+  margin: 0;
 }
 
 .centered {
@@ -47,6 +56,16 @@ button {
 /* MODAL */
 .bx--modal-container {
   border-radius: 4px;
+}
+
+.bx--modal-content{
+  &:focus {
+    outline: none;
+  }
+
+  p:empty {
+    display: none;
+  }
 }
 
 .bx--btn {

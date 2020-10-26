@@ -5,11 +5,13 @@
     grid-row-gap: 1rem;
 }
 
-.AddExpenseForm {
+.AddExpenseForm, .ImportStatementForm {
     > div + div {
         margin-top: 1rem;
     }
+}
 
+.AddExpenseForm {
     .split {
         > * {
             width: calc(50% - 0.5rem);
@@ -28,5 +30,30 @@
 
     .bx--date-picker-container .bx--label {
         margin-bottom: 11px;
+    }
+}
+
+.ImportStatementForm {
+    .FileUploader {
+        .bx--btn {
+            padding: 0 1rem!important;
+        }
+
+        .bx--file__selected-file {
+            background-color: white;
+        }
+    }
+
+    .inputArray {
+        display: grid;
+        grid-template-columns: repeat(4, 25%);
+
+        .bx--form-item {
+            width: 80%;
+        }
+
+        input {
+            min-width: auto!important;
+        }
     }
 }

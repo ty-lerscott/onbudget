@@ -23,6 +23,9 @@ const AddExpense = () => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
+  };
+
+  const handleClearForm = () => {
     setModalType("");
   };
 
@@ -43,6 +46,7 @@ const AddExpense = () => {
         onRequestClose={handleCloseModal}
         onRequestSubmit={handleSubmitForm}
         onSecondarySubmit={handleCloseModal}
+        onAnimationEnd={handleClearForm}
       >
         <Form setFormValues={setFormValues} formValues={formValues} />
       </Modal>

@@ -41,7 +41,7 @@ export const categories = [
   },
   {
     id: 14,
-    name: "Miscellaneous",
+    name: "Other",
     color: "#d47637",
     createdOn: "2020-10-21T01:59:38.323Z",
     updatedOn: "2020-10-21T01:59:38.323Z",
