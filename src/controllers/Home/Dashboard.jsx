@@ -6,6 +6,7 @@ import { fetchCategories, fetchExpenses } from "./DashboardActions";
 import AddExpense from "../../components/AddExpense/AddExpense";
 import MoneySpent from "../../components/MoneySpent/MoneySpent";
 import MonthDisplay from "../../components/MonthDisplay/MonthDisplay";
+import OverviewChart from "../../components/OverviewChart/OverviewChart";
 import ExpenseOverview from "../../components/ExpenseOverview/ExpenseOverview";
 
 const Dashboard = ({ expenses, getCategories, getExpenses, categories }) => {
@@ -81,6 +82,12 @@ const Dashboard = ({ expenses, getCategories, getExpenses, categories }) => {
         <MonthDisplay month={month} setMonth={setMonth} />
         <AddExpense />
       </div>
+
+      <OverviewChart
+        categories={categories}
+        expenses={cachedExpenses}
+        month={month}
+      />
     </>
   );
 };

@@ -35,11 +35,11 @@ function App() {
           /> */}
         </div>
 
-        <OverviewChart
+        {/* <OverviewChart
           expenses={expenses}
           categories={categories}
           month={month}
-        />
+        /> */}
 
         {/* <div className="monthAndAdd">
           <MonthDisplay month={month} setMonth={setMonth} />
