@@ -15,7 +15,7 @@ export default ({ expenses, categories, month }) => {
       expenses.reduce((amount, expense) => {
         if (
           category.id === expense.categoryId &&
-          isSameMonth(new Date(expense.paidOn), month)
+          isSameMonth(new Date(expense.date), month)
         ) {
           amount += expense.amount;
         }

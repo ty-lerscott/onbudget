@@ -4,7 +4,7 @@ const round = (amount) => Math.round((amount + Number.EPSILON) * 100) / 100;
 
 export default ({ expenses, month, categories }) => {
   const grouped = expenses.reduce((acc, expense) => {
-    if (isSameMonth(new Date(expense.paidOn), month)) {
+    if (isSameMonth(new Date(expense.date), month)) {
       acc[expense.categoryId] = {
         amount: (acc?.[expense.categoryId]?.amount || 0) + expense.amount,
         quantity: (acc?.[expense.categoryId]?.quantity || 0) + 1,
@@ -20,7 +20,7 @@ export default ({ expenses, month, categories }) => {
 
   return entries.map(([categoryId, { amount, quantity }]) => {
     const { color = "", name } =
-      categories.find((category) => category.id === Number(categoryId)) || {};
+      categories.find((category) => category.id === categoryId) || {};
 
     return {
       name,

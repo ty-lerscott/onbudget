@@ -8,6 +8,8 @@ import MoneySpent from "../../components/MoneySpent/MoneySpent";
 import MonthDisplay from "../../components/MonthDisplay/MonthDisplay";
 import OverviewChart from "../../components/OverviewChart/OverviewChart";
 import ExpenseOverview from "../../components/ExpenseOverview/ExpenseOverview";
+import CategoryBreakdown from "../../components/CategoryBreakdown/CategoryBreakdown";
+import StackedCategoryChart from "../../components/StackedCategoryChart/StackedCategoryChart";
 
 const Dashboard = ({ expenses, getCategories, getExpenses, categories }) => {
   const memoizedGetExpenses = useRef(() => getExpenses()).current;
@@ -87,6 +89,18 @@ const Dashboard = ({ expenses, getCategories, getExpenses, categories }) => {
         categories={categories}
         expenses={cachedExpenses}
         month={month}
+      />
+
+      <CategoryBreakdown
+        month={month}
+        expenses={expenses}
+        categories={categories}
+      />
+
+      <StackedCategoryChart
+        month={month}
+        categories={categories}
+        expenses={cachedExpenses}
       />
     </>
   );

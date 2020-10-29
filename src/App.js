@@ -46,11 +46,11 @@ function App() {
           <AddExpense />
         </div> */}
 
-        <CategoryBreakdown
+        {/* <CategoryBreakdown
           month={month}
           expenses={expenses}
           categories={categories}
-        />
+        /> */}
 
         <StackedCategoryChart
           month={month}
