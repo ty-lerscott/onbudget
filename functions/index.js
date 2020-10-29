@@ -4,9 +4,23 @@ const functions = require("firebase-functions");
 admin.initializeApp();
 
 exports.newUserSignup = functions.auth.user().onCreate((user) => {
-  admin.firestore().collection("users").doc(user.uid).set({
-    expenses: [],
-  });
+  admin
+    .firestore()
+    .collection("users")
+    .doc(user.uid)
+    .collection("expenses")
+    .set({
+      description: "",
+    });
+
+  admin
+    .firestore()
+    .collection("users")
+    .doc(user.uid)
+    .collection("categories")
+    .set({
+      name: "",
+    });
 });
 
 exports.categories = functions.https.onCall(

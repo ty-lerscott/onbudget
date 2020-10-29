@@ -4,20 +4,21 @@ import cn from "classnames";
 import Card from "../Card/Card";
 import "./ExpenseOverview.css";
 
-import combineIncome from "./utils/combineIncome";
-import breakdownExpenses from "./utils/breakdownExpenses";
+import forThisMonth from "./utils/forThisMonth";
 
 //TODO: proptypes
 
 const ExpenseOverview = ({
   classNames,
   expenses,
-  incomes,
+  deposits,
+  bills,
   month,
   ...props
 }) => {
-  const { bills, unplanned } = breakdownExpenses({ expenses, month });
-  const combinedIncome = combineIncome({ incomes, month, expenses });
+  const income = forThisMonth(deposits, month);
+  const unplanned = forThisMonth(expenses, month);
+  const billsForMonth = forThisMonth(bills, month);
 
   return (
     <Card
@@ -31,7 +32,7 @@ const ExpenseOverview = ({
     >
       <div className="overviewGroup">
         <span className="title">Balance</span>
-        <span className="amount">${combinedIncome}</span>
+        <span className="amount">${income - unplanned - billsForMonth}</span>
       </div>
       <div className="overviewGroup">
         <span className="title">Expenses</span>
@@ -39,7 +40,7 @@ const ExpenseOverview = ({
       </div>
       <div className="overviewGroup">
         <span className="title">Planned</span>
-        <span className="amount">${bills}</span>
+        <span className="amount">${billsForMonth}</span>
       </div>
     </Card>
   );

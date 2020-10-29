@@ -27,12 +27,12 @@ function App() {
     <div className="App">
       <Page>
         <div className="cashFlow">
-          <MoneySpent expenses={expenses} month={month} />
-          <ExpenseOverview
+          {/* <MoneySpent expenses={expenses} month={month} /> */}
+          {/* <ExpenseOverview
             expenses={expenses}
             incomes={incomes}
             month={month}
-          />
+          /> */}
         </div>
 
         <OverviewChart
@@ -41,10 +41,10 @@ function App() {
           month={month}
         />
 
-        <div className="monthAndAdd">
+        {/* <div className="monthAndAdd">
           <MonthDisplay month={month} setMonth={setMonth} />
           <AddExpense />
-        </div>
+        </div> */}
 
         <CategoryBreakdown
           month={month}

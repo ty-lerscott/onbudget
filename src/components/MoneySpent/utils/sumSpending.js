@@ -2,7 +2,7 @@ import isSameMonth from "date-fns/isSameMonth";
 
 export default ({ expenses, month }) => {
   const amount = expenses.reduce((acc, expense) => {
-    if (isSameMonth(new Date(expense.paidOn), month)) {
+    if (isSameMonth(new Date(expense.date), month)) {
       acc = acc + expense.amount;
     }
 
