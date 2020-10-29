@@ -8,8 +8,8 @@ import { firestoreReducer } from "redux-firestore";
 import api from "./api";
 // import middleware from "utils/middleware";
 
-export default ({ history, reducers, initial = {}, routes = [] }) =>
-  createStore(
+export default ({ history, reducers, initial = {}, routes = [] }) => {
+  return createStore(
     combineReducers({
       router: connectRouter(history),
       firebase: firebaseReducer,
@@ -18,10 +18,10 @@ export default ({ history, reducers, initial = {}, routes = [] }) =>
     }),
     initial,
     applyMiddleware(
-      //   thunk.withExtraArgument({ getFirebase, api: api(getFirebase) }),
-      thunk.withExtraArgument({ getFirebase }),
+      thunk.withExtraArgument({ getFirebase, api }),
       routerMiddleware(history),
       //   middleware.dependencies(routes),
       createLogger()
     )
   );
+};

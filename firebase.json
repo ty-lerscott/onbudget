@@ -1,0 +1,13 @@
+{
+  "emulators": {
+    "functions": {
+      "port": 3030
+    },
+    "ui": {
+      "enabled": true
+    },
+    "firestore": {
+      "port": 8080
+    }
+  }
+}

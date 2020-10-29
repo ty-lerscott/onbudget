@@ -1,6 +1,6 @@
 import React from "react";
 import cn from "classnames";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 // TODO: PropTypes
 
