@@ -11,6 +11,7 @@ import ExpenseOverview from "../../components/ExpenseOverview/ExpenseOverview";
 import CategoryBreakdown from "../../components/CategoryBreakdown/CategoryBreakdown";
 import StackedCategoryChart from "../../components/StackedCategoryChart/StackedCategoryChart";
 
+//TODO: use a reducer to maintain all of this internal state
 const Dashboard = ({ expenses, getCategories, getExpenses, categories }) => {
   const memoizedGetExpenses = useRef(() => getExpenses()).current;
   const memoizedGetCategories = useRef(() => getCategories()).current;
@@ -86,9 +87,9 @@ const Dashboard = ({ expenses, getCategories, getExpenses, categories }) => {
       </div>
 
       <OverviewChart
+        month={month}
         categories={categories}
         expenses={cachedExpenses}
-        month={month}
       />
 
       <CategoryBreakdown

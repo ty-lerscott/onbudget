@@ -5,6 +5,10 @@ body {
   background-color: var(--white_lilac);
 }
 
+.App {
+  position: relative;
+}
+
 *:focus {
   border-color: var(--primary)!important;
   outline-color: var(--primary)!important;
@@ -109,4 +113,8 @@ a.bx--header__name, a.bx--header__name:hover {
 
 .error {
   color: var(--valencia);
+}
+
+.bx--toast-notification {
+  margin: 0;
 }

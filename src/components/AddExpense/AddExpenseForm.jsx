@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import {
   ComboBox,
   TextInput,
@@ -7,13 +9,7 @@ import {
   DatePickerInput,
 } from "carbon-components-react";
 
-import { categories as allCategories } from "../../data";
-
-const categories = [...new Set(allCategories.map(({ id }) => id))].map((id) =>
-  allCategories.find((category) => category.id === id)
-);
-
-const AddExpenseForm = ({ formValues, setFormValues }) => {
+const AddExpenseForm = ({ formValues, setFormValues, categories }) => {
   const categoriesToString = (category) => category?.name || "";
 
   const setState = (key) => (value) => {
@@ -30,19 +26,19 @@ const AddExpenseForm = ({ formValues, setFormValues }) => {
   };
 
   const handleChangeCategory = ({ selectedItem }) => {
-    setState("category")(Number(selectedItem.id));
+    setState("categoryId")(selectedItem.id);
   };
 
   const handleDateChange = (args) => {
     let date;
     // this is a DatePicker calendar select
     if (Array.isArray(args)) {
-      date = args[0].getDate();
+      date = args[0];
     } else {
-      date = new Date(args?.target?.value);
+      date = new Date(args.target.value);
     }
 
-    setState("date")(date);
+    setState("date")(date.getTime());
   };
 
   const handleDescriptionChange = (e) => {
@@ -95,4 +91,8 @@ const AddExpenseForm = ({ formValues, setFormValues }) => {
   );
 };
 
-export default AddExpenseForm;
+const mapStateToProps = (state) => ({
+  categories: state.app.categories,
+});
+
+export default connect(mapStateToProps)(AddExpenseForm);

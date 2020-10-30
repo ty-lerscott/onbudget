@@ -30,7 +30,7 @@ const SignInModal = ({ login }) => {
   };
 
   const handleSubmitForm = () => {
-    console.warn("does this work", formValues);
+    // console.warn("does this work", formValues);
     login(formValues).catch((err) => {
       setError(err.message);
     });

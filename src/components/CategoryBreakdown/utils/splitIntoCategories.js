@@ -1,10 +1,19 @@
 import isSameMonth from "date-fns/isSameMonth";
-
-const round = (amount) => Math.round((amount + Number.EPSILON) * 100) / 100;
+import round from "../../../utils/currency";
 
 export default ({ expenses, month, categories }) => {
+  const billCategories = categories.reduce((acc, { isBill, id }) => {
+    if (isBill) {
+      acc.push(id);
+    }
+    return acc;
+  }, []);
+
   const grouped = expenses.reduce((acc, expense) => {
-    if (isSameMonth(new Date(expense.date), month)) {
+    if (
+      isSameMonth(new Date(expense.date), month) &&
+      !billCategories.includes(expense.categoryId)
+    ) {
       acc[expense.categoryId] = {
         amount: (acc?.[expense.categoryId]?.amount || 0) + expense.amount,
         quantity: (acc?.[expense.categoryId]?.quantity || 0) + 1,

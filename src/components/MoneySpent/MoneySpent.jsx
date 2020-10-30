@@ -23,7 +23,7 @@ const MoneySpent = ({ classNames, expenses, categories, month, ...props }) => {
       small
       wrapped
     >
-      <p className="amount">${moneySpent}</p>
+      <p className="amount">{moneySpent}</p>
     </Card>
   );
 };

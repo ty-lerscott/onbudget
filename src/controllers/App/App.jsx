@@ -2,6 +2,8 @@ import React from "react";
 import { renderRoutes } from "react-router-config";
 import { Header, HeaderName } from "carbon-components-react";
 
+import NotificationCenter from "../../components/NotificationCenter/NotificationCenter";
+
 const App = ({ route }) =>
   !!route?.routes && (
     <main className="App">
@@ -9,8 +11,8 @@ const App = ({ route }) =>
         <HeaderName prefix="" href="#">
           OnBudget
         </HeaderName>
-        {/* TODO: User Login */}
       </Header>
+      <NotificationCenter />
 
       {renderRoutes(route.routes)}
     </main>

@@ -4,6 +4,7 @@ import cn from "classnames";
 import Card from "../Card/Card";
 import "./ExpenseOverview.css";
 
+import toCurrency from "../../utils/currency";
 import forThisMonth from "./utils/forThisMonth";
 
 //TODO: proptypes
@@ -32,7 +33,9 @@ const ExpenseOverview = ({
     >
       <div className="overviewGroup">
         <span className="title">Balance</span>
-        <span className="amount">${income - unplanned - billsForMonth}</span>
+        <span className="amount">
+          {toCurrency(income - unplanned - billsForMonth)}
+        </span>
       </div>
       <div className="overviewGroup">
         <span className="title">Expenses</span>
@@ -40,7 +43,7 @@ const ExpenseOverview = ({
       </div>
       <div className="overviewGroup">
         <span className="title">Planned</span>
-        <span className="amount">${billsForMonth}</span>
+        <span className="amount">{toCurrency(billsForMonth) || "$0.00"}</span>
       </div>
     </Card>
   );

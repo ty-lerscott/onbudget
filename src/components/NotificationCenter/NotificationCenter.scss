@@ -1,0 +1,12 @@
+.NotificationCenter {
+    position: fixed;
+    top: 0;
+    height: 0;
+    width: 100vw;
+    z-index: 100;
+    margin-top: 48px;
+    background-color: teal;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: flex-end;
+}

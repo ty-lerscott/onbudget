@@ -11,7 +11,7 @@ const Category = ({ name, quantity, amount }) => (
       </span>
     </div>
     <div className="right flex align-center">
-      <span className="amount">${amount}</span>
+      <span className="amount">{amount}</span>
     </div>
   </li>
 );

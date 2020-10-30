@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import React, { useState } from "react";
 import { Modal } from "carbon-components-react";
 
@@ -5,15 +6,20 @@ import Card from "../Card/Card";
 import AddExpenseForm from "./AddExpenseForm";
 import ImportStatementForm from "./ImportStatementForm";
 
+import { addExpenseAction } from "./AddExpenseActions";
+import { fetchExpenses } from "../../controllers/Home/DashboardActions";
+import { enqueueNotification } from "../NotificationCenter/NotificationActions";
+
 import "./AddExpense.scss";
 
-const AddExpense = () => {
+const AddExpense = ({ addExpense, notify, getExpenses }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState("");
   const isAddModal = modalType === "add";
   const [formValues, setFormValues] = useState({});
 
   const Form = isAddModal ? AddExpenseForm : ImportStatementForm;
+
   const modalTitle = isAddModal ? "Add Expense" : "Import Statement";
 
   const handleOpenModal = (type) => () => {
@@ -30,7 +36,25 @@ const AddExpense = () => {
   };
 
   const handleSubmitForm = () => {
-    console.log("who knos", formValues);
+    // TODO: add import action
+    const submitAction = isAddModal ? addExpense : null;
+
+    submitAction(formValues).then((resp) => {
+      if (!resp?.errors) {
+        const subtitle = isAddModal
+          ? "You successfully added an expense"
+          : "You successfully imported expenses";
+        handleCloseModal();
+        notify({
+          subtitle,
+          type: "success",
+          title: "Success",
+        });
+        getExpenses();
+        setFormValues();
+      }
+    });
+    // console.log("who knos", formValues);
   };
 
   return (
@@ -43,10 +67,10 @@ const AddExpense = () => {
         modalHeading={modalTitle}
         primaryButtonText="Submit"
         secondaryButtonText="Cancel"
+        onAnimationEnd={handleClearForm}
         onRequestClose={handleCloseModal}
         onRequestSubmit={handleSubmitForm}
         onSecondarySubmit={handleCloseModal}
-        onAnimationEnd={handleClearForm}
       >
         <Form setFormValues={setFormValues} formValues={formValues} />
       </Modal>
@@ -64,4 +88,10 @@ const AddExpense = () => {
   );
 };
 
-export default AddExpense;
+const mapDispatchToProps = {
+  getExpenses: fetchExpenses,
+  notify: enqueueNotification,
+  addExpense: addExpenseAction,
+};
+
+export default connect(null, mapDispatchToProps)(AddExpense);

@@ -47,7 +47,7 @@ exports.categories = functions.https.onCall(
 
       return categories;
     } catch (err) {
-      console.warn("what errors are happening", err.message);
+      // console.warn("what errors are happening", err.message);
       return {
         errors: [{ message: err.message }],
       };
@@ -92,5 +92,33 @@ exports.expenses = functions.https.onCall(
     return statement;
   }
 );
+
+exports.addExpense = functions.https.onCall(
+  async ({ isEmulating, ...body }, { auth }) => {
+    const db = admin.firestore();
+    let resp;
+
+    if (isEmulating) {
+      db.emulatorOrigin = "http://localhost:8080";
+    }
+
+    await admin
+      .firestore()
+      .collection("users")
+      .doc(auth.uid)
+      .collection("expenses")
+      .doc()
+      .set(body)
+      .catch((err) => {
+        resp = {
+          errors: [{ message: err.message }],
+        };
+      });
+
+    return resp;
+  }
+);
+
+exports.addExpenses = functions.https.onCall(async (body, { auth }) => {});
 
 // exports.getStatementByMonth =
