@@ -109,6 +109,7 @@ const SignInModal = ({ login, requestAccess, forgotPassword }) => {
       <Modal
         open
         hasForm
+        size="sm"
         shouldSubmitOnEnter
         preventCloseOnClickOutside
         modalHeading={modalHeading}
