@@ -1,0 +1,46 @@
+.Modal {
+    .bx--modal-content{
+        margin-bottom: 2rem;
+
+        &:focus {
+          outline: none;
+        }
+
+        p:empty {
+          display: none;
+        }
+    }
+
+    .bx--modal-container {
+        border-radius: 4px;
+    }
+}
+
+.Modal--submitting {
+    .bx--inline-loading {
+        display: flex;
+        justify-content: center;
+
+        .bx--loading--small,.bx--inline-loading__animation {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+}
+
+.Modal--disabled {
+    .bx--modal-footer {
+        .bx--btn--primary {
+            pointer-events: none;
+            color: var(--silver);
+            text-shadow: none;
+            background-color: var(--shadow);
+        }
+
+        .bx--btn--secondary {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    }
+
+}

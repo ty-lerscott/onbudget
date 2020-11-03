@@ -1,11 +1,11 @@
 import cn from "classnames";
 import { connect } from "react-redux";
-import React, { useState } from "react";
-import { Modal } from "carbon-components-react";
+import React, { useState, useEffect } from "react";
 
 import Card from "../Card/Card";
 import AddTransactionForm from "./AddTransactionForm";
 import ImportStatementForm from "./ImportStatementForm";
+import Modal from "../Modal/Modal";
 
 import {
   addTransactionAction,
@@ -16,16 +16,43 @@ import { enqueueNotification } from "../NotificationCenter/NotificationActions";
 
 import "./AddTransaction.scss";
 
+const MODAL_TYPES = {
+  ADD: "ADD",
+  IMPORT: "IMPORT",
+};
+
+const INITIAL_FORM_VALUES = {
+  [MODAL_TYPES.ADD]: {
+    amount: 0,
+    date: 0,
+    categoryId: "",
+    description: "",
+  },
+  [MODAL_TYPES.IMPORT]: {
+    csv: [],
+  },
+};
+
 const AddTransaction = ({
-  addTransaction,
   notify,
+  addTransaction,
   getTransactions,
   importStatement,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState("");
-  const isAddModal = modalType === "add";
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAddModal, setIsAddModal] = useState(false);
   const [formValues, setFormValues] = useState({});
+
+  useEffect(() => {
+    const _isAddModal = modalType === MODAL_TYPES.ADD;
+
+    setIsAddModal(_isAddModal);
+    setFormValues(
+      INITIAL_FORM_VALUES[_isAddModal ? MODAL_TYPES.ADD : MODAL_TYPES.IMPORT]
+    );
+  }, [modalType]);
 
   const Form = isAddModal ? AddTransactionForm : ImportStatementForm;
 
@@ -49,38 +76,49 @@ const AddTransaction = ({
   };
 
   const handleSubmitForm = () => {
-    // TODO: add import action
+    setIsSubmitting(true);
     const submitAction = isAddModal ? addTransaction : importStatement;
 
-    submitAction(formValues).then((resp) => {
-      if (!resp?.errors) {
-        const subtitle = isAddModal
-          ? "You successfully added an transaction"
-          : "You successfully imported transactions";
-        handleCloseModal();
-        notify({
-          subtitle,
-          type: "success",
-        });
-        getTransactions();
-        setFormValues({});
-      }
-    });
+    submitAction(formValues)
+      .then((resp) => {
+        if (!resp?.errors) {
+          const subtitle = isAddModal
+            ? "You successfully added an transaction"
+            : "You successfully imported transactions";
+          handleCloseModal();
+          notify({
+            subtitle,
+            type: "success",
+          });
+          getTransactions();
+          setFormValues({});
+        }
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
+
+  const handleDisableState = () => {
+    if (isAddModal) {
+      return !formValues.amount || !formValues.date;
+    }
+
+    return !(formValues.csv || []).length;
   };
 
   return (
     <Card small transparent className="AddTransaction">
       <Modal
-        hasForm
-        aria-label={`${modalTitle} Modal`}
-        open={isOpen}
-        hasScrollingContent
-        modalHeading={modalTitle}
-        primaryButtonText="Submit"
-        secondaryButtonText="Cancel"
-        onRequestClose={handleCloseModal}
-        onRequestSubmit={handleSubmitForm}
-        onSecondarySubmit={handleCloseModal}
+        isScrollable
+        isOpen={isOpen}
+        title={modalTitle}
+        isSubmitting={isSubmitting}
+        handleCloseModal={handleCloseModal}
+        handlePrimaryClick={handleSubmitForm}
+        handleSecondaryClick={handleClearForm}
+        handleCloseModalComplete={handleClearForm}
+        isDisabled={isSubmitting || handleDisableState()}
       >
         {!!modalType && (
           <Form setFormValues={setFormValues} formValues={formValues} />
@@ -89,14 +127,14 @@ const AddTransaction = ({
       <button
         type="button"
         className={cn("Button Primary")}
-        onClick={handleOpenModal("import")}
+        onClick={handleOpenModal(MODAL_TYPES.IMPORT)}
       >
         Import Statement
       </button>
       <button
         type="button"
         className={cn("Button")}
-        onClick={handleOpenModal("add")}
+        onClick={handleOpenModal(MODAL_TYPES.ADD)}
       >
         Add Transaction
       </button>

@@ -8,16 +8,16 @@ import AddCategoryForm from "./AddCategoryForm/AddCategoryForm";
 
 import splitIntoCategories from "./utils/splitIntoCategories";
 
-import "./TransactionsList.scss";
+import "./CategoryList.scss";
 
-const TransactionsList = ({ classNames, unplanned, categories }) => {
+const CategoryList = ({ classNames, unplanned, categories }) => {
   const combinedCategories = splitIntoCategories(unplanned, categories);
 
   return (
     <Card
       wrapped
-      title="Transaction List"
-      className={cn("TransactionsList", classNames)}
+      title="Category List"
+      className={cn("CategoryList", classNames)}
     >
       <ul className="Categories">
         {combinedCategories.map((category, id) => (
@@ -33,4 +33,4 @@ const mapStateToProps = (state) => ({
   categories: state.app.categories,
 });
 
-export default connect(mapStateToProps)(TransactionsList);
+export default connect(mapStateToProps)(CategoryList);

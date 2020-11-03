@@ -6,10 +6,10 @@ import { fetchCategories, fetchTransactions } from "./DashboardActions";
 import { getMonthTransactions } from "../../state/selectors/TransactionSelectors";
 
 import MonthDisplay from "../../components/MonthDisplay/MonthDisplay";
+import CategoryList from "../../components/CategoryList/CategoryList";
 import OverviewChart from "../../components/OverviewChart/OverviewChart";
 import AddTransaction from "../../components/AddTransaction/AddTransaction";
 import OverallSpending from "../../components/OverallSpending/OverallSpending";
-import TransactionsList from "../../components/TransactionsList/TransactionsList";
 import TransactionOverview from "../../components/TransactionOverview/TransactionOverview";
 import StackedCategoryChart from "../../components/StackedCategoryChart/StackedCategoryChart";
 
@@ -44,7 +44,7 @@ const Dashboard = ({
 
       <OverviewChart unplanned={unplanned} />
 
-      <TransactionsList unplanned={unplanned} />
+      <CategoryList bills={bills} deposits={deposits} unplanned={unplanned} />
 
       <StackedCategoryChart />
     </>

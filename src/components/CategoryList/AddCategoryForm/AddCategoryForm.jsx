@@ -5,7 +5,9 @@ import React, { useState } from "react";
 import colors from "../../../utils/colors";
 
 import { Add32 } from "@carbon/icons-react";
-import { Modal, TextInput, Checkbox } from "carbon-components-react";
+import { TextInput, Checkbox } from "carbon-components-react";
+
+import Modal from "../../Modal/Modal";
 
 import { addCategoryAction } from "./AddCategoryFormActions";
 import { enqueueNotification } from "../../NotificationCenter/NotificationActions";
@@ -18,6 +20,7 @@ const defaultFormValues = {
 
 const AddCategoryForm = ({ notify, categories, addCategory }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formValues, setFormValues] = useState(defaultFormValues);
 
   const setState = (key) => (value) => {
@@ -36,9 +39,7 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
   const handleCloseModal = () => {
     setIsOpen(false);
 
-    setTimeout(() => {
-      handleClearForm();
-    }, 300);
+    return;
   };
 
   const handleClearForm = () => {
@@ -61,16 +62,22 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
       color: newColor,
     };
 
-    addCategory(finalValues).then((resp) => {
-      if (!resp?.errors) {
-        handleCloseModal();
-        notify({
-          type: "success",
-          subtitle: `You have successfully added a the ${formValues.name} category.`,
-        });
-        setFormValues(defaultFormValues);
-      }
-    });
+    setIsSubmitting(true);
+
+    addCategory(finalValues)
+      .then((resp) => {
+        if (!resp?.errors) {
+          handleCloseModal();
+          notify({
+            type: "success",
+            subtitle: `You have successfully added a the ${formValues.name} category.`,
+          });
+          setFormValues(defaultFormValues);
+        }
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   const handleNameChange = (e) => {
@@ -84,17 +91,16 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
   return (
     <>
       <Modal
-        hasForm
-        open={isOpen}
-        className={cn("AddCategoryForm", { disabled: !formValues.name.length })}
-        hasScrollingContent
-        primaryButtonText="Submit"
-        modalHeading="Add Category"
-        secondaryButtonText="Clear"
-        aria-label="Add Category Modal"
-        onRequestClose={handleCloseModal}
-        onRequestSubmit={handleSubmitForm}
-        onSecondarySubmit={handleClearForm}
+        isScrollable
+        isOpen={isOpen}
+        title="Add Category"
+        className="AddCategoryModal"
+        isSubmitting={isSubmitting}
+        handleCloseModal={handleCloseModal}
+        handlePrimaryClick={handleSubmitForm}
+        handleSecondaryClick={handleClearForm}
+        handleCloseModalComplete={handleClearForm}
+        isDisabled={!formValues.name.length || isSubmitting}
       >
         <div className="AddCategoryForm">
           <div className="Row">

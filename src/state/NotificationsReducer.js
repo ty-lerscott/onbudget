@@ -1,4 +1,4 @@
-export const NOTIFICATION = "SESSION";
+export const NOTIFICATION = "NOTIFICATION";
 
 const initialState = [];
 
