@@ -1,45 +1,69 @@
 :root {
     // reds
     --geraldine: #f79694;
-    --deep_blush: #e8688d;
-    --russett: #75575f;
-    --congo_brown: #52303a;
+    --au_chico: #945a59;
+    --congo_brown: #593635;
+    --cocoa_brown: #352020;
+
+    --illusion: #f794c6;
 
     // oranges
     --manhattan: #f7b494;
-    --terracotta: #e77f67;
+    --leather: #947759;
+    --millbrook: #594735;
+    --birch: #352b20;
 
     // yellows
-    --marzipan: #f7d794;
-    --rob_roy: #e8c068;
-    --crocodile: #756c57;
-    --judge_gray: #524830;
+    --texas: #f7f794;
+    --clay_creek: #949459;
+    --verdigris: #756c57;
 
     // greens
-    --mint_green: #94f7a1;
-    --pastel_green: #68e879;
-    --cactus: #57755b;
-    --tom_thumb: #305235;
+    --gossip: #c6f794;
+    --asparagus: #779459;
+    --tom_thumb: #475935;
+    --green_kelp: #2b3520;
+
+    --mint_green: #94f794;
+    --spring_leaves: #599459;
 
     // blues
-    --jordy_blue: #94bcf7;
-    --cornflower_blue: #689be8;
-    --shuttle_gray: #596475;
-    --pickled_bluewood: #303e52;
+    --aquamarine: #94f7c6;
+    --aqua_forest: #599477;
+    --stromboli: #355947;
+    --everglade: #20352b;
+
+    --charlotte: #94f7f7;
+    --breaker_bay: #599494;
+    --spectra: #355959;
+    --outer_space: #203535;
+
+    --malibu: #94c6f7;
+    --waikawa_gray: #597794;
+    --pickled_bluewood: #354759;
+    --ebony_clay: #202b35;
 
     // violets
-    --portage: #a594f7;
-    --medium_purple: #7562d9;
-    --smoky: #5c5775;
-    --martinique: #363052;
+    --portage: #9494f7;
+    --martinique: #353559;
+
+    --perfume: #c694f7;
+    --trendy_pink: #775994;
+    --eggplant: #593559;
+    --thunder: #352035;
+
+    --lavender_rose: #f794f7;
+    --strikemaster: #945994;
+    --voodoo: #473559;
+    --bleached_cedar: #2b2035;
 
     --valencia: #d4373e;
 
     --shadow: #e8e8e8;
-    --silver: #cccccc;
+    --silver: #c6c6c6;
     --white_sand: #f5f5f5;
     --white_lilac: #f6f8fc;
 
     --woodsmoke: #181a1c;
-    --primary: var(--jordy_blue);
+    --primary: var(--geraldine);
 }

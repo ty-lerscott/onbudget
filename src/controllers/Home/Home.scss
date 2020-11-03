@@ -1,7 +1,7 @@
 .Page-Home {
     grid-template-areas:
         'cashFlow categoryOverview monthAndAdd'
-        'chart chart categoryBreakdown';
+        'chart chart transactionsList';
     grid-row-gap: 1rem;
     grid-column-gap: 1rem;
     grid-template-columns: repeat(3, 1fr);
@@ -12,7 +12,7 @@
             'cashFlow'
             'categoryOverview'
             'chart'
-            'categoryBreakdown'
+            'transactionsList'
             ;
         grid-template-columns: 100%;
     }

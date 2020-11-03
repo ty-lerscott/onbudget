@@ -1,49 +1,46 @@
 import React from "react";
-import cn from "classnames";
+import { connect } from "react-redux";
 
-import expensesToMonth from "./utils/expensesToMonth";
+import { formatTransactionsForStackedBarGraph } from "../../state/selectors/TransactionSelectors";
 
 import Card from "../Card/Card";
 import { Bar } from "react-chartjs-2";
 
 import "./StackedCategoryChart.scss";
 
-const StackedCategoryChart = ({
-  month,
-  expenses,
-  categories,
-  classNames,
-  ...props
-}) => {
-  const data = expensesToMonth({ expenses, categories, month });
-
+const StackedCategoryChart = ({ chartData }) => {
   return (
     <Card
       wrapped
       centered
       title="Category Breakdown"
-      className={cn("StackedCategoryChart", classNames)}
-      {...props}
+      className="StackedCategoryChart"
     >
-      <Bar
-        data={data}
-        options={{
-          scales: {
-            xAxes: [
-              {
-                stacked: true,
-              },
-            ],
-            yAxes: [
-              {
-                stacked: true,
-              },
-            ],
-          },
-        }}
-      />
+      {[...(chartData?.datasets || [])].length ? (
+        <Bar
+          data={chartData}
+          options={{
+            scales: {
+              xAxes: [
+                {
+                  stacked: true,
+                },
+              ],
+              yAxes: [
+                {
+                  stacked: true,
+                },
+              ],
+            },
+          }}
+        />
+      ) : null}
     </Card>
   );
 };
 
-export default StackedCategoryChart;
+const mapStateToProps = (state) => ({
+  chartData: formatTransactionsForStackedBarGraph(state),
+});
+
+export default connect(mapStateToProps)(StackedCategoryChart);

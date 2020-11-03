@@ -2,8 +2,15 @@ import React from "react";
 
 import "./Category.scss";
 
-const Category = ({ name, quantity, amount }) => (
-  <li className="Category">
+import toCurrency from "../../utils/currency";
+
+const Category = ({ name, quantity, total, color }) => (
+  <li
+    className="Category"
+    style={{
+      borderLeftColor: color,
+    }}
+  >
     <div className="left">
       <span className="title">{name}</span>
       <span className="transactions">
@@ -11,7 +18,7 @@ const Category = ({ name, quantity, amount }) => (
       </span>
     </div>
     <div className="right flex align-center">
-      <span className="amount">{amount}</span>
+      <span className="amount">{toCurrency(total)}</span>
     </div>
   </li>
 );

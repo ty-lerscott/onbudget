@@ -1,4 +1,5 @@
 import React from "react";
+import clone from "clone-deep";
 import { connect } from "react-redux";
 
 import {
@@ -9,7 +10,7 @@ import {
   DatePickerInput,
 } from "carbon-components-react";
 
-const AddExpenseForm = ({ formValues, setFormValues, categories }) => {
+const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
   const categoriesToString = (category) => category?.name || "";
 
   const setState = (key) => (value) => {
@@ -45,8 +46,16 @@ const AddExpenseForm = ({ formValues, setFormValues, categories }) => {
     setState("description")(e.target.value);
   };
 
+  const sortedCategories = () => {
+    let unsortedCategories = clone(categories);
+
+    unsortedCategories.sort((a, b) => (a.name > b.name ? 1 : -1));
+
+    return unsortedCategories;
+  };
+
   return (
-    <div className="AddExpenseForm">
+    <div className="AddTransactionForm">
       <div className="Row">
         <NumberInput
           id="amount"
@@ -61,7 +70,7 @@ const AddExpenseForm = ({ formValues, setFormValues, categories }) => {
           light
           id="category"
           label="Category"
-          items={categories}
+          items={sortedCategories()}
           titleText="Category"
           placeholder="Filter..."
           className="CategoryDropdown"
@@ -95,4 +104,4 @@ const mapStateToProps = (state) => ({
   categories: state.app.categories,
 });
 
-export default connect(mapStateToProps)(AddExpenseForm);
+export default connect(mapStateToProps)(AddTransactionForm);

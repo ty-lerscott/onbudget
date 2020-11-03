@@ -1,0 +1,10 @@
+.OverallSpending {
+    .content {
+        height: calc(100% - 2rem);
+    }
+
+    .amount {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+}

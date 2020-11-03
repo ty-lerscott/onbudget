@@ -26,3 +26,5 @@ firestore-debug.log*
 ui-debug.log*
 
 src/configs/firebase.js
+
+/firebase

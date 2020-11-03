@@ -1,124 +1,27 @@
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
+const { onUserCreate } = require("./user/create.js");
+const { getCategories, addCategory } = require("./user/categories.js");
+const {
+  addStatement,
+  addTransaction,
+  getTransactions,
+  getTransactionsByMonth,
+} = require("./user/transactions");
 
 admin.initializeApp();
 
-exports.newUserSignup = functions.auth.user().onCreate((user) => {
-  admin
-    .firestore()
-    .collection("users")
-    .doc(user.uid)
-    .collection("expenses")
-    .set({
-      description: "",
-    });
+exports.newUserSignup = functions.auth.user().onCreate(onUserCreate(admin));
 
-  admin
-    .firestore()
-    .collection("users")
-    .doc(user.uid)
-    .collection("categories")
-    .set({
-      name: "",
-    });
-});
+exports.categories = functions.https.onCall(getCategories(admin));
+exports.addCategory = functions.https.onCall(addCategory(admin));
 
-exports.categories = functions.https.onCall(
-  async ({ isEmulating }, { auth }) => {
-    const db = admin.firestore();
-    const categories = [];
-
-    if (isEmulating) {
-      db.emulatorOrigin = "http://localhost:8080";
-    }
-
-    try {
-      await admin
-        .firestore()
-        .collection("users")
-        .doc(auth.uid)
-        .collection("categories")
-        .get()
-        .then((snapshots) => {
-          snapshots.forEach((snapshot) => {
-            categories.push({ id: snapshot.id, ...snapshot.data() });
-          });
-        });
-
-      return categories;
-    } catch (err) {
-      // console.warn("what errors are happening", err.message);
-      return {
-        errors: [{ message: err.message }],
-      };
-    }
-  }
+exports.transactions = functions.https.onCall(getTransactions(admin));
+exports.addTransaction = functions.https.onCall(addTransaction(admin));
+exports.transactionsByMonth = functions.https.onCall(
+  getTransactionsByMonth(admin)
 );
 
-exports.expenses = functions.https.onCall(
-  async ({ isEmulating, ...body }, { auth }) => {
-    const db = admin.firestore();
-
-    if (isEmulating) {
-      db.emulatorOrigin = "http://localhost:8080";
-    }
-
-    const statement = [];
-    const yearAgo = new Date().setFullYear(new Date().getFullYear() - 1);
-
-    try {
-      await admin
-        .firestore()
-        .collection("users")
-        .doc(auth.uid)
-        .collection("expenses")
-        .where("date", ">=", yearAgo)
-        .get()
-        .then((snapshots) => {
-          snapshots.forEach((snapshot) => {
-            statement.push({ id: snapshot.id, ...snapshot.data() });
-          });
-        });
-    } catch (err) {
-      return {
-        errors: [
-          {
-            message: err.message,
-          },
-        ],
-      };
-    }
-
-    return statement;
-  }
-);
-
-exports.addExpense = functions.https.onCall(
-  async ({ isEmulating, ...body }, { auth }) => {
-    const db = admin.firestore();
-    let resp;
-
-    if (isEmulating) {
-      db.emulatorOrigin = "http://localhost:8080";
-    }
-
-    await admin
-      .firestore()
-      .collection("users")
-      .doc(auth.uid)
-      .collection("expenses")
-      .doc()
-      .set(body)
-      .catch((err) => {
-        resp = {
-          errors: [{ message: err.message }],
-        };
-      });
-
-    return resp;
-  }
-);
-
-exports.addExpenses = functions.https.onCall(async (body, { auth }) => {});
+exports.addStatement = functions.https.onCall(addStatement(admin));
 
 // exports.getStatementByMonth =

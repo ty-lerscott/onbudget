@@ -14,6 +14,10 @@ const ImportStatementForm = ({ formValues, setFormValues }) => {
     setFormValues(nextState);
   };
 
+  const clearState = () => {
+    setState(stateName)();
+  };
+
   const handleFileUpload = async (e) => {
     const [file] = e.target.files;
 
@@ -35,15 +39,10 @@ const ImportStatementForm = ({ formValues, setFormValues }) => {
         .map(([date, description, paidOn, depositedOn, category]) => ({
           category,
           description,
-          date: new Date(date),
-          ...(Number(paidOn) ? { paidOn: Number(paidOn) } : {}),
-          ...(Number(depositedOn) ? { depositedOn: Number(depositedOn) } : {}),
+          date: new Date(date).getTime(),
+          amount: Number(paidOn || depositedOn) || 0,
         }))
     );
-  };
-
-  const clearState = () => {
-    setState(stateName)();
   };
 
   return (

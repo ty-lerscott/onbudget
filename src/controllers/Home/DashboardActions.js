@@ -24,7 +24,7 @@ export const fetchCategories = () => async (
   });
 };
 
-export const fetchExpenses = () => async (
+export const fetchTransactions = () => async (
   dispatch,
   getState,
   { getFirebase, api }
@@ -33,11 +33,11 @@ export const fetchExpenses = () => async (
     dispatch,
     getState,
     getFirebase,
-    path: "expenses",
-  }).then(({ expenses }) => {
+    path: "transactions",
+  }).then(({ transactions }) => {
     dispatch({
       type: `${EXPENSES}_SUCCESS`,
-      payload: expenses,
+      payload: transactions,
     });
   });
 };

@@ -14,6 +14,7 @@
     "carbon-icons": "^7.0.7",
     "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
+    "clone-deep": "^4.0.1",
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.16.1",
     "firebase": "^7.24.0",
@@ -35,6 +36,7 @@
     "redux-firestore": "^0.14.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "uuid": "^8.3.1"
   },
   "scripts": {
@@ -42,7 +44,10 @@
     "start:emulate": "REACT_APP_EMULATING=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "firebase": "firebase emulators:start",
+    "firebase:deploy": "firebase deploy --only functions",
+    "firebase:populate": "firebase emulators:start --export-on-exit=./firebase --import=./firebase"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -10,7 +10,7 @@
     display: grid;
     grid-template-areas:
         'moneySpent'
-        'expenseOverview';
+        'transactionOverview';
     grid-row-gap: 1rem;
 }
 
@@ -19,6 +19,6 @@
     display: grid;
     grid-template-areas:
         'calendar'
-        'addExpense';
+        'addTransaction';
     grid-row-gap: 1rem;
 }

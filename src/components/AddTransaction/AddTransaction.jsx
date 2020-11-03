@@ -3,24 +3,32 @@ import React, { useState } from "react";
 import { Modal } from "carbon-components-react";
 
 import Card from "../Card/Card";
-import AddExpenseForm from "./AddExpenseForm";
+import AddTransactionForm from "./AddTransactionForm";
 import ImportStatementForm from "./ImportStatementForm";
 
-import { addExpenseAction } from "./AddExpenseActions";
-import { fetchExpenses } from "../../controllers/Home/DashboardActions";
+import {
+  addTransactionAction,
+  importStatementAction,
+} from "./AddTransactionActions";
+import { fetchTransactions } from "../../controllers/Home/DashboardActions";
 import { enqueueNotification } from "../NotificationCenter/NotificationActions";
 
-import "./AddExpense.scss";
+import "./AddTransaction.scss";
 
-const AddExpense = ({ addExpense, notify, getExpenses }) => {
+const AddTransaction = ({
+  addTransaction,
+  notify,
+  getTransactions,
+  importStatement,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState("");
   const isAddModal = modalType === "add";
   const [formValues, setFormValues] = useState({});
 
-  const Form = isAddModal ? AddExpenseForm : ImportStatementForm;
+  const Form = isAddModal ? AddTransactionForm : ImportStatementForm;
 
-  const modalTitle = isAddModal ? "Add Expense" : "Import Statement";
+  const modalTitle = isAddModal ? "Add Transaction" : "Import Statement";
 
   const handleOpenModal = (type) => () => {
     setModalType(type);
@@ -29,6 +37,10 @@ const AddExpense = ({ addExpense, notify, getExpenses }) => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
+
+    setTimeout(() => {
+      handleClearForm();
+    }, 300);
   };
 
   const handleClearForm = () => {
@@ -37,28 +49,26 @@ const AddExpense = ({ addExpense, notify, getExpenses }) => {
 
   const handleSubmitForm = () => {
     // TODO: add import action
-    const submitAction = isAddModal ? addExpense : null;
+    const submitAction = isAddModal ? addTransaction : importStatement;
 
     submitAction(formValues).then((resp) => {
       if (!resp?.errors) {
         const subtitle = isAddModal
-          ? "You successfully added an expense"
-          : "You successfully imported expenses";
+          ? "You successfully added an transaction"
+          : "You successfully imported transactions";
         handleCloseModal();
         notify({
           subtitle,
           type: "success",
-          title: "Success",
         });
-        getExpenses();
-        setFormValues();
+        getTransactions();
+        setFormValues({});
       }
     });
-    // console.log("who knos", formValues);
   };
 
   return (
-    <Card small transparent className="AddExpense">
+    <Card small transparent className="AddTransaction">
       <Modal
         hasForm
         aria-label={`${modalTitle} Modal`}
@@ -67,12 +77,13 @@ const AddExpense = ({ addExpense, notify, getExpenses }) => {
         modalHeading={modalTitle}
         primaryButtonText="Submit"
         secondaryButtonText="Cancel"
-        onAnimationEnd={handleClearForm}
         onRequestClose={handleCloseModal}
         onRequestSubmit={handleSubmitForm}
         onSecondarySubmit={handleCloseModal}
       >
-        <Form setFormValues={setFormValues} formValues={formValues} />
+        {!!modalType && (
+          <Form setFormValues={setFormValues} formValues={formValues} />
+        )}
       </Modal>
       <button
         type="button"
@@ -82,16 +93,17 @@ const AddExpense = ({ addExpense, notify, getExpenses }) => {
         Import Statement
       </button>
       <button type="button" onClick={handleOpenModal("add")}>
-        Add Expense
+        Add Transaction
       </button>
     </Card>
   );
 };
 
 const mapDispatchToProps = {
-  getExpenses: fetchExpenses,
+  getTransactions: fetchTransactions,
   notify: enqueueNotification,
-  addExpense: addExpenseAction,
+  addTransaction: addTransactionAction,
+  importStatement: importStatementAction,
 };
 
-export default connect(null, mapDispatchToProps)(AddExpense);
+export default connect(null, mapDispatchToProps)(AddTransaction);

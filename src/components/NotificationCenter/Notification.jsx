@@ -8,7 +8,6 @@ import { deleteNotification } from "./NotificationActions";
 
 const Notification = ({
   id,
-  title = "",
   subtitle = "",
   type = "info",
   deleteThisNotification,
@@ -16,6 +15,8 @@ const Notification = ({
   const handleDelete = () => {
     deleteThisNotification(id);
   };
+
+  const title = type[0].toUpperCase() + type.substr(1);
 
   return (
     <ToastNotification

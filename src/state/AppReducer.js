@@ -1,13 +1,14 @@
 import { combineReducers } from "redux";
 
 export const EXPENSES = "EXPENSES";
+export const STATEMENT = "STATEMENT";
 export const CATEGORIES = "CATEGORIES";
 
 const initialState = {
   isLoading: false,
   categories: [],
   isFetching: false,
-  expenses: [],
+  transactions: [],
 };
 
 const isLoading = (state = initialState.isLoading, { type }) => {
@@ -36,6 +37,8 @@ const categories = (state = initialState.categories, { type, payload }) => {
   switch (type) {
     case `${CATEGORIES}_SUCCESS`:
       return payload;
+    case `ADD_${CATEGORIES}_SUCCESS`:
+      return state.concat(payload);
     case `${CATEGORIES}_PENDING`:
     case `${CATEGORIES}_FAILURE`:
     default:
@@ -43,10 +46,12 @@ const categories = (state = initialState.categories, { type, payload }) => {
   }
 };
 
-const expenses = (state = initialState.expenses, { type, payload }) => {
+const transactions = (state = initialState.transactions, { type, payload }) => {
   switch (type) {
     case `${EXPENSES}_SUCCESS`:
       return payload;
+    case `${EXPENSES}_BY_MONTH_SUCCESS`:
+      return state.concat(payload);
     case `${EXPENSES}_PENDING`:
     case `${EXPENSES}_FAILURE`:
     default:
@@ -67,8 +72,8 @@ const isFetching = (state = initialState.isFetching, { type }) => {
 };
 
 export default combineReducers({
-  expenses,
   isLoading,
   categories,
   isFetching,
+  transactions,
 });

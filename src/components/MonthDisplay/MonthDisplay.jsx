@@ -1,30 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import cn from "classnames";
-import format from "date-fns/format";
-
-import addMonths from "date-fns/addMonths";
-import isThisMonth from "date-fns/isThisMonth";
-
-import Card from "../Card/Card";
-
-import "./MonthDisplay.scss";
+import { format, addMonths, isSameMonth, startOfMonth } from "date-fns";
+import { connect } from "react-redux";
 
 import { ChevronLeft32, ChevronRight32 } from "@carbon/icons-react";
 
-const MonthDisplay = ({ classNames, month, setMonth }) => {
-  if (!month) {
+import Card from "../Card/Card";
+
+import isThisMonth from "date-fns/isThisMonth";
+import {
+  setMonthAction,
+  fetchTransactionsByMonthAction,
+} from "./MonthDisplayActions";
+
+import "./MonthDisplay.scss";
+
+const MonthDisplay = ({
+  date,
+  setMonth,
+  classNames,
+  fetchTransactionsByMonth,
+}) => {
+  const [fetchedMonth, setFetchedMonth] = useState([date]);
+
+  if (!date) {
     return null;
   }
 
-  const onPrevious = () => {
-    setMonth(addMonths(month, -1));
-  };
-
   const onNext = () => {
-    setMonth(addMonths(month, 1));
+    const nextMonth = addMonths(date, 1);
+
+    setMonth(nextMonth);
   };
 
-  const isDisabled = isThisMonth(month);
+  const onPrevious = () => {
+    const previousMonth = addMonths(date, -1);
+
+    if (!fetchedMonth.some((month) => isSameMonth(previousMonth, month))) {
+      const yearAndOneMonth = startOfMonth(addMonths(previousMonth, -12));
+
+      setFetchedMonth(fetchedMonth.concat(previousMonth));
+      fetchTransactionsByMonth(yearAndOneMonth.getTime());
+    }
+
+    setMonth(previousMonth);
+  };
+
+  const isDisabled = isThisMonth(date);
 
   return (
     <Card small transparent className={cn("MonthDisplay", classNames)}>
@@ -37,7 +59,7 @@ const MonthDisplay = ({ classNames, month, setMonth }) => {
           <ChevronLeft32 />
         </button>
 
-        <p className="Month">{format(month, "MMM yyyy")}</p>
+        <p className="Month">{format(date, "MMM yyyy")}</p>
 
         <button
           type="button"
@@ -52,4 +74,13 @@ const MonthDisplay = ({ classNames, month, setMonth }) => {
   );
 };
 
-export default MonthDisplay;
+const mapDispatchToProps = {
+  setMonth: setMonthAction,
+  fetchTransactionsByMonth: fetchTransactionsByMonthAction,
+};
+
+const mapStateToProps = (state) => ({
+  date: state.ui.date,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MonthDisplay);

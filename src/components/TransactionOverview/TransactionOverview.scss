@@ -1,0 +1,20 @@
+.TransactionOverview {
+    .overviewGroup {
+        margin-top: 1rem;
+        text-align: center;
+
+        .title {
+            display: block;
+            font-size: 1rem;
+            color: var(--silver);
+        }
+
+        .amount {
+            margin-top: 0.25rem;
+            display: block;
+            font-size: 1rem;
+            color: var(--woodsmoke);
+            font-weight: 600;
+        }
+    }
+}

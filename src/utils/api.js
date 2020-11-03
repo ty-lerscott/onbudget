@@ -14,7 +14,9 @@ export default async ({ body, path, dispatch, getState, getFirebase }) => {
 
   const func = firebase.functions().httpsCallable(path);
 
-  return func({ isEmulating, ...body })
+  const isBodyObject = Object.keys(body || {}).length;
+
+  return func({ isEmulating, ...(isBodyObject ? body : { body }) })
     .then(({ data, errors, result }) => {
       if (Array.isArray(errors) && errors?.length) {
         dispatch({
@@ -43,6 +45,6 @@ export default async ({ body, path, dispatch, getState, getFirebase }) => {
         payload: { path },
       });
       console.error(resp);
-      throw new Error("SOME ERROR");
+      // throw new Error("SOME ERROR");
     });
 };

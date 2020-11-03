@@ -65,6 +65,17 @@ button {
   border-radius: 4px;
 }
 
+.bx--modal {
+  &.disabled {
+    .bx--btn--primary {
+      pointer-events: none;
+      color: var(--silver);
+      text-shadow: none;
+      background-color: var(--shadow);
+    }
+  }
+}
+
 .bx--modal-content{
   &:focus {
     outline: none;
@@ -117,4 +128,13 @@ a.bx--header__name, a.bx--header__name:hover {
 
 .bx--toast-notification {
   margin: 0;
+}
+
+.bx--checkbox-label__focus::before,
+.bx--checkbox:focus + .bx--checkbox-label::before,
+.bx--checkbox:checked:focus + .bx--checkbox-label::before,
+.bx--checkbox:indeterminate:focus+.bx--checkbox-label::before,
+.bx--checkbox-label[data-contained-checkbox-state='true'].bx--checkbox-label__focus::before,
+.bx--checkbox-label[data-contained-checkbox-state='mixed'].bx--checkbox-label__focus::before {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary) !important;
 }

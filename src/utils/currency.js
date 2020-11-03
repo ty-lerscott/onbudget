@@ -2,7 +2,7 @@
 //   !amount ? 0 : Math.round((amount + Number.EPSILON) * 100) / 100;
 
 export default (amount) =>
-  !amount
+  isNaN(amount)
     ? 0
     : new Intl.NumberFormat("en-US", {
         style: "currency",

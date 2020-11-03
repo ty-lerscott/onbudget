@@ -1,0 +1,39 @@
+.TransactionsList {
+    grid-area: transactionsList;
+    height: auto;
+
+    > .title {
+        padding-bottom: 0.25rem;
+    }
+
+    .content {
+        max-height: 363px;
+        overflow-y: auto;
+    }
+
+    .Categories {
+        width: 100%;
+        padding-top: 1rem;
+    }
+
+    .AddCategory {
+        margin: 1rem 0;
+
+        button {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            svg {
+                margin-right: 0.25rem;
+            }
+        }
+    }
+
+    .AddCategoryForm {
+        .Row + .Row {
+            margin-top: 1rem;
+        }
+    }
+}
