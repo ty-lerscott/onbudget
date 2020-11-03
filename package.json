@@ -47,7 +47,8 @@
     "eject": "react-scripts eject",
     "firebase": "firebase emulators:start",
     "firebase:deploy": "firebase deploy --only functions",
-    "firebase:populate": "firebase emulators:start --export-on-exit=./firebase --import=./firebase"
+    "firebase:populate": "firebase emulators:start --export-on-exit=./firebase --import=./firebase",
+    "deploy": "git push production master"
   },
   "eslintConfig": {
     "extends": "react-app"
