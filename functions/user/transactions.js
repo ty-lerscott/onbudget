@@ -1,4 +1,3 @@
-const { getCategories } = require("./categories.js");
 const { chunkify } = require("../utils/array.js");
 const { addMonths, startOfMonth, endOfMonth } = require("date-fns");
 
@@ -134,7 +133,25 @@ const addStatement = (admin) => async (
     db.emulatorOrigin = "http://localhost:8080";
   }
 
-  const categories = await getCategories(admin)({ isEmulating }, { auth });
+  const categories = [];
+
+  try {
+    await admin
+      .firestore()
+      .collection("users")
+      .doc(auth.uid)
+      .collection("categories")
+      .get()
+      .then((snapshots) => {
+        snapshots.forEach((snapshot) => {
+          categories.push({ id: snapshot.id, ...snapshot.data() });
+        });
+      });
+  } catch (err) {
+    return {
+      errors: [{ message: err.message }],
+    };
+  }
 
   const { id: fallbackCategoryId } =
     categories.find(({ name }) => name.toLowerCase() === "other") || {};

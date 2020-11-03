@@ -26,5 +26,3 @@ exports.transactionsByMonth = functions.https.onCall(
 );
 
 exports.addStatement = functions.https.onCall(addStatement(admin));
-
-// exports.getStatementByMonth =

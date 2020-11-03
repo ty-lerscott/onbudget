@@ -14,11 +14,11 @@
   "main": "index.js",
   "dependencies": {
     "color-scheme": "^1.0.1",
+    "date-fns": "^2.16.1",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0"
   },
   "devDependencies": {
-    "date-fns": "^2.16.1",
     "firebase-functions-test": "^0.2.0"
   },
   "private": true
