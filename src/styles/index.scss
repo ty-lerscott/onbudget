@@ -1,5 +1,6 @@
 @import "./reset";
 @import "./colors";
+@import "./button";
 
 body {
   background-color: var(--white_lilac);
@@ -39,27 +40,6 @@ body {
   align-items: center;
 }
 
-// COMPONENTS
-button {
-  cursor: pointer;
-  border: 1px solid rgba(65, 65, 65, 0.25);
-  border-radius: 4px;
-  background-color: var(--woodsmoke);
-  color: var(--white_lilac);
-  font-weight: 600;
-  letter-spacing: 0.1px;
-  opacity: 0.75;
-  text-shadow: 0px 1px 1px rgba(65, 65, 65, 0.5);
-
-  &.Primary {
-      background-color: var(--primary);
-  }
-
-  &:hover {
-      opacity: 1;
-  }
-}
-
 /* MODAL */
 .bx--modal-container {
   border-radius: 4px;
@@ -77,6 +57,8 @@ button {
 }
 
 .bx--modal-content{
+  margin-bottom: 2rem;
+
   &:focus {
     outline: none;
   }

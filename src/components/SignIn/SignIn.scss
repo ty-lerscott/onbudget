@@ -3,7 +3,35 @@
         display: none;
     }
 
-    div + div {
-        margin-top: 1rem;
+    .bx--modal-content {
+        padding-right: 1rem!important;
+
+        .bx--form-item + .bx--form-item {
+            margin-top: 1rem;
+        }
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 2rem;
+
+        .TextButton {
+            font-size: 0.75rem;
+        }
+
+        .buttonWrapper {
+            border-color: var(--silver);
+            border-style: solid;
+
+            &:first-of-type {
+                border-right-width: 1px;
+                // margin-right: 0.5rem;
+            }
+            &:last-of-type {
+                border-left-width: 1px;
+            }
+        }
     }
 }

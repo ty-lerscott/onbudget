@@ -1,8 +1,10 @@
 import { connect } from "react-redux";
 import React, { useState } from "react";
-import { Modal, TextInput } from "carbon-components-react";
+import { Modal } from "carbon-components-react";
 
 import { login as signIn } from "./SignInActions";
+
+import { SignInForm, RequestAccessForm, ForgotPasswordForm } from "./Forms";
 
 import "./SignIn.scss";
 
@@ -11,9 +13,16 @@ const initialFormState = {
   password: "",
 };
 
+const formTypes = {
+  signIn: "signIn",
+  forgot: "forgot",
+  request: "request",
+};
+
 const SignInModal = ({ login }) => {
-  const [formValues, setFormValues] = useState(initialFormState);
   const [error, setError] = useState("");
+  const [formType, setFormType] = useState(formTypes.signIn);
+  const [formValues, setFormValues] = useState(initialFormState);
 
   const setState = (key) => (e) => {
     const nextState = {
@@ -35,38 +44,49 @@ const SignInModal = ({ login }) => {
     });
   };
 
+  const toggleForm = (toggle) => () => {
+    setFormType(toggle);
+  };
+
+  const Form =
+    formType === formTypes.signIn
+      ? SignInForm
+      : formType === formTypes.request
+      ? RequestAccessForm
+      : ForgotPasswordForm;
+
+  const modalHeading =
+    formType === formTypes.signIn
+      ? "Sign In"
+      : formType === formTypes.request
+      ? "Request Access"
+      : "ForgotPassword";
+
   return (
     <div className="SignIn">
       <Modal
         open
-        hasForm
-        shouldSubmitOnEnter
-        modalHeading="Sign In"
-        aria-label="Sign In Modal"
-        primaryButtonText="Sign In"
-        secondaryButtonText="Clear"
         preventCloseOnClickOutside
-        onRequestSubmit={handleSubmitForm}
-        onSecondarySubmit={handleClearForm}
+        modalHeading={modalHeading}
+        aria-label={`${modalHeading} Modal`}
+        {...(formTypes === formType.signIn
+          ? {
+              hasForm: true,
+              shouldSubmitOnEnter: true,
+              secondaryButtonText: "Clear",
+              primaryButtonText: "Sign In",
+              onRequestSubmit: handleSubmitForm,
+              onSecondarySubmit: handleClearForm,
+            }
+          : {})}
       >
-        <TextInput
-          id="email"
-          labelText="Email"
-          value={formValues.email}
-          onChange={setState("email")}
+        <Form
+          error={error}
+          setState={setState}
+          formTypes={formTypes}
+          formValues={formValues}
+          toggleForm={toggleForm}
         />
-        <TextInput
-          id="password"
-          type="password"
-          labelText="Password"
-          value={formValues.password}
-          onChange={setState("password")}
-        />
-        {error && (
-          <div className="ErrorWrapper">
-            <p className="bx--label error">{error}</p>
-          </div>
-        )}
       </Modal>
     </div>
   );

@@ -1,0 +1,32 @@
+.Button, .bx--btn, .TextButton {
+    cursor: pointer;
+    letter-spacing: 0.1px;
+}
+
+.Button, .bx--btn {
+    font-weight: 600;
+    color: var(--white_lilac);
+    background-color: var(--woodsmoke);
+    border: 1px solid rgba(65, 65, 65, 0.25);
+    text-shadow: 0px 1px 1px rgba(65, 65, 65, 0.5);
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.Button {
+    border-radius: 4px;
+
+    &.Primary {
+        background-color: var(--primary);
+    }
+}
+
+.TextButton {
+    border: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

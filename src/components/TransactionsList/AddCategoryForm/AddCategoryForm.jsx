@@ -1,6 +1,6 @@
+import cn from "classnames";
 import { connect } from "react-redux";
 import React, { useState } from "react";
-import cn from "classnames";
 
 import colors from "../../../utils/colors";
 
@@ -123,7 +123,11 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
         </div>
       </Modal>
       <li className="AddCategory">
-        <button type="button" className="Primary" onClick={handleOpenModal}>
+        <button
+          type="button"
+          className={cn("Button Primary")}
+          onClick={handleOpenModal}
+        >
           <Add32 /> Add Category
         </button>
       </li>

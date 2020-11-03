@@ -54,7 +54,7 @@ const MonthDisplay = ({
         <button
           type="button"
           onClick={onPrevious}
-          className={cn("PreviousMonth")}
+          className={cn("Button", "PreviousMonth")}
         >
           <ChevronLeft32 />
         </button>
@@ -65,7 +65,7 @@ const MonthDisplay = ({
           type="button"
           onClick={onNext}
           disabled={isDisabled}
-          className={cn("NextMonth")}
+          className={cn("Button", "NextMonth")}
         >
           <ChevronRight32 />
         </button>

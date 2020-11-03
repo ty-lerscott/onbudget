@@ -1,3 +1,4 @@
+import cn from "classnames";
 import { connect } from "react-redux";
 import React, { useState } from "react";
 import { Modal } from "carbon-components-react";
@@ -87,12 +88,16 @@ const AddTransaction = ({
       </Modal>
       <button
         type="button"
-        className="Primary"
+        className={cn("Button Primary")}
         onClick={handleOpenModal("import")}
       >
         Import Statement
       </button>
-      <button type="button" onClick={handleOpenModal("add")}>
+      <button
+        type="button"
+        className={cn("Button")}
+        onClick={handleOpenModal("add")}
+      >
         Add Transaction
       </button>
     </Card>
