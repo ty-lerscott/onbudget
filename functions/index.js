@@ -9,8 +9,11 @@ const {
   getTransactionsByMonth,
 } = require("./user/transactions");
 
+const { requestAccess } = require("./user/requestAccess.js");
+
 admin.initializeApp();
 
+exports.requestAccess = functions.https.onCall(requestAccess(admin));
 exports.newUserSignup = functions.auth.user().onCreate(onUserCreate(admin));
 
 exports.categories = functions.https.onCall(getCategories(admin));

@@ -46,6 +46,8 @@ const start = () => {
   firebase.initializeApp(firebaseConfig);
   firebase.firestore();
 
+  // window.firebase = firebase;
+
   render(
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...firebaseProps}>

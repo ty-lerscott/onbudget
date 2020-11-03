@@ -1,5 +1,7 @@
 export const SESSION = "SESSION";
 export const SIGN_IN = "SIGN_IN";
+export const REQUEST_ACCESS = "REQUEST_ACCESS";
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 
 const initialState = {
   token: "",

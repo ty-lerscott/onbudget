@@ -5,10 +5,6 @@
 
     .bx--modal-content {
         padding-right: 1rem!important;
-
-        .bx--form-item + .bx--form-item {
-            margin-top: 1rem;
-        }
     }
 
     .actions {
@@ -19,19 +15,48 @@
 
         .TextButton {
             font-size: 0.75rem;
+            background-color: transparent;
         }
 
-        .buttonWrapper {
-            border-color: var(--silver);
+        .buttonWrapper + .buttonWrapper {
+            border-left-color: var(--silver);
+            border-left-width: 2px;
             border-style: solid;
-
-            &:first-of-type {
-                border-right-width: 1px;
-                // margin-right: 0.5rem;
-            }
-            &:last-of-type {
-                border-left-width: 1px;
-            }
         }
+    }
+
+
+}
+
+.SignIn--signIn {
+    .bx--modal-content {
+        .bx--form-item + .bx--form-item {
+            margin-top: 1rem;
+        }
+    }
+
+    .ErrorWrapper {
+        margin-top: 1rem;
+    }
+}
+
+.SignIn--request,
+.SignIn--forgot {
+    .form {
+        margin: 2rem 0;
+
+        .Row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 1rem;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.Signin--submitted {
+    .bx--modal-footer {
+        display: none;
     }
 }
