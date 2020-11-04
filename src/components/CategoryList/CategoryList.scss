@@ -2,15 +2,42 @@
     grid-area: transactionsList;
     height: auto;
 
+    .Row {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        grid-column-gap: 1rem;
+        // justify-content: space-between;
+
+        .bx--select {
+            // max-width: 30%;
+            display: flex;
+            align-self: flex-end;
+        }
+
+        .bx--select-input {
+            min-width: initial;
+            width: auto;
+            font-size: 12px;
+            padding-right: 1.75rem;
+        }
+
+        .bx--select--inline .bx--select__arrow {
+            width: 14px;
+        }
+
+        .CategoryFilters {
+            label {
+                display: none;
+            }
+        }
+    }
+
     > .title {
         padding-bottom: 0.25rem;
     }
 
     .content {
-        // max-height: 363px;
-        // overflow-y: auto;
-
-
         display: grid;
         grid-template-rows: 1fr auto;
     }

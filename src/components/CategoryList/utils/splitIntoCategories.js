@@ -1,10 +1,16 @@
 const getCategory = (categories, id) =>
   (categories || []).find((category) => category.id === id);
 
+const defaultBreakdown = {
+  total: 0,
+  quantity: 0,
+  transactions: [],
+};
+
 // given an array of transactions, group them by category
 // return them as an array sorted by the total spent in that category
-export default (transactions, categories) => {
-  if (!transactions.length || !categories.length) {
+export default ({ transactions, categories }) => {
+  if (!categories.length) {
     return [];
   }
 
@@ -16,9 +22,7 @@ export default (transactions, categories) => {
 
       if (!byCategory[category.name]) {
         byCategory[category.name] = {
-          total: 0,
-          quantity: 0,
-          transactions: [],
+          ...defaultBreakdown,
           ...category,
         };
       }
@@ -32,7 +36,13 @@ export default (transactions, categories) => {
     {}
   );
 
-  const entries = Object.entries(transactionsForThisMonth);
+  const byCategory = categories.map((category) => ({
+    ...category,
+    ...defaultBreakdown,
+    ...transactionsForThisMonth[category.name],
+  }));
+
+  const entries = Object.entries(byCategory);
 
   entries.sort((a, b) => b[1].total - a[1].total);
 
