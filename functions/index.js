@@ -3,15 +3,24 @@ const functions = require("firebase-functions");
 const { onUserCreate } = require("./user/create.js");
 const { getCategories, addCategory } = require("./user/categories.js");
 const {
-  addStatement,
   addTransaction,
   getTransactions,
+  importStatement,
   getTransactionsByMonth,
 } = require("./user/transactions");
 
 const { requestAccess } = require("./user/requestAccess.js");
 
-admin.initializeApp();
+admin.initializeApp({
+  apiKey: "AIzaSyBBUtULZb9dSNyz-0FAgKS8k3Tx90uxVRs",
+  authDomain: "on-budget-app.firebaseapp.com",
+  databaseURL: "https://on-budget-app.firebaseio.com",
+  projectId: "on-budget-app",
+  storageBucket: "on-budget-app.appspot.com",
+  messagingSenderId: "273430886391",
+  appId: "1:273430886391:web:3bf8aeef8c75f15baf60f2",
+  measurementId: "G-PJWK48EWV2",
+});
 
 exports.requestAccess = functions.https.onCall(requestAccess(admin));
 exports.newUserSignup = functions.auth.user().onCreate(onUserCreate(admin));
@@ -25,4 +34,4 @@ exports.transactionsByMonth = functions.https.onCall(
   getTransactionsByMonth(admin)
 );
 
-exports.addStatement = functions.https.onCall(addStatement(admin));
+exports.importStatement = functions.https.onCall(importStatement(admin));

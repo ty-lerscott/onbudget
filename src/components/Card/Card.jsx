@@ -11,7 +11,10 @@ const Card = ({
   className,
   small = false,
   wrapped = false,
+  optionalContent,
   centered = false,
+  flexContent = true,
+  gridContent = false,
   transparent = false,
   spaceBetween = false,
   ...props
@@ -28,10 +31,18 @@ const Card = ({
       )}
       {...props}
     >
-      {!!title && <p className="title">{title}</p>}
+      {(title || optionalContent) && (
+        <div className="Row">
+          {!!title && <p className="title">{title}</p>}
+          {optionalContent}
+        </div>
+      )}
+
       {wrapped ? (
         <div
-          className={cn("content flex", {
+          className={cn("content", {
+            grid: gridContent,
+            flex: flexContent,
             centered: centered,
             "space-between": spaceBetween,
           })}

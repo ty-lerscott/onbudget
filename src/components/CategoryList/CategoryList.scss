@@ -7,23 +7,30 @@
     }
 
     .content {
-        max-height: 363px;
-        overflow-y: auto;
+        // max-height: 363px;
+        // overflow-y: auto;
+
+
+        display: grid;
+        grid-template-rows: 1fr auto;
     }
 
     .Categories {
+        overflow-y: auto;
+        max-height: 350px;
         width: 100%;
         padding-top: 1rem;
     }
 
     .AddCategory {
-        margin: 1rem 0;
+        margin: 1rem 0 0;
 
         button {
             width: 100%;
             display: flex;
             flex-direction: row;
             align-items: center;
+            justify-content: center;
 
             svg {
                 margin-right: 0.25rem;

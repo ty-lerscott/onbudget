@@ -1,5 +1,5 @@
 import { DATE } from "../../state/UIReducer";
-import { EXPENSES } from "../../state/AppReducer";
+import { TRANSACTIONS } from "../../state/AppReducer";
 
 export const setMonthAction = (month) => (
   dispatch,
@@ -26,7 +26,7 @@ export const fetchTransactionsByMonthAction = (body) => async (
     path: "transactionsByMonth",
   }).then(({ transactionsByMonth }) => {
     dispatch({
-      type: `${EXPENSES}_BY_MONTH_SUCCESS`,
+      type: `${TRANSACTIONS}_BY_MONTH_SUCCESS`,
       payload: transactionsByMonth,
     });
   });

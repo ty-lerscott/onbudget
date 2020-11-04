@@ -1,6 +1,7 @@
 const isEmulating = !!process.env.REACT_APP_EMULATING;
 
-export default async ({ body, path, dispatch, getState, getFirebase }) => {
+export default async (options) => {
+  const { body, path, dispatch, getFirebase } = options;
   const firebase = await getFirebase();
 
   if (isEmulating) {

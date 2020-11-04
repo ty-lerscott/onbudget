@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
-export const EXPENSES = "EXPENSES";
 export const STATEMENT = "STATEMENT";
 export const CATEGORIES = "CATEGORIES";
+export const TRANSACTIONS = "TRANSACTIONS";
 
 const initialState = {
   isLoading: false,
@@ -48,12 +48,12 @@ const categories = (state = initialState.categories, { type, payload }) => {
 
 const transactions = (state = initialState.transactions, { type, payload }) => {
   switch (type) {
-    case `${EXPENSES}_SUCCESS`:
+    case `${TRANSACTIONS}_SUCCESS`:
       return payload;
-    case `${EXPENSES}_BY_MONTH_SUCCESS`:
+    case `${TRANSACTIONS}_BY_MONTH_SUCCESS`:
       return state.concat(payload);
-    case `${EXPENSES}_PENDING`:
-    case `${EXPENSES}_FAILURE`:
+    case `${TRANSACTIONS}_PENDING`:
+    case `${TRANSACTIONS}_FAILURE`:
     default:
       return state;
   }

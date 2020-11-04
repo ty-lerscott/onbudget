@@ -128,7 +128,7 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
           </div>
         </div>
       </Modal>
-      <li className="AddCategory">
+      <div className="AddCategory">
         <button
           type="button"
           className={cn("Button Primary")}
@@ -136,7 +136,7 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
         >
           <Add32 /> Add Category
         </button>
-      </li>
+      </div>
     </>
   );
 };

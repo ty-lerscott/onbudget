@@ -121,13 +121,11 @@ const normalizeEntry = ({ entry, fallbackCategoryId, categories }) => ({
     "",
 });
 
-const addStatement = (admin) => async (
+const importStatement = (admin) => async (
   { isEmulating, csv, ...rest },
   { auth }
 ) => {
   const db = admin.firestore();
-
-  //   let resp;
 
   if (isEmulating) {
     db.emulatorOrigin = "http://localhost:8080";
@@ -190,8 +188,8 @@ const addStatement = (admin) => async (
 };
 
 module.exports = {
-  addStatement,
   addTransaction,
   getTransactions,
+  importStatement,
   getTransactionsByMonth,
 };

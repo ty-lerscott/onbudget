@@ -1,4 +1,4 @@
-import { CATEGORIES, EXPENSES } from "../../state/AppReducer";
+import { CATEGORIES, TRANSACTIONS } from "../../state/AppReducer";
 
 export const fetchCategories = () => async (
   dispatch,
@@ -14,7 +14,7 @@ export const fetchCategories = () => async (
     getState,
     getFirebase,
     path: "categories",
-  }).then(({ categories }) => {
+  }).then(({ categories } = {}) => {
     dispatch({
       type: `${CATEGORIES}_SUCCESS`,
       payload: categories,
@@ -34,9 +34,9 @@ export const fetchTransactions = () => async (
     getState,
     getFirebase,
     path: "transactions",
-  }).then(({ transactions }) => {
+  }).then(({ transactions } = {}) => {
     dispatch({
-      type: `${EXPENSES}_SUCCESS`,
+      type: `${TRANSACTIONS}_SUCCESS`,
       payload: transactions,
     });
   });

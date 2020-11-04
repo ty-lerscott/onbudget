@@ -1,4 +1,4 @@
-import { EXPENSES, STATEMENT } from "../../state/AppReducer";
+import { TRANSACTIONS, STATEMENT } from "../../state/AppReducer";
 
 export const addTransactionAction = (body) => async (
   dispatch,
@@ -6,7 +6,7 @@ export const addTransactionAction = (body) => async (
   { getFirebase, api }
 ) => {
   dispatch({
-    type: `ADD_${EXPENSES}_PENDING`,
+    type: `ADD_${TRANSACTIONS}_PENDING`,
   });
 
   return api({
@@ -17,7 +17,7 @@ export const addTransactionAction = (body) => async (
     path: "addTransaction",
   }).then(({ addTransaction }) => {
     dispatch({
-      type: `ADD_${EXPENSES}_SUCCESS`,
+      type: `ADD_${TRANSACTIONS}_SUCCESS`,
       payload: addTransaction,
     });
 
@@ -31,7 +31,7 @@ export const importStatementAction = (body) => async (
   { getFirebase, api }
 ) => {
   dispatch({
-    type: `ADD_${STATEMENT}_PENDING`,
+    type: `IMPORT_${STATEMENT}_PENDING`,
   });
 
   return api({
@@ -39,13 +39,13 @@ export const importStatementAction = (body) => async (
     dispatch,
     getState,
     getFirebase,
-    path: "addStatement",
-  }).then(({ addStatement }) => {
+    path: "importStatement",
+  }).then(({ importStatement } = {}) => {
     dispatch({
-      type: `ADD_${STATEMENT}_SUCCESS`,
-      payload: addStatement,
+      type: `IMPORT_${STATEMENT}_SUCCESS`,
+      payload: importStatement,
     });
 
-    return addStatement;
+    return importStatement;
   });
 };

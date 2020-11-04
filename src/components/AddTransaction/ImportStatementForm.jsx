@@ -31,7 +31,9 @@ const ImportStatementForm = ({ formValues, setFormValues }) => {
 
     const data = await toString(file);
 
-    const { data: parsedData } = parse(data);
+    const { data: parsedData } = parse(data, {
+      skipEmptyLines: true,
+    });
 
     setState(stateName)(
       parsedData
