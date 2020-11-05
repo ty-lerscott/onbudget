@@ -1,6 +1,8 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 import { createBrowserHistory } from "history";
 import { renderRoutes } from "react-router-config";
 import { ConnectedRouter } from "connected-react-router";
@@ -46,7 +48,15 @@ const start = () => {
   firebase.initializeApp(firebaseConfig);
   firebase.firestore();
 
-  // window.firebase = firebase;
+  Sentry.init({
+    dsn:
+      "https://700dc73d529244cebcb02cc6e5b2ed77@o472551.ingest.sentry.io/5506363",
+    integrations: [new Integrations.BrowserTracing()],
+
+    // We recommend adjusting this value in production, or using tracesSampler
+    // for finer control
+    tracesSampleRate: 1.0,
+  });
 
   render(
     <Provider store={store}>

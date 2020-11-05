@@ -6,7 +6,7 @@ import { routerMiddleware, connectRouter } from "connected-react-router";
 import { firestoreReducer } from "redux-firestore";
 
 import api from "./api";
-// import middleware from "utils/middleware";
+import { SentryMiddleware } from "../middleware";
 
 export default ({ history, reducers, initial = {}, routes = [] }) => {
   return createStore(
@@ -20,8 +20,8 @@ export default ({ history, reducers, initial = {}, routes = [] }) => {
     applyMiddleware(
       thunk.withExtraArgument({ getFirebase, api }),
       routerMiddleware(history),
-      //   middleware.dependencies(routes),
-      createLogger()
+      createLogger(),
+      SentryMiddleware
     )
   );
 };

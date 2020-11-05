@@ -17,6 +17,7 @@ const TransactionOverview = ({
   bills,
   deposits,
   isLoading,
+  dispatch,
   unplanned,
   classNames,
   ...props

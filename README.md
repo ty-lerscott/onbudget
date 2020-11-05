@@ -52,3 +52,6 @@ users
             ]
 
 Every user must be created with an other category
+
+Using Sentry for error tracking
+If solving a sentry bug, include the issue # within the commit

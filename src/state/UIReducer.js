@@ -30,10 +30,6 @@ const date = (state = initialState.date, { type, payload }) => {
 const dashboard = (state = initialState.dashboard, { type, payload }) => {
   switch (type) {
     case `SET_${LOADING_COMPLETE}`:
-      console.warn("what", {
-        ...state,
-        [payload]: false,
-      });
       return {
         ...state,
         isLoading: {

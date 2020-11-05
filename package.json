@@ -4,7 +4,12 @@
   "private": true,
   "dependencies": {
     "@carbon/icons-react": "^10.19.0",
+    "@cypress/code-coverage": "^3.8.3",
+    "@cypress/webpack-preprocessor": "^5.4.10",
     "@loadable/component": "^5.14.1",
+    "@sentry/react": "^5.27.3",
+    "@sentry/tracing": "^5.27.3",
+    "@sentry/webpack-plugin": "^1.13.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",

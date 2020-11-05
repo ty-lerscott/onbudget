@@ -12,7 +12,13 @@ import "./OverallSpending.scss";
 
 //TODO: proptypes
 
-const OverallSpending = ({ classNames, transactions, isLoading, ...props }) => {
+const OverallSpending = ({
+  classNames,
+  transactions,
+  isLoading,
+  dispatch,
+  ...props
+}) => {
   const total = sumTransactions(transactions);
 
   return (
@@ -24,9 +30,9 @@ const OverallSpending = ({ classNames, transactions, isLoading, ...props }) => {
       className={cn("OverallSpending", classNames)}
       {...props}
     >
-      <p className={cn("amount", { isLoading })}>
+      <div className={cn("amount", { isLoading })}>
         {isLoading ? <SkeletonText /> : toCurrency(total)}
-      </p>
+      </div>
     </Card>
   );
 };
