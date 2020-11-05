@@ -4,6 +4,16 @@
     box-shadow: 0px 0px 8px var(--shadow);
     padding: 1rem;
     height: 260px;
+
+    .bx--inline-loading {
+        justify-content: center;
+    }
+
+    .bx--loading--small,
+    .bx--loading--small .bx--loading__svg {
+        height: 3rem;
+        width: 3rem;
+    }
 }
 
 .CardSmall {

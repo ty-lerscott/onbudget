@@ -20,8 +20,8 @@ const Dashboard = ({
 }) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    getTransactions();
     getCategories();
+    getTransactions();
   }, []);
   /* eslint-disable react-hooks/exhaustive-deps */
 

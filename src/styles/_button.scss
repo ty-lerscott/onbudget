@@ -18,9 +18,30 @@
 .Button {
     border-radius: 4px;
 
-    &.Primary {
-        background-color: var(--primary);
+    &-disabled {
+        text-shadow: none;
+        color: var(--silver);
+        // pointer-events: none;
+        cursor: no-drop;
+        background-color: var(--mine_shaft);
     }
+}
+
+.Button--Primary {
+    background-color: var(--primary);
+
+    &-disabled {
+        text-shadow: none;
+        color: var(--silver);
+        cursor: no-drop;
+        background-color: var(--shadow);
+
+        &:active {
+            pointer-events: none;
+        }
+    }
+
+
 }
 
 .TextButton {
@@ -30,3 +51,4 @@
         text-decoration: underline;
     }
 }
+

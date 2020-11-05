@@ -1,6 +1,16 @@
 .OverviewChart {
     grid-area: categoryOverview;
 
+    .content {
+        height: calc(100% - 20px);
+    }
+
+    .bx--loading--small,
+    .bx--loading--small .bx--loading__svg {
+        height: 4rem;
+        width: 4rem;
+    }
+
     canvas {
         max-width: 95%;
         margin: 0 auto;

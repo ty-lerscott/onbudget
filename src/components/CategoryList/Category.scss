@@ -11,11 +11,13 @@
 
     .left {
         display: grid;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: auto auto;
+        grid-row-gap: 0.25rem;
     }
 
     .title {
         font-size: 1rem;
+        line-height: 1;
     }
 
     .transactions {
@@ -35,4 +37,24 @@
 
 .Category + .Category {
     margin-top: 0.5rem;
+}
+
+.CategorySkeleton {
+    background-color: var(--white_lilac);
+
+    .title {
+        width: 70px;
+    }
+
+    .transactions {
+        width: 200px;
+
+        .bx--skeleton__text {
+            height: 21px;
+        }
+    }
+
+    .bx--skeleton__text {
+        margin-bottom: 0;
+    }
 }

@@ -36,6 +36,7 @@ const INITIAL_FORM_VALUES = {
 const AddTransaction = ({
   notify,
   addTransaction,
+  categoriesExist,
   getTransactions,
   importStatement,
 }) => {
@@ -126,7 +127,9 @@ const AddTransaction = ({
       </Modal>
       <button
         type="button"
-        className={cn("Button Primary")}
+        className={cn("Button", "Button--Primary", {
+          "Button--Primary-disabled": !categoriesExist,
+        })}
         onClick={handleOpenModal(MODAL_TYPES.IMPORT)}
       >
         Import Statement
@@ -143,10 +146,14 @@ const AddTransaction = ({
 };
 
 const mapDispatchToProps = {
-  getTransactions: fetchTransactions,
   notify: enqueueNotification,
+  getTransactions: fetchTransactions,
   addTransaction: addTransactionAction,
   importStatement: importStatementAction,
 };
 
-export default connect(null, mapDispatchToProps)(AddTransaction);
+const mapStateToProps = (state) => ({
+  categoriesExist: !!state.app.categories.length,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddTransaction);

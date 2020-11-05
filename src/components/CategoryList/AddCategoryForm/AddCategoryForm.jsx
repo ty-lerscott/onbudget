@@ -93,7 +93,7 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
       <div className="AddCategory">
         <button
           type="button"
-          className={cn("Button Primary")}
+          className={cn("Button", "Button--Primary")}
           onClick={handleOpenModal}
         >
           <Add32 /> Add Category

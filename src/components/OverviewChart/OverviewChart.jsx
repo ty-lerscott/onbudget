@@ -1,17 +1,18 @@
 import React from "react";
 import cn from "classnames";
-
-import formatTransactionsForChart from "./utils/formatTransactionsForChart";
-
-import Card from "../Card/Card";
 import { connect } from "react-redux";
 import { Doughnut } from "react-chartjs-2";
+import { InlineLoading } from "carbon-components-react";
+
+import Card from "../Card/Card";
+
+import formatTransactionsForChart from "./utils/formatTransactionsForChart";
 
 import "./OverviewChart.scss";
 
 //TODO: proptypes
 
-const OverviewChart = ({ unplanned, classNames, categories }) => {
+const OverviewChart = ({ isLoading, unplanned, classNames, categories }) => {
   const data = formatTransactionsForChart(unplanned, categories);
 
   return (
@@ -21,18 +22,22 @@ const OverviewChart = ({ unplanned, classNames, categories }) => {
       title="Overview"
       className={cn("OverviewChart", classNames)}
     >
-      {Array.isArray(data?.datasets?.[0]?.data) && (
-        <Doughnut
-          options={{
-            cutoutPercentage: 75,
-            circumference: Math.PI,
-            rotation: Math.PI,
-            legend: {
-              display: false,
-            },
-          }}
-          data={data}
-        />
+      {isLoading ? (
+        <InlineLoading />
+      ) : (
+        Array.isArray(data?.datasets?.[0]?.data) && (
+          <Doughnut
+            options={{
+              cutoutPercentage: 75,
+              circumference: Math.PI,
+              rotation: Math.PI,
+              legend: {
+                display: false,
+              },
+            }}
+            data={data}
+          />
+        )
       )}
     </Card>
   );
@@ -40,6 +45,7 @@ const OverviewChart = ({ unplanned, classNames, categories }) => {
 
 const mapStateToProps = (state) => ({
   categories: state.app.categories,
+  isLoading: state.ui.dashboard.isLoading.overview,
 });
 
 export default connect(mapStateToProps)(OverviewChart);

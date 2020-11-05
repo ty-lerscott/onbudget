@@ -103,3 +103,7 @@ a.bx--header__name, a.bx--header__name:hover {
 .bx--checkbox-label[data-contained-checkbox-state='mixed'].bx--checkbox-label__focus::before {
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary) !important;
 }
+
+.bx--skeleton__text::before {
+  background-color: var(--primary) !important;
+}

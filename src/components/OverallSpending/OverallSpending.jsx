@@ -1,5 +1,7 @@
 import React from "react";
 import cn from "classnames";
+import { connect } from "react-redux";
+import { SkeletonText } from "carbon-components-react";
 
 import toCurrency from "../../utils/currency";
 import { sumTransactions } from "../../utils/transactions";
@@ -10,7 +12,7 @@ import "./OverallSpending.scss";
 
 //TODO: proptypes
 
-const OverallSpending = ({ classNames, transactions, ...props }) => {
+const OverallSpending = ({ classNames, transactions, isLoading, ...props }) => {
   const total = sumTransactions(transactions);
 
   return (
@@ -22,9 +24,15 @@ const OverallSpending = ({ classNames, transactions, ...props }) => {
       className={cn("OverallSpending", classNames)}
       {...props}
     >
-      <p className="amount">{toCurrency(total)}</p>
+      <p className={cn("amount", { isLoading })}>
+        {isLoading ? <SkeletonText /> : toCurrency(total)}
+      </p>
     </Card>
   );
 };
 
-export default OverallSpending;
+const mapStateToProps = (state) => ({
+  isLoading: state.ui.dashboard.isLoading.overallSpending,
+});
+
+export default connect(mapStateToProps)(OverallSpending);

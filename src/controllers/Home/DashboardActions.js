@@ -1,3 +1,4 @@
+import { LOADING_COMPLETE } from "../../state/UIReducer";
 import { CATEGORIES, TRANSACTIONS } from "../../state/AppReducer";
 
 export const fetchCategories = () => async (
@@ -14,14 +15,18 @@ export const fetchCategories = () => async (
     getState,
     getFirebase,
     path: "categories",
-  }).then(({ categories } = {}) => {
-    dispatch({
-      type: `${CATEGORIES}_SUCCESS`,
-      payload: categories,
-    });
+  })
+    .then(({ categories } = {}) => {
+      dispatch({
+        type: `${CATEGORIES}_SUCCESS`,
+        payload: categories,
+      });
 
-    return categories;
-  });
+      return categories;
+    })
+    .finally(() => {
+      dispatch(setLoadingComplete("categoryList"));
+    });
 };
 
 export const fetchTransactions = () => async (
@@ -34,10 +39,24 @@ export const fetchTransactions = () => async (
     getState,
     getFirebase,
     path: "transactions",
-  }).then(({ transactions } = {}) => {
-    dispatch({
-      type: `${TRANSACTIONS}_SUCCESS`,
-      payload: transactions,
+  })
+    .then(({ transactions } = {}) => {
+      dispatch({
+        type: `${TRANSACTIONS}_SUCCESS`,
+        payload: transactions,
+      });
+
+      return transactions;
+    })
+    .finally(() => {
+      dispatch(setLoadingComplete("overview"));
+      dispatch(setLoadingComplete("overallSpending"));
+      dispatch(setLoadingComplete("categoryBreakdown"));
+      dispatch(setLoadingComplete("transactionOverview"));
     });
-  });
 };
+
+export const setLoadingComplete = (componentName) => ({
+  type: `SET_${LOADING_COMPLETE}`,
+  payload: componentName,
+});

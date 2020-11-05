@@ -6,6 +6,7 @@ import Card from "../Card/Card";
 import Category from "./Category";
 import Modal from "../Modal/Modal";
 import CategoryFilter from "./CategoryFilter";
+import CategorySkeleton from "./CategorySkeleton";
 import AddCategoryForm from "./AddCategoryForm/AddCategoryForm";
 import { Fields, useFormReducer, getInitialState } from "../forms/Category";
 
@@ -28,6 +29,7 @@ const CategoryList = ({
   bills,
   notify,
   deposits,
+  isLoading,
   unplanned,
   classNames,
   categories,
@@ -143,13 +145,19 @@ const CategoryList = ({
         )}
       </Modal>
       <ul className="Categories">
-        {combinedCategories.map((category, id) => (
-          <Category
-            {...category}
-            key={`Category-${id}`}
-            handleOnClick={handleEditCategory(category)}
-          />
-        ))}
+        {isLoading
+          ? Array(5)
+              .fill(CategorySkeleton)
+              .map((Component, index) => (
+                <Component key={`CategorySkeleton-${index}`} />
+              ))
+          : combinedCategories.map((category, id) => (
+              <Category
+                {...category}
+                key={`Category-${id}`}
+                handleOnClick={handleEditCategory(category)}
+              />
+            ))}
       </ul>
       <AddCategoryForm />
     </Card>
@@ -158,6 +166,7 @@ const CategoryList = ({
 
 const mapStateToProps = (state) => ({
   categories: state.app.categories,
+  isLoading: state.ui.dashboard.isLoading.categoryList,
 });
 
 const mapDispatchToProps = {

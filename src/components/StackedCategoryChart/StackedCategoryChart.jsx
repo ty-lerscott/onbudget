@@ -1,22 +1,28 @@
 import React from "react";
+import cn from "classnames";
 import { connect } from "react-redux";
+import { Bar } from "react-chartjs-2";
+import { InlineLoading } from "carbon-components-react";
 
 import { formatTransactionsForStackedBarGraph } from "../../state/selectors/TransactionSelectors";
 
 import Card from "../Card/Card";
-import { Bar } from "react-chartjs-2";
 
 import "./StackedCategoryChart.scss";
 
-const StackedCategoryChart = ({ chartData }) => {
+const StackedCategoryChart = ({ isLoading, chartData }) => {
   return (
     <Card
       wrapped
       centered
       title="Category Breakdown"
-      className="StackedCategoryChart"
+      className={cn("StackedCategoryChart", {
+        "StackedCategoryChart--Loading": isLoading,
+      })}
     >
-      {[...(chartData?.datasets || [])].length ? (
+      {isLoading ? (
+        <InlineLoading />
+      ) : [...(chartData?.datasets || [])].length ? (
         <Bar
           data={chartData}
           options={{
@@ -41,6 +47,7 @@ const StackedCategoryChart = ({ chartData }) => {
 
 const mapStateToProps = (state) => ({
   chartData: formatTransactionsForStackedBarGraph(state),
+  isLoading: state.ui.dashboard.isLoading.categoryBreakdown,
 });
 
 export default connect(mapStateToProps)(StackedCategoryChart);

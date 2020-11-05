@@ -6,5 +6,9 @@
     .amount {
         font-size: 2rem;
         font-weight: 600;
+
+        &.isLoading {
+            width: 25%;
+        }
     }
 }

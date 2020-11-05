@@ -6,3 +6,15 @@
         padding-bottom: 0.5rem;
     }
 }
+
+.StackedCategoryChart--Loading {
+    .content {
+        height: calc(100% - 20px);
+    }
+
+    .bx--loading--small,
+    .bx--loading--small .bx--loading__svg {
+        height: 4rem;
+        width: 4rem;
+    }
+}

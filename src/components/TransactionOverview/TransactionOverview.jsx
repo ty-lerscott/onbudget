@@ -1,5 +1,7 @@
 import React from "react";
 import cn from "classnames";
+import { connect } from "react-redux";
+import { SkeletonText } from "carbon-components-react";
 
 import Card from "../Card/Card";
 
@@ -14,6 +16,7 @@ const TransactionOverview = ({
   date,
   bills,
   deposits,
+  isLoading,
   unplanned,
   classNames,
   ...props
@@ -43,19 +46,27 @@ const TransactionOverview = ({
           })}
         >
           {/* TODO: MUST CALCULATE WITH BALANCE AT START OF MONTH */}
-          {toCurrency(revenue)}
+          {isLoading ? <SkeletonText /> : toCurrency(revenue)}
         </span>
       </div>
       <div className="overviewGroup">
         <span className="title">Unplanned</span>
-        <span className="amount">{toCurrency(unplannedTotal)}</span>
+        <span className="amount">
+          {isLoading ? <SkeletonText /> : toCurrency(unplannedTotal)}
+        </span>
       </div>
       <div className="overviewGroup">
         <span className="title">Bills</span>
-        <span className="amount">{toCurrency(billsTotal)}</span>
+        <span className="amount">
+          {isLoading ? <SkeletonText /> : toCurrency(billsTotal)}
+        </span>
       </div>
     </Card>
   );
 };
 
-export default TransactionOverview;
+const mapStateToProps = (state) => ({
+  isLoading: state.ui.dashboard.isLoading.transactionOverview,
+});
+
+export default connect(mapStateToProps)(TransactionOverview);

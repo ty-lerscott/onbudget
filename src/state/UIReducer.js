@@ -1,11 +1,21 @@
 import { combineReducers } from "redux";
 
 export const DATE = "DATE";
+export const LOADING_COMPLETE = "LOADING_COMPLETE";
 
 const now = new Date();
 
 const initialState = {
   date: now,
+  dashboard: {
+    isLoading: {
+      overview: true,
+      categoryList: true,
+      overallSpending: true,
+      categoryBreakdown: true,
+      transactionOverview: true,
+    },
+  },
 };
 
 const date = (state = initialState.date, { type, payload }) => {
@@ -17,6 +27,26 @@ const date = (state = initialState.date, { type, payload }) => {
   }
 };
 
+const dashboard = (state = initialState.dashboard, { type, payload }) => {
+  switch (type) {
+    case `SET_${LOADING_COMPLETE}`:
+      console.warn("what", {
+        ...state,
+        [payload]: false,
+      });
+      return {
+        ...state,
+        isLoading: {
+          ...state.isLoading,
+          [payload]: false,
+        },
+      };
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   date,
+  dashboard,
 });
