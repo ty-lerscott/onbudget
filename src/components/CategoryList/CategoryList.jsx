@@ -146,7 +146,7 @@ const CategoryList = ({
       </Modal>
       <ul className="Categories">
         {isLoading
-          ? Array(5)
+          ? Array(6)
               .fill(CategorySkeleton)
               .map((Component, index) => (
                 <Component key={`CategorySkeleton-${index}`} />
