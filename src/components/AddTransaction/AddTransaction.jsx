@@ -41,9 +41,9 @@ const AddTransaction = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isAddModal, setIsAddModal] = useState(false);
   const [formValues, setFormValues] = useState({});
+  const [isAddModal, setIsAddModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const _isAddModal = modalType === MODAL_TYPES.ADD;

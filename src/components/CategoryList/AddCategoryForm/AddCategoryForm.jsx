@@ -1,55 +1,46 @@
 import cn from "classnames";
 import { connect } from "react-redux";
-import React, { useState } from "react";
+import React from "react";
 
 import colors from "../../../utils/colors";
 
 import { Add32 } from "@carbon/icons-react";
-import { TextInput, Checkbox } from "carbon-components-react";
 
 import Modal from "../../Modal/Modal";
 
 import { addCategoryAction } from "./AddCategoryFormActions";
 import { enqueueNotification } from "../../NotificationCenter/NotificationActions";
 
-const defaultFormValues = {
-  name: "",
-  isBill: false,
-  isDeposit: false,
-};
+import { Fields, useFormReducer, getInitialState } from "../../forms/Category";
 
 const AddCategoryForm = ({ notify, categories, addCategory }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formValues, setFormValues] = useState(defaultFormValues);
-
-  const setState = (key) => (value) => {
-    const nextState = {
-      ...formValues,
-      [key]: value,
-    };
-
-    setFormValues(nextState);
-  };
+  const [
+    {
+      values,
+      state: { isModalOpen, isSubmitting, areFieldsMounted },
+    },
+    { setFormValues, setIsModalOpen, setIsSubmitting, setAreFieldsMounted },
+  ] = useFormReducer();
 
   const handleOpenModal = () => {
-    setIsOpen(true);
+    setAreFieldsMounted(true);
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsOpen(false);
+    setIsModalOpen(false);
 
     return;
   };
 
   const handleClearForm = () => {
-    setFormValues(defaultFormValues);
+    setFormValues(getInitialState());
   };
 
   const handleSubmitForm = () => {
     let newColor = "#cccccc";
 
-    if (!formValues.isBill && !formValues.isDeposit) {
+    if (!values.isBill && !values.isDeposit) {
       const categoryColors = categories.map(({ color }) => color);
 
       const [nextColor] = colors.filter((hex) => !categoryColors.includes(hex));
@@ -58,7 +49,7 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
     }
 
     const finalValues = {
-      ...formValues,
+      ...values,
       color: newColor,
     };
 
@@ -70,63 +61,34 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
           handleCloseModal();
           notify({
             type: "success",
-            subtitle: `You have successfully added a the ${formValues.name} category.`,
+            subtitle: `You have successfully added a the ${values.name} category.`,
           });
-          setFormValues(defaultFormValues);
         }
       })
       .finally(() => {
         setIsSubmitting(false);
+        setAreFieldsMounted(false);
       });
-  };
-
-  const handleNameChange = (e) => {
-    setState("name")(e.target.value);
-  };
-
-  const handleToggleCheckbox = (category) => (isChecked = false) => {
-    setState(category)(isChecked);
   };
 
   return (
     <>
       <Modal
         isScrollable
-        isOpen={isOpen}
+        isOpen={isModalOpen}
         title="Add Category"
         className="AddCategoryModal"
         isSubmitting={isSubmitting}
         handleCloseModal={handleCloseModal}
         handlePrimaryClick={handleSubmitForm}
         handleSecondaryClick={handleClearForm}
-        handleCloseModalComplete={handleClearForm}
-        isDisabled={!formValues.name.length || isSubmitting}
+        isDisabled={!values.name.length || isSubmitting}
       >
-        <div className="AddCategoryForm">
-          <div className="Row">
-            <TextInput
-              id="name"
-              labelText="Name"
-              autoComplete="off"
-              value={formValues.name}
-              onChange={handleNameChange}
-            />
+        {areFieldsMounted && (
+          <div className="CategoryFormFields">
+            <Fields formValues={values} setFormValues={setFormValues} />
           </div>
-          <div className="Row">
-            <Checkbox
-              id="isBill"
-              labelText="Bill?"
-              checked={formValues.isBill}
-              onChange={handleToggleCheckbox("isBill")}
-            />
-            <Checkbox
-              id="isDeposit"
-              labelText="Deposit?"
-              checked={formValues.isDeposit}
-              onChange={handleToggleCheckbox("isDeposit")}
-            />
-          </div>
-        </div>
+        )}
       </Modal>
       <div className="AddCategory">
         <button

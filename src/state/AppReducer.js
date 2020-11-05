@@ -1,3 +1,4 @@
+import clone from "clone-deep";
 import { combineReducers } from "redux";
 
 export const STATEMENT = "STATEMENT";
@@ -39,6 +40,16 @@ const categories = (state = initialState.categories, { type, payload }) => {
       return payload;
     case `ADD_${CATEGORIES}_SUCCESS`:
       return state.concat(payload);
+    case `EDIT_${CATEGORIES}_SUCCESS`:
+      const nextState = clone(state);
+
+      const changedIndex = nextState.findIndex(
+        (item) => item.id === payload.id
+      );
+
+      nextState[changedIndex] = payload;
+
+      return nextState;
     case `${CATEGORIES}_PENDING`:
     case `${CATEGORIES}_FAILURE`:
     default:

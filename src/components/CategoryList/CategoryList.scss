@@ -2,15 +2,13 @@
     grid-area: transactionsList;
     height: auto;
 
-    .Row {
+    > .Row {
         display: grid;
         grid-template-columns: auto 1fr;
         align-items: center;
         grid-column-gap: 1rem;
-        // justify-content: space-between;
 
         .bx--select {
-            // max-width: 30%;
             display: flex;
             align-self: flex-end;
         }
@@ -39,14 +37,17 @@
 
     .content {
         display: grid;
+        overflow-x: hidden;
         grid-template-rows: 1fr auto;
     }
 
     .Categories {
         overflow-y: auto;
-        max-height: 350px;
+        max-height: 300px;
         width: 100%;
         padding-top: 1rem;
+        padding-right: 17px;
+        box-sizing: content-box;
     }
 
     .AddCategory {
@@ -65,7 +66,7 @@
         }
     }
 
-    .AddCategoryForm {
+    .CategoryFormFields {
         .Row + .Row {
             margin-top: 1rem;
         }

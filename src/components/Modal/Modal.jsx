@@ -72,11 +72,11 @@ Modal.propTypes = {
   isScrollable: PropTypes.bool,
   isOpen: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  handlePrimaryClick: PropTypes.func,
-  handleSecondaryClick: PropTypes.func,
   handleCloseModalComplete: PropTypes.func,
   preventCloseOnClickOutside: PropTypes.bool,
   handleCloseModal: PropTypes.func.isRequired,
+  handlePrimaryClick: PropTypes.func.isRequired,
+  handleSecondaryClick: PropTypes.func.isRequired,
 };
 
 export default Modal;

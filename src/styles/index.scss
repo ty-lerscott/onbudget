@@ -10,7 +10,7 @@ body {
   position: relative;
 }
 
-*:focus {
+*:focus:not(.bx--modal-container) {
   border-color: var(--primary)!important;
   outline-color: var(--primary)!important;
 }

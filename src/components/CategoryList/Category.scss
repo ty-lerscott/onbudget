@@ -6,6 +6,8 @@
     border-left-width: 4px;
     border-style: solid;
     padding-left: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
 
     .left {
         display: grid;
@@ -24,8 +26,13 @@
         font-size: 0.75rem;
         font-weight: 600;
     }
+
+    &:hover {
+        background-color: var(--white_lilac);
+    }
+
 }
 
 .Category + .Category {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }

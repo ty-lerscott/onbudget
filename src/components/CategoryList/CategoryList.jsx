@@ -4,9 +4,13 @@ import { connect } from "react-redux";
 
 import Card from "../Card/Card";
 import Category from "./Category";
+import Modal from "../Modal/Modal";
+import CategoryFilter from "./CategoryFilter";
 import AddCategoryForm from "./AddCategoryForm/AddCategoryForm";
+import { Fields, useFormReducer, getInitialState } from "../forms/Category";
 
-import { Select, SelectItem } from "carbon-components-react";
+import { editCategoryAction } from "./CategoryListActions";
+import { enqueueNotification } from "../NotificationCenter/NotificationActions";
 
 import splitIntoCategories from "./utils/splitIntoCategories";
 
@@ -18,49 +22,32 @@ import {
 
 import "./CategoryList.scss";
 
-const FILTERS = {
-  ALL: "All",
-  BILLS: "Bills",
-  DEPOSITS: "Deposits",
-  UNPLANNED: "Unplanned",
-};
-
-const FilterSet = ({ setFilter }) => {
-  const filterCategory = (e) => {
-    setFilter(FILTERS[e.target.value]);
-  };
-
-  return (
-    <Select
-      light
-      inline
-      dir="rtl"
-      size="sm"
-      labelText="Filter"
-      id="CategoryFilters"
-      className="CategoryFilters"
-      onChange={filterCategory}
-    >
-      {Object.keys(FILTERS).map((filter, index) => (
-        <SelectItem
-          value={filter}
-          text={FILTERS[filter]}
-          key={`filtercategory-${index}`}
-        />
-      ))}
-    </Select>
-  );
-};
+import FILTERS from "./utils/filters";
 
 const CategoryList = ({
   bills,
+  notify,
   deposits,
   unplanned,
   classNames,
   categories,
+  editCategory,
 }) => {
   const [filter, setFilter] = useState(FILTERS.ALL);
   const [combinedCategories, setCombinedCategories] = useState([]);
+  const [
+    {
+      values,
+      state: { isModalOpen, isFormDirty, isSubmitting, areFieldsMounted },
+    },
+    {
+      setFormValues,
+      setIsFormDirty,
+      setIsModalOpen,
+      setIsSubmitting,
+      setAreFieldsMounted,
+    },
+  ] = useFormReducer();
 
   useEffect(() => {
     setCombinedCategories(
@@ -90,6 +77,46 @@ const CategoryList = ({
     );
   }, [filter, unplanned, deposits, categories, bills]);
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+
+    return;
+  };
+
+  const handleSubmitForm = () => {
+    setIsSubmitting(true);
+
+    editCategory(values)
+      .then((resp) => {
+        if (!resp?.errors) {
+          handleCloseModal();
+          notify({
+            type: "success",
+            subtitle: `You have successfully updated a the ${values.name} category.`,
+          });
+        }
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+        setAreFieldsMounted(false);
+      });
+  };
+
+  const handleClearForm = () => {
+    setFormValues(getInitialState());
+  };
+
+  const handleEditCategory = ({ total, quantity, ...category }) => () => {
+    setAreFieldsMounted(true);
+    setFormValues(category);
+    setIsFormDirty(false);
+    setIsModalOpen(true);
+  };
+
+  const handleUnmountFields = () => {
+    setAreFieldsMounted(false);
+  };
+
   return (
     <Card
       wrapped
@@ -97,11 +124,31 @@ const CategoryList = ({
       flexContent={false}
       title="Category List"
       className={cn("CategoryList", classNames)}
-      optionalContent={<FilterSet setFilter={setFilter} />}
+      optionalContent={<CategoryFilter setFilter={setFilter} />}
     >
+      <Modal
+        isOpen={isModalOpen}
+        title="Edit Category"
+        isSubmitting={isSubmitting}
+        handleCloseModal={handleCloseModal}
+        handlePrimaryClick={handleSubmitForm}
+        handleSecondaryClick={handleClearForm}
+        isDisabled={!isFormDirty || isSubmitting}
+        handleCloseModalComplete={handleUnmountFields}
+      >
+        {areFieldsMounted && (
+          <div className="CategoryFormFields">
+            <Fields formValues={values} setFormValues={setFormValues} />
+          </div>
+        )}
+      </Modal>
       <ul className="Categories">
         {combinedCategories.map((category, id) => (
-          <Category key={`Category-${id}`} {...category} />
+          <Category
+            {...category}
+            key={`Category-${id}`}
+            handleOnClick={handleEditCategory(category)}
+          />
         ))}
       </ul>
       <AddCategoryForm />
@@ -113,4 +160,9 @@ const mapStateToProps = (state) => ({
   categories: state.app.categories,
 });
 
-export default connect(mapStateToProps)(CategoryList);
+const mapDispatchToProps = {
+  notify: enqueueNotification,
+  editCategory: editCategoryAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);

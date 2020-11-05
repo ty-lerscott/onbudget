@@ -51,4 +51,34 @@ const addCategory = (admin) => async ({ isEmulating, ...body }, { auth }) => {
   return resp;
 };
 
-module.exports = { getCategories, addCategory };
+const editCategory = (admin) => async (
+  { isEmulating, id, transactions, ...category },
+  { auth }
+) => {
+  const db = admin.firestore();
+  let resp;
+
+  if (isEmulating) {
+    db.emulatorOrigin = "http://localhost:8080";
+  }
+
+  await admin
+    .firestore()
+    .collection("users")
+    .doc(auth.uid)
+    .collection("categories")
+    .doc(id)
+    .update(category)
+    .then(() => {
+      resp = {};
+    })
+    .catch((err) => {
+      resp = {
+        errors: [{ message: err.message }],
+      };
+    });
+
+  return resp;
+};
+
+module.exports = { getCategories, addCategory, editCategory };

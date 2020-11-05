@@ -4,9 +4,10 @@ import "./Category.scss";
 
 import toCurrency from "../../utils/currency";
 
-const Category = ({ name, quantity, total, color }) => (
+const Category = ({ name, quantity, total, color, handleOnClick }) => (
   <li
     className="Category"
+    onClick={handleOnClick}
     style={{
       borderLeftColor: color,
     }}
