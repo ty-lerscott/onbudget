@@ -1,0 +1,28 @@
+.ImportStatementForm {
+    > div + div {
+        margin-top: 1rem;
+    }
+
+    .FileUploader {
+        .bx--btn {
+            padding: 0 1rem!important;
+        }
+
+        .bx--file__selected-file {
+            background-color: white;
+        }
+    }
+
+    .inputArray {
+        display: grid;
+        grid-template-columns: repeat(4, 25%);
+
+        .bx--form-item {
+            width: 80%;
+        }
+
+        input {
+            min-width: auto!important;
+        }
+    }
+}

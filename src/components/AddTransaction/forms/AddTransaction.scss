@@ -1,0 +1,33 @@
+.AddTransactionForm {
+    > div + div {
+        margin-top: 1rem;
+    }
+
+    .split {
+        > * {
+            width: calc(50% - 0.5rem);
+        }
+    }
+
+    .bx--form-item {
+        display: block;
+    }
+
+    .bx--select-input__wrapper {
+        width: 100%;
+
+        .bx--select-input {
+            width: inherit;
+        }
+    }
+
+    .bx--date-picker,
+    .bx--date-picker-container,
+    .bx--date-picker.bx--date-picker--single .bx--date-picker__input {
+        width: 100%;
+    }
+
+    .bx--label {
+        margin-bottom: 11px;
+    }
+}
