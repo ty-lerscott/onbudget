@@ -50,7 +50,7 @@
     "firebase": "firebase emulators:start",
     "firebase:deploy": "firebase deploy --only functions",
     "firebase:populate": "firebase emulators:start --export-on-exit=./firebase --import=./firebase",
-    "deploy": "gpush && git push production master",
+    "deploy": "git push origin master && git push production master",
     "test": "NODE_ENV=test jest --config jest/config.js --collectCoverage",
     "test:watch": "NODE_ENV=test jest --config jest/config.js --watch",
     "create-component": "NODE_ENV=development node ./config/create-component"
