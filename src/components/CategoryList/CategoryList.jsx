@@ -5,7 +5,11 @@ import React, { useState, useEffect } from "react";
 import Card from "components/Card/Card";
 import Modal from "components/Modal/Modal";
 import { enqueueNotification } from "components/NotificationCenter/NotificationActions";
-import { Fields, useFormReducer, getInitialState } from "../Forms/Category";
+import {
+  Fields,
+  useFormReducer,
+  getInitialState,
+} from "components/Forms/Category";
 
 import Category from "./Category";
 import CategoryFilter from "./CategoryFilter";
