@@ -24,7 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: |
       echo 'Hello, world.' > test-text.txt
-      echo ${{ secrets.SSH_KEY }} > $HOME/.ssh/id_rsa
+      echo "${secrets.SSH_KEY}" > $HOME/.ssh/id_rsa
       rsync -Pav -e "ssh -i $HOME/.ssh/somekey" ./test-text.txt ${{secrets.SSH_USER}}@${{secrets.BEACON_HILLS}}:${{ secrets.SSH_PATH }}
 
     # - run: NODE_ENV=production npm ci
