@@ -43,7 +43,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start:emulate": "REACT_APP_EMULATING=true react-scripts start",
-    "build": "react-scripts build",
+    "build": "NODE_ENV=production react-scripts build",
     "eject": "react-scripts eject",
     "firebase": "firebase emulators:start",
     "firebase:deploy": "firebase deploy --only functions",
