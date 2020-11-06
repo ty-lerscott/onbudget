@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Test And Deploy To Production
 
 on:
   push:
@@ -11,13 +11,10 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
-
     strategy:
       matrix:
         node-version: [12.13.0]
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -35,3 +32,13 @@ jobs:
         REACT_APP_FIREBASE_messagingSenderId: ${{ secrets.REACT_APP_FIREBASE_messagingSenderId }}
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
+    - name: deploy-via-scp
+      uses: horochx/deploy-via-scp@v1.0.1
+      with:
+        local: build/*
+        remote: /usr/share/nginx/sites/onbudget
+        host: ${{ secrets.BEACON_HILLS }}
+        port: 22
+        user: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+
