@@ -48,17 +48,15 @@ const start = () => {
   firebase.initializeApp(firebaseConfig);
   firebase.firestore();
 
-  if (!process.env.REACT_APP_EMULATING) {
-    Sentry.init({
-      dsn:
-        "https://700dc73d529244cebcb02cc6e5b2ed77@o472551.ingest.sentry.io/5506363",
-      integrations: [new Integrations.BrowserTracing()],
+  Sentry.init({
+    dsn:
+      "https://700dc73d529244cebcb02cc6e5b2ed77@o472551.ingest.sentry.io/5506363",
+    integrations: [new Integrations.BrowserTracing()],
 
-      // We recommend adjusting this value in production, or using tracesSampler
-      // for finer control
-      tracesSampleRate: 1.0,
-    });
-  }
+    // We recommend adjusting this value in production, or using tracesSampler
+    // for finer control
+    tracesSampleRate: 1.0,
+  });
 
   render(
     <Provider store={store}>
