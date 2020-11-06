@@ -3,12 +3,12 @@ import cn from "classnames";
 import { connect } from "react-redux";
 import { SkeletonText } from "carbon-components-react";
 
-import Card from "../Card/Card";
+import Card from "components/Card/Card";
+
+import toCurrency from "utils/currency";
+import { sumTransactions } from "utils/transactions";
 
 import "./TransactionOverview.scss";
-
-import toCurrency from "../../utils/currency";
-import { sumTransactions } from "../../utils/transactions";
 
 //TODO: proptypes
 
@@ -16,8 +16,8 @@ const TransactionOverview = ({
   date,
   bills,
   deposits,
-  isLoading,
   dispatch,
+  isLoading,
   unplanned,
   classNames,
   ...props

@@ -2,17 +2,18 @@ import cn from "classnames";
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 
-import Card from "../Card/Card";
-import AddTransactionForm from "./AddTransactionForm";
-import ImportStatementForm from "./ImportStatementForm";
-import Modal from "../Modal/Modal";
+import Card from "components/Card/Card";
+import Modal from "components/Modal/Modal";
 
+import AddTransactionForm from "components/AddTransaction/forms/AddTransaction";
+import ImportStatementForm from "components/AddTransaction/forms/ImportStatement";
+
+import { fetchTransactions } from "controllers/Home/DashboardActions";
+import { enqueueNotification } from "components/NotificationCenter/NotificationActions";
 import {
   addTransactionAction,
   importStatementAction,
-} from "./AddTransactionActions";
-import { fetchTransactions } from "../../controllers/Home/DashboardActions";
-import { enqueueNotification } from "../NotificationCenter/NotificationActions";
+} from "components/AddTransaction/AddTransactionActions";
 
 import "./AddTransaction.scss";
 
