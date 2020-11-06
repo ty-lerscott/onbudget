@@ -32,13 +32,7 @@ jobs:
         REACT_APP_FIREBASE_messagingSenderId: ${{ secrets.REACT_APP_FIREBASE_messagingSenderId }}
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
-    - name: SCP action wrapper
-      uses: lBeJIuk/scp_action@v1
-      with:
-        source: build
-        ssh_port: 22
-        target: /usr/share/nginx/sites/onbudget
-        ssh_host: ${{ secrets.BEACON_HILLS }}
-        ssh_username: ${{ secrets.SSH_USER }}
-        public_key: ${{ secrets.SSH_KEY }}
+    - name: Deploy
+    - run: |
+        scp
 
