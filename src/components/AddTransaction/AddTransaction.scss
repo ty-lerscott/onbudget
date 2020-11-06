@@ -22,13 +22,21 @@
         display: block;
     }
 
+    .bx--select-input__wrapper {
+        width: 100%;
+
+        .bx--select-input {
+            width: inherit;
+        }
+    }
+
     .bx--date-picker,
     .bx--date-picker-container,
     .bx--date-picker.bx--date-picker--single .bx--date-picker__input {
         width: 100%;
     }
 
-    .bx--date-picker-container .bx--label {
+    .bx--label {
         margin-bottom: 11px;
     }
 }

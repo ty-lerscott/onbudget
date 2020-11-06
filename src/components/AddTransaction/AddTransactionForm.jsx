@@ -3,8 +3,9 @@ import clone from "clone-deep";
 import { connect } from "react-redux";
 
 import {
-  ComboBox,
+  Select,
   TextInput,
+  SelectItem,
   DatePicker,
   NumberInput,
   DatePickerInput,
@@ -24,6 +25,17 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
 
   const handleAmountChange = (e) => {
     setState("amount")(e.target.value);
+  };
+
+  const handleCategoryInputChange = (e) => {
+    const { id } =
+      (categories || []).find(
+        (category) => category.name.toLowerCase() === e.toLowerCase().trim()
+      ) || {};
+
+    if (id) {
+      setState("categoryId")(id);
+    }
   };
 
   const handleChangeCategory = ({ selectedItem }) => {
@@ -66,17 +78,21 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
         />
       </div>
       <div className="flex space-between split no-flex">
-        <ComboBox
+        <Select
           light
           id="category"
           label="Category"
-          items={sortedCategories()}
-          titleText="Category"
           placeholder="Filter..."
           className="CategoryDropdown"
-          onChange={handleChangeCategory}
-          itemToString={categoriesToString}
-        />
+        >
+          {sortedCategories().map((category, index) => (
+            <SelectItem
+              key={`Select-option-${index}`}
+              value={category.id}
+              text={category.name}
+            />
+          ))}
+        </Select>
 
         <DatePicker datePickerType="single" onChange={handleDateChange}>
           <DatePickerInput
