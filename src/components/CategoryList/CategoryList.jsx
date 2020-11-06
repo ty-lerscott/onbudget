@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import { connect } from "react-redux";
 
-import Card from "../Card/Card";
+import Card from "components/Card/Card";
+import Modal from "components/Modal/Modal";
+import {
+  Fields,
+  useFormReducer,
+  getInitialState,
+} from "components/Forms/Category";
+
 import Category from "./Category";
-import Modal from "../Modal/Modal";
 import CategoryFilter from "./CategoryFilter";
 import CategorySkeleton from "./CategorySkeleton";
 import AddCategoryForm from "./AddCategoryForm/AddCategoryForm";
-import { Fields, useFormReducer, getInitialState } from "../forms/Category";
 
 import { editCategoryAction } from "./CategoryListActions";
 import { enqueueNotification } from "../NotificationCenter/NotificationActions";

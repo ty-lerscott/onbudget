@@ -11,7 +11,11 @@ import Modal from "../../Modal/Modal";
 import { addCategoryAction } from "./AddCategoryFormActions";
 import { enqueueNotification } from "../../NotificationCenter/NotificationActions";
 
-import { Fields, useFormReducer, getInitialState } from "../../forms/Category";
+import {
+  Fields,
+  useFormReducer,
+  getInitialState,
+} from "components/Forms/Category";
 
 const AddCategoryForm = ({ notify, categories, addCategory }) => {
   const [

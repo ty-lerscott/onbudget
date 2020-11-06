@@ -5,19 +5,19 @@ import Dashboard from "./Dashboard";
 import Page from "../../components/Page/Page";
 import SignInModal from "../../components/SignIn/SignIn";
 
-import { isAuthenticated } from "../../selectors/UserSelectors";
-import { hasAppLoaded } from "../../selectors/SessionSelectors";
+import { isAuthenticated } from "state/selectors/UserSelectors";
+import { hasFirebaseLoaded } from "state/selectors/FirebaseSelectors";
 
 import "./Home.scss";
 
-const Home = ({ isSignedIn, hasAppLoaded }) =>
-  !hasAppLoaded ? null : (
+const Home = ({ isSignedIn, hasFirebaseLoaded }) =>
+  !hasFirebaseLoaded ? null : (
     <Page name="Home">{isSignedIn ? <Dashboard /> : <SignInModal />}</Page>
   );
 
 const mapStateToProps = (state) => ({
   isSignedIn: isAuthenticated(state),
-  hasAppLoaded: hasAppLoaded(state),
+  hasFirebaseLoaded: hasFirebaseLoaded(state),
 });
 
 export default connect(mapStateToProps)(Home);
