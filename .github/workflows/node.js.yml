@@ -18,14 +18,16 @@ jobs:
         node-version: [12.13.0]
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v1
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
     - run: |
+      pwd
+      ls -asl
       echo 'Hello, world.' > test-text.txt
-      echo "${secrets.SSH_KEY}" > $HOME/.ssh/id_rsa
-      rsync -Pav -e "ssh -i $HOME/.ssh/somekey" ./test-text.txt ${{secrets.SSH_USER}}@${{secrets.BEACON_HILLS}}:${{ secrets.SSH_PATH }}
+      # echo "${secrets.SSH_KEY}" > $HOME/.ssh/id_rsa
+      # rsync -Pav -e "ssh -i $HOME/.ssh/somekey" ./test-text.txt ${{secrets.SSH_USER}}@${{secrets.BEACON_HILLS}}:${{ secrets.SSH_PATH }}
 
     # - run: NODE_ENV=production npm ci
     # - run: npm run build
