@@ -11,7 +11,8 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on:
+
     strategy:
       matrix:
         node-version: [12.13.0]
@@ -32,7 +33,6 @@ jobs:
         REACT_APP_FIREBASE_messagingSenderId: ${{ secrets.REACT_APP_FIREBASE_messagingSenderId }}
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
-    - name: Deploy
     - run: |
         scp
 
