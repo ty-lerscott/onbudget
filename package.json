@@ -26,9 +26,6 @@
     "colors": "^1.4.0",
     "command-line-args": "^5.1.1",
     "connected-react-router": "^6.8.0",
-    "cypress": "^5.5.0",
-    "cypress-axe": "^0.10.0",
-    "cypress-react-unit-test": "^4.16.9",
     "date-fns": "^2.16.1",
     "firebase": "^7.24.0",
     "firebase-functions": "^3.11.0",
@@ -85,5 +82,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^5.5.0",
+    "cypress-axe": "^0.10.0",
+    "cypress-react-unit-test": "^4.16.9"
   }
 }

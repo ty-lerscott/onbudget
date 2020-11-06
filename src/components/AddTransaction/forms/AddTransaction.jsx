@@ -26,8 +26,8 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
     setFormValues(nextState);
   };
 
-  const handleAmountChange = (e) => {
-    setState("amount")(e.target.value);
+  const handleInputChange = (fieldName) => (e) => {
+    setState(fieldName)(e.target.value);
   };
 
   const handleDateChange = (args) => {
@@ -40,10 +40,6 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
     }
 
     setState("date")(date.getTime());
-  };
-
-  const handleDescriptionChange = (e) => {
-    setState("description")(e.target.value);
   };
 
   const sortedCategories = () => {
@@ -61,7 +57,7 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
           id="amount"
           label="Amount *"
           allowEmpty={false}
-          onChange={handleAmountChange}
+          onChange={handleInputChange("amount")}
           invalidText="Please provide a valid amount"
         />
       </div>
@@ -71,6 +67,7 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
           id="category"
           label="Category"
           placeholder="Filter..."
+          onChange={handleInputChange("categoryId")}
           className="CategoryDropdown"
         >
           {sortedCategories().map((category, index) => (
@@ -97,7 +94,7 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
         <TextInput
           id="description"
           labelText="Description"
-          onChange={handleDescriptionChange}
+          onChange={handleInputChange("description")}
         />
       </div>
     </div>
