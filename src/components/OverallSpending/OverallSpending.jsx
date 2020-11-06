@@ -3,10 +3,10 @@ import cn from "classnames";
 import { connect } from "react-redux";
 import { SkeletonText } from "carbon-components-react";
 
-import toCurrency from "../../utils/currency";
-import { sumTransactions } from "../../utils/transactions";
+import toCurrency from "utils/currency";
+import { sumTransactions } from "utils/transactions";
 
-import Card from "../Card/Card";
+import Card from "components/Card/Card";
 
 import "./OverallSpending.scss";
 

@@ -1,8 +1,4 @@
-import {
-  SIGN_IN,
-  REQUEST_ACCESS,
-  FORGOT_PASSWORD,
-} from "../../state/SessionReducer";
+import { SIGN_IN, REQUEST_ACCESS, FORGOT_PASSWORD } from "state/SessionReducer";
 
 export const loginAction = (props) => async (
   dispatch,

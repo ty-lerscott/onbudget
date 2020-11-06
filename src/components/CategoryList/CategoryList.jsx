@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
 
 import Card from "components/Card/Card";
 import Modal from "components/Modal/Modal";
+import { enqueueNotification } from "components/NotificationCenter/NotificationActions";
 import {
   Fields,
   useFormReducer,
@@ -16,19 +17,17 @@ import CategorySkeleton from "./CategorySkeleton";
 import AddCategoryForm from "./AddCategoryForm/AddCategoryForm";
 
 import { editCategoryAction } from "./CategoryListActions";
-import { enqueueNotification } from "../NotificationCenter/NotificationActions";
 
+import FILTERS from "./utils/filters";
 import splitIntoCategories from "./utils/splitIntoCategories";
 
 import {
   getBillCategories,
   getDepositCategories,
   getUnplannedCategories,
-} from "../../state/selectors/CategorySelectors";
+} from "state/selectors/CategorySelectors";
 
 import "./CategoryList.scss";
-
-import FILTERS from "./utils/filters";
 
 const CategoryList = ({
   bills,

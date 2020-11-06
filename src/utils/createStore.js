@@ -6,7 +6,7 @@ import { routerMiddleware, connectRouter } from "connected-react-router";
 import { firestoreReducer } from "redux-firestore";
 
 import api from "./api";
-import { SentryMiddleware } from "../middleware";
+import { SentryMiddleware } from "middleware";
 
 export default ({ history, reducers, initial = {}, routes = [] }) => {
   return createStore(

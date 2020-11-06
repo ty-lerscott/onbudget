@@ -1,4 +1,4 @@
-import { TRANSACTIONS, STATEMENT } from "../../state/AppReducer";
+import { TRANSACTIONS, STATEMENT } from "state/AppReducer";
 
 export const addTransactionAction = (body) => async (
   dispatch,

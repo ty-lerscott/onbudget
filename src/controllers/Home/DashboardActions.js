@@ -1,5 +1,5 @@
-import { LOADING_COMPLETE } from "../../state/UIReducer";
-import { CATEGORIES, TRANSACTIONS } from "../../state/AppReducer";
+import { LOADING_COMPLETE } from "state/UIReducer";
+import { CATEGORIES, TRANSACTIONS } from "state/AppReducer";
 
 export const fetchCategories = () => async (
   dispatch,

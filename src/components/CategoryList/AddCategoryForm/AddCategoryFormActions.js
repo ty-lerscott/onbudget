@@ -1,4 +1,4 @@
-import { CATEGORIES } from "../../../state/AppReducer";
+import { CATEGORIES } from "state/AppReducer";
 
 export const addCategoryAction = (body) => async (
   dispatch,

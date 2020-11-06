@@ -1,5 +1,5 @@
-import { DATE } from "../../state/UIReducer";
-import { TRANSACTIONS } from "../../state/AppReducer";
+import { DATE } from "state/UIReducer";
+import { TRANSACTIONS } from "state/AppReducer";
 
 export const setMonthAction = (month) => (
   dispatch,

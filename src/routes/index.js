@@ -1,6 +1,6 @@
 import loadable from "@loadable/component";
 
-import App from "../controllers/App/App";
+import App from "controllers/App/App";
 
 // import AdminRoutes from 'routes/admin';
 // import WorkoutRoutes from 'routes/workout';
@@ -12,7 +12,7 @@ export default [
       {
         path: "/",
         exact: true,
-        component: loadable(() => import("../controllers/Home/Home")),
+        component: loadable(() => import("controllers/Home/Home")),
       },
     ],
   },

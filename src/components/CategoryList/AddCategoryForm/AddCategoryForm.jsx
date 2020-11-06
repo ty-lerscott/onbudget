@@ -1,15 +1,14 @@
 import cn from "classnames";
-import { connect } from "react-redux";
 import React from "react";
-
-import colors from "../../../utils/colors";
-
+import { connect } from "react-redux";
 import { Add32 } from "@carbon/icons-react";
 
-import Modal from "../../Modal/Modal";
+import colors from "utils/colors";
+
+import Modal from "components/Modal/Modal";
+import { enqueueNotification } from "components/NotificationCenter/NotificationActions";
 
 import { addCategoryAction } from "./AddCategoryFormActions";
-import { enqueueNotification } from "../../NotificationCenter/NotificationActions";
 
 import {
   Fields,

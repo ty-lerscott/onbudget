@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { ChevronLeft32, ChevronRight32 } from "@carbon/icons-react";
 
-import Card from "../Card/Card";
+import Card from "components/Card/Card";
 
 import isThisMonth from "date-fns/isThisMonth";
 import {

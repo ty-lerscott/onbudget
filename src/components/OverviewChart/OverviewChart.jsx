@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Doughnut } from "react-chartjs-2";
 import { InlineLoading } from "carbon-components-react";
 
-import Card from "../Card/Card";
+import Card from "components/Card/Card";
 
 import formatTransactionsForChart from "./utils/formatTransactionsForChart";
 

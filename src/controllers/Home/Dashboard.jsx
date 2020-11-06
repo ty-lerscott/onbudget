@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 
 import { fetchCategories, fetchTransactions } from "./DashboardActions";
 
-import { getMonthTransactions } from "../../state/selectors/TransactionSelectors";
+import { getMonthTransactions } from "state/selectors/TransactionSelectors";
 
-import MonthDisplay from "../../components/MonthDisplay/MonthDisplay";
-import CategoryList from "../../components/CategoryList/CategoryList";
-import OverviewChart from "../../components/OverviewChart/OverviewChart";
-import AddTransaction from "../../components/AddTransaction/AddTransaction";
-import OverallSpending from "../../components/OverallSpending/OverallSpending";
-import TransactionOverview from "../../components/TransactionOverview/TransactionOverview";
-import StackedCategoryChart from "../../components/StackedCategoryChart/StackedCategoryChart";
+import MonthDisplay from "components/MonthDisplay/MonthDisplay";
+import CategoryList from "components/CategoryList/CategoryList";
+import OverviewChart from "components/OverviewChart/OverviewChart";
+import AddTransaction from "components/AddTransaction/AddTransaction";
+import OverallSpending from "components/OverallSpending/OverallSpending";
+import TransactionOverview from "components/TransactionOverview/TransactionOverview";
+import StackedCategoryChart from "components/StackedCategoryChart/StackedCategoryChart";
 
 const Dashboard = ({
   getCategories,

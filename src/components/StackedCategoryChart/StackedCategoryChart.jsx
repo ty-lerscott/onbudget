@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { Bar } from "react-chartjs-2";
 import { InlineLoading } from "carbon-components-react";
 
-import { formatTransactionsForStackedBarGraph } from "../../state/selectors/TransactionSelectors";
+import { formatTransactionsForStackedBarGraph } from "state/selectors/TransactionSelectors";
 
-import Card from "../Card/Card";
+import Card from "components/Card/Card";
 
 import "./StackedCategoryChart.scss";
 

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Category.scss";
 
-import toCurrency from "../../utils/currency";
+import toCurrency from "utils/currency";
 
 const Category = ({ name, quantity, total, color, handleOnClick }) => (
   <li
