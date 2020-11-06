@@ -32,13 +32,12 @@ jobs:
         REACT_APP_FIREBASE_messagingSenderId: ${{ secrets.REACT_APP_FIREBASE_messagingSenderId }}
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
-    - name: deploy-via-scp
-      uses: horochx/deploy-via-scp@v1.0.1
+    - name: Deploy with SCP
+      uses: i3h/deploy-with-scp@v1.0.2
       with:
-        local: build/*
-        remote: /usr/share/nginx/sites/onbudget
-        host: ${{ secrets.BEACON_HILLS }}
-        port: 22
-        user: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
+        src: build
+        dest: /usr/share/nginx/sites/onbudget
+        server-ip: ${{ secrets.BEACON_HILLS }}
+        username: ${{ secrets.SSH_USER }}
+        ssh-key: ${{ secrets.SSH_KEY }}
 
