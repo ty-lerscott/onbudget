@@ -37,7 +37,7 @@ jobs:
       uses: trendyminds/github-actions-rsync@master
       with:
         RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
-        RSYNC_TARGET: ${{ SSH_PATH }}
+        RSYNC_TARGET: ${{ secrets.SSH_PATH }}
         RSYNC_SOURCE: build
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
