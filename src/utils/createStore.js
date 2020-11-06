@@ -8,7 +8,12 @@ import { routerMiddleware, connectRouter } from "connected-react-router";
 
 import api from "./api";
 
-export default ({ history, reducers, initial = {}, routes = [] }) => {
+const createStoreHelper = ({
+  history,
+  reducers,
+  initial = {},
+  routes = [],
+}) => {
   return createStore(
     combineReducers({
       router: connectRouter(history),
@@ -25,3 +30,5 @@ export default ({ history, reducers, initial = {}, routes = [] }) => {
     )
   );
 };
+
+export default createStoreHelper;

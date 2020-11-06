@@ -12,9 +12,8 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/functions";
 
-import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
-import firebaseConfig from "./configs/firebase";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
 import routes from "./routes";
 import reducers from "./state";
@@ -45,7 +44,18 @@ const start = () => {
 
   window.onbudget = window.onbudget || store;
 
-  firebase.initializeApp(firebaseConfig);
+  console.warn(process.env);
+
+  firebase.initializeApp({
+    appId: process.env.REACT_APP_FIREBASE_appId,
+    apiKey: process.env.REACT_APP_FIREBASE_apiKey,
+    projectId: process.env.REACT_APP_FIREBASE_projectId,
+    authDomain: process.env.REACT_APP_FIREBASE_authDomain,
+    databaseURL: process.env.REACT_APP_FIREBASE_databaseURL,
+    storageBucket: process.env.REACT_APP_FIREBASE_storageBucket,
+    measurementId: process.env.REACT_APP_FIREBASE_measurementId,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_messagingSenderId,
+  });
   firebase.firestore();
 
   Sentry.init({

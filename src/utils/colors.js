@@ -1,4 +1,4 @@
-export default [
+const colors = [
   "#f79694",
   "#f7b494",
   "#f7f794",
@@ -39,3 +39,5 @@ export default [
   "#352035",
   "#2b2035",
 ];
+
+export default colors;

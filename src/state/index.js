@@ -3,9 +3,11 @@ import app from "./AppReducer";
 import session from "./SessionReducer";
 import notifications from "./NotificationsReducer";
 
-export default {
+const reducers = {
   ui,
   app,
   session,
   notifications,
 };
+
+export default reducers;

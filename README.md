@@ -76,7 +76,7 @@ Another modal to create categories for your spending
 * A Firebase billable account in order to deploy functions
 * Initialization of firebase cloud firestore and functions
 
-Once you have all of that in place, place your firebase configuration in `src/configs/firebase.js` so that it can be used by the application
+Once you have all of that in place, place your firebase configuration into the appropriate `.env` file so that it can be used by the application
 
 #### Local Development
 

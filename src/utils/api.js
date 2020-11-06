@@ -1,6 +1,6 @@
 const isEmulating = !!process.env.REACT_APP_EMULATING;
 
-export default async (options) => {
+const api = async (options) => {
   const { body, path, dispatch, getFirebase } = options;
   const firebase = await getFirebase();
 
@@ -49,3 +49,5 @@ export default async (options) => {
       // throw new Error("SOME ERROR");
     });
 };
+
+export default api;

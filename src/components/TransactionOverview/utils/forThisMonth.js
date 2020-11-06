@@ -1,6 +1,6 @@
 import isSameMonth from "date-fns/isSameMonth";
 
-export default (arr = [], month) =>
+const forThisMonth = (arr = [], month) =>
   !arr.length
     ? 0
     : arr.reduce((acc, item) => {
@@ -10,3 +10,5 @@ export default (arr = [], month) =>
 
         return acc;
       }, 0);
+
+export default forThisMonth;

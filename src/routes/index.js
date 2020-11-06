@@ -5,7 +5,7 @@ import App from "controllers/App/App";
 // import AdminRoutes from 'routes/admin';
 // import WorkoutRoutes from 'routes/workout';
 
-export default [
+const routes = [
   {
     component: App,
     routes: [
@@ -17,3 +17,5 @@ export default [
     ],
   },
 ];
+
+export default routes;

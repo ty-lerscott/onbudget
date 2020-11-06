@@ -3,7 +3,7 @@ const getCategory = (categories, id) =>
 
 // given an array of transactions, group them by category
 // return them as an array sorted by the total spent in that category
-export default (transactions, categories) => {
+const formatTransactionsForChart = (transactions, categories) => {
   if (!transactions.length || !categories.length) {
     return [];
   }
@@ -42,3 +42,5 @@ export default (transactions, categories) => {
     labels: entries.map(([key]) => key),
   };
 };
+
+export default formatTransactionsForChart;

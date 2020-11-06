@@ -1,7 +1,4 @@
-// export default (amount) =>
-//   !amount ? 0 : Math.round((amount + Number.EPSILON) * 100) / 100;
-
-export default (amount) =>
+const toCurrency = (amount) =>
   isNaN(amount)
     ? 0
     : new Intl.NumberFormat("en-US", {
@@ -10,3 +7,4 @@ export default (amount) =>
       }).format(amount);
 
 export const asNumber = (amount) => (!amount ? 0 : Number(amount.substr(1)));
+export default toCurrency;

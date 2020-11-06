@@ -13,6 +13,7 @@
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -24,7 +25,5 @@ yarn-error.log*
 firebase-debug.log*
 firestore-debug.log*
 ui-debug.log*
-
-src/configs/firebase.js
 
 /firebase

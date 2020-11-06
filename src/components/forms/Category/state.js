@@ -82,7 +82,7 @@ const reducer = (initialState, { type, payload }) => {
   }
 };
 
-export default (importedState = {}) => {
+const CategoryState = (importedState = {}) => {
   const [state, dispatch] = useReducer(reducer, getInitialState(importedState));
   const createAction = (type) => (payload) => dispatch({ type, payload });
 
@@ -97,3 +97,5 @@ export default (importedState = {}) => {
     },
   ];
 };
+
+export default CategoryState;
