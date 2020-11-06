@@ -33,6 +33,14 @@ jobs:
         REACT_APP_FIREBASE_messagingSenderId: ${{ secrets.REACT_APP_FIREBASE_messagingSenderId }}
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
-    - run: |
-        scp
+    - name: Deploy to Production
+      uses: trendyminds/github-actions-rsync@master
+      with:
+        RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
+        RSYNC_TARGET: ${{ SSH_PATH }}
+        RSYNC_SOURCE: build
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+        SSH_USERNAME: ${{ secrets.SSH_USER }}
+        SSH_HOSTNAME: ${{ secrets.BEACON_HILLS }}
 
