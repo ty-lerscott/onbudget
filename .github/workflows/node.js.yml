@@ -33,54 +33,34 @@ jobs:
         REACT_APP_FIREBASE_messagingSenderId: ${{ secrets.REACT_APP_FIREBASE_messagingSenderId }}
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
-    - name: Action - rsync
+    - name: Upload Build Directory
       uses: up9cloud/action-rsync@v1.2
       env:
         HOST: ${{ secrets.SSH_HOST }}
         KEY: ${{ secrets.SSH_KEY }}
-        TARGET: ${{ secrets.SSH_PATH }}
+        TARGET: ${{ secrets.SSH_BUILD_PATH }}
         VERBOSE: true
         USER: ${{ secrets.SSH_USER }}
         # PORT: 2222 # no need to set this, because of $SSH_ARGS
         ARGS: -az --exclude=/.git/
         SSH_ARGS: '-p 22 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
         SOURCE: ./build/
-
         PRE_SCRIPT: |
-          echo start at:
-          date -u --rfc-3339=ns
+            echo start at:
+            date -u --rfc-3339=ns
         POST_SCRIPT: "echo done at: && date -u --rfc-3339=ns"
-
-    # - name: SCP Upload
-    #   uses: betanzos/scp-upload@v1
-    #   with:
-    #     # Source local file path
-    #     # REQUIRED
-    #     source: ./build/*
-    #     # Remote host
-    #     # REQUIRED
-    #     host: ${{ secrets.BEACON_HILLS }}
-    #     # Remote host SSH port
-    #     port: '22'
-    #     # Remote host username
-    #     # REQUIRED
-    #     username: ${{ secrets.SSH_USER }}
-    #     # SSH private key
-    #     # REQUIRED
-    #     key: ${{ secrets.SSH_KEY }}
-    #     # Remote directory to copy the file. Default $HOME
-    #     # REQUIRED
-    #     remote_dir: ${{ secrets.SSH_PATH }}
-
-
-    # - name: Deploy to Production
-    #   uses: trendyminds/github-actions-rsync@master
-    #   with:
-    #     RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
-    #     RSYNC_TARGET: ${{ secrets.SSH_PATH }}
-    #     RSYNC_SOURCE: build
-    #   env:
-    #     SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-    #     SSH_USERNAME: ${{ secrets.SSH_USER }}
-    #     SSH_HOSTNAME: ${{ secrets.BEACON_HILLS }}
-
+    - name: Action - rsync
+      uses: up9cloud/action-rsync@v1.2
+      env:
+        HOST: ${{ secrets.SSH_HOST }}
+        KEY: ${{ secrets.SSH_KEY }}
+        TARGET: ${{ secrets.SSH_PUBLIC_PATH }}
+        VERBOSE: true
+        USER: ${{ secrets.SSH_USER }}
+        PORT: 22
+        ARGS: -az --exclude=/.git/
+        SOURCE: ./public/
+        PRE_SCRIPT: |
+            echo start at:
+            date -u --rfc-3339=ns
+        POST_SCRIPT: "echo done at: && date -u --rfc-3339=ns"
