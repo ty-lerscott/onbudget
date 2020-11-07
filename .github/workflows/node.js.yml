@@ -33,26 +33,30 @@ jobs:
         REACT_APP_FIREBASE_messagingSenderId: ${{ secrets.REACT_APP_FIREBASE_messagingSenderId }}
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
-    - name: SCP Upload
-      uses: betanzos/scp-upload@v1
-      with:
-        # Source local file path
-        # REQUIRED
-        source: ./build/*
-        # Remote host
-        # REQUIRED
-        host: ${{ secrets.BEACON_HILLS }}
-        # Remote host SSH port
-        port: '22'
-        # Remote host username
-        # REQUIRED
-        username: ${{ secrets.SSH_USER }}
-        # SSH private key
-        # REQUIRED
-        key: ${{ secrets.SSH_KEY }}
-        # Remote directory to copy the file. Default $HOME
-        # REQUIRED
-        remote_dir: ${{ secrets.SSH_PATH }}
+    - run: |
+        echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DIRECTORIES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; \
+        ls -asl; \
+        echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DIRECTORIES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+    # - name: SCP Upload
+    #   uses: betanzos/scp-upload@v1
+    #   with:
+    #     # Source local file path
+    #     # REQUIRED
+    #     source: ./build/*
+    #     # Remote host
+    #     # REQUIRED
+    #     host: ${{ secrets.BEACON_HILLS }}
+    #     # Remote host SSH port
+    #     port: '22'
+    #     # Remote host username
+    #     # REQUIRED
+    #     username: ${{ secrets.SSH_USER }}
+    #     # SSH private key
+    #     # REQUIRED
+    #     key: ${{ secrets.SSH_KEY }}
+    #     # Remote directory to copy the file. Default $HOME
+    #     # REQUIRED
+    #     remote_dir: ${{ secrets.SSH_PATH }}
 
 
     # - name: Deploy to Production
