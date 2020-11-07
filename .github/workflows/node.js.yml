@@ -38,7 +38,7 @@ jobs:
       with:
         # Source local file path
         # REQUIRED
-        source: build/*
+        source: ./build/*
         # Remote host
         # REQUIRED
         host: ${{ secrets.BEACON_HILLS }}
