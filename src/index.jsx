@@ -44,8 +44,6 @@ const start = () => {
 
   window.onbudget = window.onbudget || store;
 
-  console.warn(process.env);
-
   firebase.initializeApp({
     appId: process.env.REACT_APP_FIREBASE_appId,
     apiKey: process.env.REACT_APP_FIREBASE_apiKey,
@@ -56,6 +54,7 @@ const start = () => {
     measurementId: process.env.REACT_APP_FIREBASE_measurementId,
     messagingSenderId: process.env.REACT_APP_FIREBASE_messagingSenderId,
   });
+
   firebase.firestore();
 
   Sentry.init({

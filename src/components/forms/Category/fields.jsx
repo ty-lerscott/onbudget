@@ -4,7 +4,7 @@ import { TextInput, Checkbox } from "carbon-components-react";
 
 const CategoryFormFields = ({ formValues, setFormValues }) => {
   const handleSetFormValues = (key) => (e) => {
-    setFormValues({ [key]: e?.target?.value || e });
+    setFormValues({ [key]: typeof e === "boolean" ? e : e.target.value });
   };
 
   return (

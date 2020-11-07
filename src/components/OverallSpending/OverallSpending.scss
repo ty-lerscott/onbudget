@@ -1,6 +1,6 @@
 .OverallSpending {
     .content {
-        height: calc(100% - 2rem);
+        height: calc(100% - 20px);
     }
 
     .amount {
@@ -9,6 +9,9 @@
 
         &.isLoading {
             width: 25%;
+            height: 48px;
+            display: flex;
+            align-items: center;
         }
     }
 }
