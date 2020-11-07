@@ -33,10 +33,21 @@ jobs:
         REACT_APP_FIREBASE_messagingSenderId: ${{ secrets.REACT_APP_FIREBASE_messagingSenderId }}
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
+    - name: Prove directory structure
     - run: |
         echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DIRECTORIES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; \
         ls -asl; \
         echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DIRECTORIES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+    - name: SCP deploy action
+      uses: nogsantos/ssh-scp-deploy@v1.2.1
+      with:
+        src: ./build/*
+        host: ${{ secrets.BEACON_HILLS }}
+        remote: ${{ secrets.SSH_PATH }}
+        port: 22
+        user: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+
     # - name: SCP Upload
     #   uses: betanzos/scp-upload@v1
     #   with:
