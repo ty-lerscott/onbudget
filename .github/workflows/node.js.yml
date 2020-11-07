@@ -40,7 +40,7 @@ jobs:
         KEY: ${{ secrets.SSH_KEY }}
         TARGET: ${{ secrets.SSH_PATH }}
         VERBOSE: true
-        USER: $${{ secrets.SSH_USER }}
+        USER: ${{ secrets.SSH_USER }}
         # PORT: 2222 # no need to set this, because of $SSH_ARGS
         ARGS: -az --exclude=/.git/
         SSH_ARGS: '-p 22 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
