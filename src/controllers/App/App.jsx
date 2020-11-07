@@ -41,7 +41,7 @@ const App = ({ route, logout }) => {
     <main className="App">
       <Header aria-label="On Budget" className="Header">
         <HeaderName prefix="" href="#">
-          On Budget
+          OnBudget
         </HeaderName>
         <HeaderGlobalBar>
           <HeaderGlobalAction
