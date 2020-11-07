@@ -10,7 +10,7 @@ const App = ({ route }) =>
     <main className="App">
       <Header aria-label="On Budget">
         <HeaderName prefix="" href="#">
-          OnBudget
+          On Budget
         </HeaderName>
       </Header>
       <NotificationCenter />
