@@ -34,6 +34,7 @@ jobs:
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
     - name: Prove directory structure
+      uses: actions/setup-node@v1
     - run: |
         echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DIRECTORIES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; \
         ls -asl; \
