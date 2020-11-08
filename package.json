@@ -49,8 +49,10 @@
     "firebase": "firebase emulators:start",
     "firebase:deploy": "firebase deploy --only functions",
     "firebase:populate": "firebase emulators:start --export-on-exit=./firebase --import=./firebase",
-    "test": "NODE_ENV=test react-scripts test",
+    "test": "NODE_ENV=test react-scripts test --watchAll=false",
+    "test:watch": "NODE_ENV=test react-scripts test",
     "test:coverage": "npm test -- --coverage",
+    "coverage:upload": "codecov",
     "create-component": "NODE_ENV=development node ./config/create-component"
   },
   "eslintConfig": {
@@ -77,7 +79,7 @@
     "@testing-library/user-event": "12.1.10",
     "babel-jest": "^26.6.0",
     "babel-plugin-istanbul": "6.0.0",
-    "codecov": "3.8.1",
+    "codecov": "^3.8.1",
     "colors": "1.4.0",
     "command-line-args": "5.1.1",
     "cypress": "5.5.0",
@@ -91,10 +93,9 @@
   "jest": {
     "clearMocks": true,
     "resetMocks": true,
-    "coverageReporters": ["json"],
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!**/*.{spec,test}.{js,jsx}"
+      "**/*.{js,jsx}",
+      "!**/node_modules/**"
     ]
   }
 }

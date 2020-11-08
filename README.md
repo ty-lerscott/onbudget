@@ -4,7 +4,7 @@
 
 ## About
 
-This project was heavily influenced by the amazing work done by <a href="https://github.com/inoda">Lana Noda</a> and is also a budgeting tool hence why the name is similar. The main difference is that, it's being hosted on a digitalocean server for the static content and <a href="https://firebase.google.com/">Google Firebase</a> for all of the database and authentication logic. You can absolutely self host this (I will describe that later, however, it's currently accessible at <a href="https://onbudget.app">onbudget.app</a>.
+This project was heavily influenced by the amazing work done by <a href="https://github.com/inoda">Lana Noda</a> and is also a budgeting tool hence why the name is similar. The main difference is that, it's being hosted on a digitalocean server for the static content and <a href="https://firebase.google.com/">Google Firebase</a> for all of the database and authentication logic. You can absolutely self host this (I will describe that later, however) it's currently accessible at <a href="https://onbudget.app">onbudget.app</a>.
 
 ## Why?
 

@@ -23,6 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: NODE_ENV=production npm ci
+    - run: npm test
     - run: npm run build
       env:
         REACT_APP_FIREBASE_apiKey: ${{ secrets.REACT_APP_FIREBASE_apiKey }}
@@ -49,7 +50,7 @@ jobs:
             echo start at:
             date -u --rfc-3339=ns
         POST_SCRIPT: "echo done at: && date -u --rfc-3339=ns"
-    - name: Action - rsync
+    - name: Upload to Beacon Hills
       uses: up9cloud/action-rsync@v1.2
       env:
         HOST: ${{ secrets.SSH_HOST }}
