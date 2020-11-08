@@ -13,7 +13,7 @@
         justify-content: center;
         margin-top: 2rem;
 
-        .TextButton {
+        .TextButton, .Link {
             font-size: 0.75rem;
             background-color: transparent;
         }
@@ -22,6 +22,7 @@
             border-left-color: var(--silver);
             border-left-width: 2px;
             border-style: solid;
+            margin-left: 0.5rem;
         }
     }
 
@@ -40,7 +41,6 @@
     }
 }
 
-.SignIn--request,
 .SignIn--forgot {
     .form {
         margin: 2rem 0;

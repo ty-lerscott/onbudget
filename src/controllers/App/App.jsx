@@ -15,9 +15,11 @@ import AppLoading from "components/Loading/AppLoading";
 import NotificationCenter from "components/NotificationCenter/NotificationCenter";
 
 import { logoutAction } from "components/SignIn/SignInActions";
+import { isAuthenticated } from "state/selectors/UserSelectors";
+
 import "./Header.scss";
 
-const App = ({ route, logout }) => {
+const App = ({ route, logout, isSignedIn }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -56,13 +58,15 @@ const App = ({ route, logout }) => {
           OnBudget
         </HeaderName>
         <HeaderGlobalBar>
-          <HeaderGlobalAction
-            aria-label="Search"
-            className="ProfileAction"
-            onClick={handleOpenPanel}
-          >
-            <FaceMask24 className="Icon" />
-          </HeaderGlobalAction>
+          {isSignedIn && (
+            <HeaderGlobalAction
+              aria-label="Search"
+              className="ProfileAction"
+              onClick={handleOpenPanel}
+            >
+              <FaceMask24 className="Icon" />
+            </HeaderGlobalAction>
+          )}
         </HeaderGlobalBar>
 
         <div className="DropdownMenu">
@@ -97,4 +101,8 @@ const mapDispatchToProps = {
   logout: logoutAction,
 };
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = (state) => ({
+  isSignedIn: isAuthenticated(state),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

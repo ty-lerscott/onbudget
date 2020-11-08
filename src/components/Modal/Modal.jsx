@@ -21,6 +21,10 @@ const Modal = ({
   ...props
 }) => {
   const onCloseModal = async () => {
+    if (!handleCloseModal) {
+      return;
+    }
+
     await handleCloseModal();
 
     if (handleCloseModalComplete) {
@@ -49,6 +53,7 @@ const Modal = ({
         {
           "Modal--disabled": isDisabled,
           "Modal--submitting": isSubmitting,
+          "Modal--unclosable": !handleCloseModal,
         },
         className
       )}
@@ -70,11 +75,11 @@ Modal.propTypes = {
   className: PropTypes.string,
   isSubmitting: PropTypes.bool,
   isScrollable: PropTypes.bool,
+  handleCloseModal: PropTypes.func,
   isOpen: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   handleCloseModalComplete: PropTypes.func,
   preventCloseOnClickOutside: PropTypes.bool,
-  handleCloseModal: PropTypes.func.isRequired,
   handlePrimaryClick: PropTypes.func.isRequired,
   handleSecondaryClick: PropTypes.func.isRequired,
 };

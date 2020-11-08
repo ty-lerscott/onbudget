@@ -1,0 +1,10 @@
+.Link {
+    cursor: pointer;
+    letter-spacing: 0.1px;
+    text-decoration: none;
+    color: var(--woodsmoke);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
