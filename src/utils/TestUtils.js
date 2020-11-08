@@ -17,11 +17,9 @@ export const TestProvider = ({ children, state }) => {
   return (
     <main className="root">
       <div className="App">
-        <div className="App-content">
-          <Provider store={store}>
-            <ConnectedRouter history={getHistory()}>{children}</ConnectedRouter>
-          </Provider>
-        </div>
+        <Provider store={store}>
+          <ConnectedRouter history={getHistory()}>{children}</ConnectedRouter>
+        </Provider>
       </div>
     </main>
   );
