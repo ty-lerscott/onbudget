@@ -17,8 +17,9 @@ const Card = ({
   transparent = false,
   spaceBetween = false,
 }) => {
-  return (
+  return !children ? null : (
     <div
+      data-testid="Card"
       className={cn(
         "Card",
         {
@@ -37,6 +38,7 @@ const Card = ({
 
       {wrapped ? (
         <div
+          data-testid="Card-ContentWrapper"
           className={cn("content", {
             grid: gridContent,
             flex: flexContent,
