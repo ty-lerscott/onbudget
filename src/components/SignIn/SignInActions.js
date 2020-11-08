@@ -1,4 +1,4 @@
-import { SIGN_IN, FORGOT_PASSWORD } from "state/SessionReducer";
+import { SIGN_IN } from "state/SessionReducer";
 
 export const loginAction = (props) => async (
   dispatch,
@@ -28,22 +28,6 @@ export const loginAction = (props) => async (
 
     throw new Error(err.message);
   }
-};
-
-export const forgotPasswordAction = ({ email }) => async (
-  dispatch,
-  getState,
-  { getFirebase, api }
-) => {
-  dispatch({
-    type: `${FORGOT_PASSWORD}_PENDING`,
-  });
-
-  const firebase = getFirebase();
-
-  return firebase.resetPassword(email).catch((error) => {
-    throw new Error(error.message);
-  });
 };
 
 export const logoutAction = (props) => async (
