@@ -1,4 +1,4 @@
-import { SIGN_IN, REQUEST_ACCESS, FORGOT_PASSWORD } from "state/SessionReducer";
+import { SIGN_IN, FORGOT_PASSWORD } from "state/SessionReducer";
 
 export const loginAction = (props) => async (
   dispatch,
@@ -28,43 +28,6 @@ export const loginAction = (props) => async (
 
     throw new Error(err.message);
   }
-};
-
-export const requestAccessAction = (body) => async (
-  dispatch,
-  getState,
-  { getFirebase, api }
-) => {
-  dispatch({
-    type: `${REQUEST_ACCESS}_PENDING`,
-  });
-
-  return api({
-    body,
-    dispatch,
-    getState,
-    getFirebase,
-    path: "requestAccess",
-  }).then(({ requestAccess: { errors, ...requestAccess } = {} } = {}) => {
-    console.warn({ errors, requestAccess });
-    if (errors) {
-      dispatch({
-        type: `${REQUEST_ACCESS}_FAILURE`,
-        payload: errors,
-      });
-
-      throw new Error(errors[0].message);
-    } else {
-      dispatch({
-        type: `${REQUEST_ACCESS}_SUCCESS`,
-        payload: requestAccess,
-      });
-    }
-
-    localStorage.setItem("hasRequestedAccess", true);
-
-    return requestAccess;
-  });
 };
 
 export const forgotPasswordAction = ({ email }) => async (
