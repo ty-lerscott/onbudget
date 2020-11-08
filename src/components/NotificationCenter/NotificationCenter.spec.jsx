@@ -1,5 +1,5 @@
 describe("<NotificationCenter />", () => {
   it("is a dummy test", () => {
-    expect(true).toBeTrue();
+    expect(true).toBeTruthy();
   });
 });
