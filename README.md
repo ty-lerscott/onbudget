@@ -2,6 +2,8 @@
 
 <a href="https://www.buymeacoffee.com/tylerscott" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
+[![codecov](https://codecov.io/gh/tsw38/onbudget/branch/master/graph/badge.svg?token=oDXSocriA6)](https://codecov.io/gh/tsw38/onbudget)
+
 ## About
 
 This project was heavily influenced by the amazing work done by <a href="https://github.com/inoda">Lana Noda</a> and is also a budgeting tool hence why the name is similar. The main difference is that, it's being hosted on a digitalocean server for the static content and <a href="https://firebase.google.com/">Google Firebase</a> for all of the database and authentication logic. You can absolutely self host this (I will describe that later, however) it's currently accessible at <a href="https://onbudget.app">onbudget.app</a>.
