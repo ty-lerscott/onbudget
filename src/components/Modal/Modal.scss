@@ -45,5 +45,14 @@
             opacity: 0.5;
         }
     }
+}
 
+.Modal--unclosable {
+    .bx--modal-close {
+        display: none;
+    }
+
+    .bx--modal-header {
+        padding-right: 1rem;
+    }
 }

@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { TextInput } from "carbon-components-react";
 
-const SignInForm = ({ error, formValues, setState, toggleForm, formTypes }) => {
+const SignInForm = ({ error, formValues, setState }) => {
   const hasRequestedAccess = !!localStorage.getItem("hasRequestedAccess");
+
   return (
     <>
       <div className="form">
@@ -30,19 +32,16 @@ const SignInForm = ({ error, formValues, setState, toggleForm, formTypes }) => {
       <div className="actions">
         {!hasRequestedAccess && (
           <div className="buttonWrapper">
-            <button
-              className="TextButton"
-              onClick={toggleForm(formTypes.request)}
-            >
+            <Link to="/request-access" className="Link">
               Request Access
-            </button>
+            </Link>
           </div>
         )}
 
         <div className="buttonWrapper">
-          <button className="TextButton" onClick={toggleForm(formTypes.forgot)}>
+          <Link to="/forgot-password" className="Link">
             Forgot Password?
-          </button>
+          </Link>
         </div>
       </div>
     </>

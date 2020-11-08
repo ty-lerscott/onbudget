@@ -3,13 +3,9 @@ import { connect } from "react-redux";
 import React, { useState } from "react";
 import { Modal } from "carbon-components-react";
 
-import {
-  loginAction,
-  requestAccessAction,
-  forgotPasswordAction,
-} from "./SignInActions";
+import { loginAction } from "./SignInActions";
 
-import { SignInForm, RequestAccessForm, ForgotPasswordForm } from "./Forms";
+import { SignInForm } from "./Forms";
 
 import "./SignIn.scss";
 
@@ -22,11 +18,9 @@ const initialFormState = {
 
 const formTypes = {
   signIn: "signIn",
-  forgot: "forgot",
-  request: "request",
 };
 
-const SignInModal = ({ login, requestAccess, forgotPassword }) => {
+const SignInModal = ({ login }) => {
   const [error, setError] = useState("");
   const [formType, setFormType] = useState(formTypes.signIn);
   const [formValues, setFormValues] = useState(initialFormState);
@@ -47,23 +41,9 @@ const SignInModal = ({ login, requestAccess, forgotPassword }) => {
   };
 
   const handleSubmitForm = () => {
-    const action =
-      formType === formTypes.signIn
-        ? login
-        : formType === formTypes.request
-        ? requestAccess
-        : forgotPassword;
+    const action = login;
 
-    const values =
-      formType === formTypes.signIn
-        ? { email: formValues.email, password: formValues.password }
-        : formType === formTypes.request
-        ? {
-            email: formValues.email,
-            firstName: formValues.firstName,
-            lastName: formValues.lastName,
-          }
-        : { email: formValues.email };
+    const values = { email: formValues.email, password: formValues.password };
 
     action(values)
       .then((resp) => {
@@ -79,26 +59,11 @@ const SignInModal = ({ login, requestAccess, forgotPassword }) => {
     setFormType(toggle);
   };
 
-  const Form =
-    formType === formTypes.signIn
-      ? SignInForm
-      : formType === formTypes.request
-      ? RequestAccessForm
-      : ForgotPasswordForm;
+  const Form = SignInForm;
 
-  const modalHeading =
-    formType === formTypes.signIn
-      ? "Sign In"
-      : formType === formTypes.request
-      ? "Request Access"
-      : "Forgot Password";
+  const modalHeading = "Sign In";
 
-  const submitButton =
-    formType === formTypes.signIn
-      ? "Sign In"
-      : formType === formTypes.request
-      ? "Request Access"
-      : "Submit";
+  const submitButton = "Sign In";
 
   return (
     <div
@@ -134,8 +99,6 @@ const SignInModal = ({ login, requestAccess, forgotPassword }) => {
 
 const mapDispatchToProps = {
   login: loginAction,
-  requestAccess: requestAccessAction,
-  forgotPassword: forgotPasswordAction,
 };
 
 export default connect(null, mapDispatchToProps)(SignInModal);
