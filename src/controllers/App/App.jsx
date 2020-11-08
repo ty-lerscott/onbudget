@@ -1,15 +1,21 @@
 import cn from "classnames";
 import { connect } from "react-redux";
+import { push } from "connected-react-router";
 import { renderRoutes } from "react-router-config";
 import React, { useState, useRef, useEffect } from "react";
 import {
   Header,
+  SideNav,
   HeaderName,
+  SideNavLink,
+  SideNavItems,
+  SkipToContent,
   HeaderGlobalBar,
+  HeaderMenuButton,
   HeaderGlobalAction,
 } from "carbon-components-react";
 
-import { FaceMask24 } from "@carbon/icons-react";
+import { FaceMask24, RecentlyViewed32 } from "@carbon/icons-react";
 
 import AppLoading from "components/Loading/AppLoading";
 import NotificationCenter from "components/NotificationCenter/NotificationCenter";
@@ -19,7 +25,8 @@ import { isAuthenticated } from "state/selectors/UserSelectors";
 
 import "./Header.scss";
 
-const App = ({ route, logout, isSignedIn }) => {
+const App = ({ route, logout, isSignedIn, navigateTo }) => {
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -51,9 +58,24 @@ const App = ({ route, logout, isSignedIn }) => {
     console.warn("todo");
   };
 
+  const handleToggleLeftMenu = () => {
+    setIsSideNavExpanded(!isSideNavExpanded);
+  };
+
+  const handleNavigation = (path) => () => {
+    navigateTo(path);
+  };
+
   return (
     <main className="App">
       <Header aria-label="On Budget" className="Header">
+        <SkipToContent />
+        <HeaderMenuButton
+          isCollapsible
+          aria-label="Open menu"
+          onClick={handleToggleLeftMenu}
+          isActive={isSideNavExpanded}
+        />
         <HeaderName prefix="" href="#">
           OnBudget
         </HeaderName>
@@ -87,6 +109,20 @@ const App = ({ route, logout, isSignedIn }) => {
             </li>
           </ul>
         </div>
+        <SideNav
+          isRail
+          aria-label="Side navigation"
+          expanded={isSideNavExpanded}
+        >
+          <SideNavItems>
+            <SideNavLink
+              onClick={handleNavigation("/transaction-history")}
+              renderIcon={RecentlyViewed32}
+            >
+              Transaction History
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
       </Header>
 
       <NotificationCenter />
@@ -98,6 +134,7 @@ const App = ({ route, logout, isSignedIn }) => {
 };
 
 const mapDispatchToProps = {
+  navigateTo: push,
   logout: logoutAction,
 };
 

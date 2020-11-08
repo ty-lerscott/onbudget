@@ -41,21 +41,5 @@ export const logoutAction = (props) => async (
   dispatch({
     type: `${SIGN_IN}_PENDING`,
   });
-
-  // try {
   await firebase.logout();
-
-  //   dispatch({
-  //     type: `${SIGN_IN}_SUCCESS`,
-  //   });
-
-  //   return;
-  // } catch (err) {
-  //   dispatch({
-  //     type: `${SIGN_IN}_FAILURE`,
-  //     payload: err.message,
-  //   });
-
-  //   throw new Error(err.message);
-  // }
 };

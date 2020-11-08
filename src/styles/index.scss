@@ -46,8 +46,6 @@ body {
 }
 
 /* MODAL */
-
-
 .bx--loading__stroke {
   stroke: var(--primary) !important;
 }
@@ -76,16 +74,6 @@ body {
       background-color: var(--woodsmoke);
     }
   }
-}
-
-.bx--header {
-  background-color: white;
-  box-shadow: 0px 0px 8px var(--shadow);
-  border-bottom-color: var(--white_lilac);
-}
-
-a.bx--header__name, a.bx--header__name:hover {
-  color: var(--woodsmoke);
 }
 
 .error {

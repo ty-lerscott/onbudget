@@ -59,12 +59,6 @@ const SignInModal = ({ login }) => {
     setFormType(toggle);
   };
 
-  const Form = SignInForm;
-
-  const modalHeading = "Sign In";
-
-  const submitButton = "Sign In";
-
   return (
     <div
       className={cn("SignIn", `SignIn--${formType}`, {
@@ -76,15 +70,15 @@ const SignInModal = ({ login }) => {
         hasForm
         size="sm"
         shouldSubmitOnEnter
+        modalHeading="Sign In"
+        aria-label="Sign In Modal"
         preventCloseOnClickOutside
-        modalHeading={modalHeading}
         secondaryButtonText="Clear"
-        primaryButtonText={submitButton}
+        primaryButtonText="Sign In"
         onRequestSubmit={handleSubmitForm}
         onSecondarySubmit={handleClearForm}
-        aria-label={`${modalHeading} Modal`}
       >
-        <Form
+        <SignInForm
           error={error}
           setState={setState}
           formTypes={formTypes}
