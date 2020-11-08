@@ -71,9 +71,6 @@
     ]
   },
   "devDependencies": {
-    "@cypress/code-coverage": "3.8.3",
-    "@cypress/webpack-preprocessor": "5.4.10",
-    "@testing-library/cypress": "7.0.1",
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "11.1.0",
     "@testing-library/user-event": "12.1.10",
@@ -82,9 +79,6 @@
     "codecov": "^3.8.1",
     "colors": "1.4.0",
     "command-line-args": "5.1.1",
-    "cypress": "5.5.0",
-    "cypress-axe": "0.10.0",
-    "cypress-react-unit-test": "4.16.9",
     "jest": "26.6.0",
     "jest-chain": "1.1.5",
     "jest-extended": "0.11.5",
