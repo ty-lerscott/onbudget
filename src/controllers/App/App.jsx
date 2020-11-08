@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { connect } from "react-redux";
-import React, { useState } from "react";
 import { renderRoutes } from "react-router-config";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Header,
   HeaderName,
@@ -19,13 +19,25 @@ import "./Header.scss";
 
 const App = ({ route, logout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      console.log(dropdownRef.current);
+      dropdownRef.current.focus();
+    }
+  }, [isMenuOpen]);
 
   if (!route?.routes) {
     return null;
   }
 
-  const handleTogglePanel = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const handleOpenPanel = () => {
+    setIsMenuOpen(true);
+  };
+
+  const handleClosePanel = () => {
+    setIsMenuOpen(false);
   };
 
   const signOut = () => {
@@ -47,13 +59,18 @@ const App = ({ route, logout }) => {
           <HeaderGlobalAction
             aria-label="Search"
             className="ProfileAction"
-            onClick={handleTogglePanel}
+            onClick={handleOpenPanel}
           >
             <FaceMask24 className="Icon" />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
+
         <div className="DropdownMenu">
-          <ul className={cn("menu", { "menu--opened": isMenuOpen })}>
+          <ul
+            ref={dropdownRef}
+            className={cn("menu", { "menu--opened": isMenuOpen })}
+            onBlur={handleClosePanel}
+          >
             <li className="ListItem">
               <button className="TextButton" onClick={signOut}>
                 Sign Out
@@ -67,6 +84,7 @@ const App = ({ route, logout }) => {
           </ul>
         </div>
       </Header>
+
       <NotificationCenter />
       <AppLoading />
 

@@ -51,7 +51,7 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
   };
 
   return (
-    <div className="AddTransactionForm">
+    <div className="AddTransactionForm" data-testid="AddTransactionForm">
       <div className="Row">
         <NumberInput
           id="amount"
@@ -65,7 +65,7 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
         <Select
           light
           id="category"
-          label="Category"
+          labelText="Category *"
           placeholder="Filter..."
           onChange={handleInputChange("categoryId")}
           className="CategoryDropdown"
@@ -107,8 +107,10 @@ AddTransactionForm.propTypes = {
   categories: PropTypes.arrayOf(CategoryProps),
 };
 
-const mapStateToProps = (state) => ({
-  categories: state.app.categories,
-});
+const mapStateToProps = (state) => {
+  return {
+    categories: state.app.categories,
+  };
+};
 
 export default connect(mapStateToProps)(AddTransactionForm);

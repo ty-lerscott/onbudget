@@ -114,8 +114,8 @@ const AddTransaction = ({
       <Modal
         isScrollable
         isOpen={isOpen}
-        title={modalTitle}
         isSubmitting={isSubmitting}
+        title={modalType && modalTitle}
         handleCloseModal={handleCloseModal}
         handlePrimaryClick={handleSubmitForm}
         handleSecondaryClick={handleClearForm}

@@ -24,7 +24,6 @@
         height: 100%;
         width: 0;
 
-
         .menu {
             position: absolute;
             top: 48px;
@@ -41,6 +40,10 @@
 
         .menu--opened {
             max-height: 300px;
+
+            &:focus {
+                border: 1px solid teal;
+            }
         }
 
         .TextButton {

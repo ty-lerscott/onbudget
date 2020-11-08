@@ -41,6 +41,7 @@
     "uuid": "8.3.1"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "start:emulate": "REACT_APP_EMULATING=true react-scripts start",
     "build": "react-scripts build",
@@ -48,8 +49,8 @@
     "firebase": "firebase emulators:start",
     "firebase:deploy": "firebase deploy --only functions",
     "firebase:populate": "firebase emulators:start --export-on-exit=./firebase --import=./firebase",
-    "deploy": "git push origin master && git push production master",
-    "test": "react-scripts test",
+    "test": "NODE_ENV=test react-scripts test",
+    "test:coverage": "npm test -- --coverage",
     "create-component": "NODE_ENV=development node ./config/create-component"
   },
   "eslintConfig": {
@@ -84,6 +85,16 @@
     "cypress-react-unit-test": "4.16.9",
     "jest": "26.6.0",
     "jest-chain": "1.1.5",
-    "jest-extended": "0.11.5"
+    "jest-extended": "0.11.5",
+    "source-map-explorer": "^2.5.0"
+  },
+  "jest": {
+    "clearMocks": true,
+    "resetMocks": true,
+    "coverageReporters": ["json"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/*.{spec,test}.{js,jsx}"
+    ]
   }
 }

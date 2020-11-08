@@ -51,7 +51,7 @@ const ImportStatementForm = ({ formValues, setFormValues }) => {
   };
 
   return (
-    <div className="ImportStatementForm">
+    <div className="ImportStatementForm" data-testid="ImportStatementForm">
       <div className="Row">
         <p className="bx--label-description no-margin">
           Please format the file in this order "date", "description", "debit",
@@ -65,7 +65,7 @@ const ImportStatementForm = ({ formValues, setFormValues }) => {
           filenameStatus="edit"
           onDelete={clearState}
           className="FileUploader"
-          buttonLabel="Choose File"
+          buttonLabel="Choose a File"
           onChange={handleFileUpload}
           iconDescription="Clear file"
           labelDescription="Only .csv files are accepted."

@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import { createBrowserHistory } from "history";
+
 import { renderRoutes } from "react-router-config";
 import { ConnectedRouter } from "connected-react-router";
 
@@ -17,17 +17,15 @@ import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
 import routes from "./routes";
 import reducers from "./state";
-import createStore from "./utils/createStore";
+import createStore, { getHistory } from "./utils/createStore";
 
 import "./styles/index.scss";
 
 const start = () => {
   let initial = {};
-  const history = createBrowserHistory();
 
   const store = createStore({
     routes,
-    history,
     initial,
     reducers,
   });
@@ -70,7 +68,7 @@ const start = () => {
   render(
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...firebaseProps}>
-        <ConnectedRouter history={history}>
+        <ConnectedRouter history={getHistory()}>
           {renderRoutes(routes)}
         </ConnectedRouter>
       </ReactReduxFirebaseProvider>
