@@ -10,6 +10,7 @@ const {
   addTransaction,
   getTransactions,
   importStatement,
+  getTransactionCount,
   getTransactionsByMonth,
 } = require("./user/transactions");
 
@@ -35,6 +36,10 @@ exports.editCategory = functions.https.onCall(editCategory(admin));
 
 exports.transactions = functions.https.onCall(getTransactions(admin));
 exports.addTransaction = functions.https.onCall(addTransaction(admin));
+exports.getTransactionCount = functions.https.onCall(
+  getTransactionCount(admin)
+);
+
 exports.transactionsByMonth = functions.https.onCall(
   getTransactionsByMonth(admin)
 );

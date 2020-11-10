@@ -1,12 +1,12 @@
 import App from "controllers/App/App";
 
-// import AdminRoutes from 'routes/admin';
+import HistoryRoutes from "routes/history";
 import AuthRoutes from "routes/authentication";
 
 const routes = [
   {
     component: App,
-    routes: AuthRoutes,
+    routes: AuthRoutes.concat(HistoryRoutes),
   },
 ];
 

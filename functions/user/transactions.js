@@ -1,8 +1,31 @@
 const { chunkify } = require("../utils/array.js");
 const { addMonths, startOfMonth, endOfMonth } = require("date-fns");
 
+const setTransactionCount = async (ref, amount) => {
+  let transactionCount = 0;
+
+  await ref
+    .collection("meta")
+    .get("transactionCount")
+    .then((snapshot) => {
+      snapshot.forEach((shot) => {
+        transactionCount = shot.data().count;
+      });
+    });
+
+  await ref
+    .collection("meta")
+    .doc("transactionCount")
+    .set(
+      {
+        count: transactionCount + amount,
+      },
+      { merge: true }
+    );
+};
+
 const getTransactions = (admin) => async (
-  { isEmulating, ...body },
+  { isEmulating, limit, page, ...body },
   { auth }
 ) => {
   const db = admin.firestore();
@@ -16,19 +39,26 @@ const getTransactions = (admin) => async (
 
   const yearAgo = startOfMonth(addMonths(today, -12)).getTime();
 
+  const transactionsRef = admin
+    .firestore()
+    .collection("users")
+    .doc(auth.uid)
+    .collection("transactions");
+
+  const query =
+    limit && page
+      ? transactionsRef
+          .orderBy("date")
+          .startAt(limit * (page - 1))
+          .limit(limit)
+      : transactionsRef.where("date", ">=", yearAgo).orderBy("date");
+
   try {
-    await admin
-      .firestore()
-      .collection("users")
-      .doc(auth.uid)
-      .collection("transactions")
-      .where("date", ">=", yearAgo)
-      .get()
-      .then((snapshots) => {
-        snapshots.forEach((snapshot) => {
-          statement.push({ id: snapshot.id, ...snapshot.data() });
-        });
+    await query.get().then((snapshots) => {
+      snapshots.forEach((snapshot) => {
+        statement.push({ id: snapshot.id, ...snapshot.data() });
       });
+    });
   } catch (err) {
     return {
       errors: [
@@ -93,10 +123,9 @@ const addTransaction = (admin) => async (
     db.emulatorOrigin = "http://localhost:8080";
   }
 
-  await admin
-    .firestore()
-    .collection("users")
-    .doc(auth.uid)
+  const userRef = admin.firestore().collection("users").doc(auth.uid);
+
+  await userRef
     .collection("transactions")
     .doc()
     .set(body)
@@ -105,6 +134,8 @@ const addTransaction = (admin) => async (
         errors: [{ message: err.message }],
       };
     });
+
+  await setTransactionCount(userRef, 1);
 
   return resp;
 };
@@ -133,11 +164,10 @@ const importStatement = (admin) => async (
 
   const categories = [];
 
+  const userRef = admin.firestore().collection("users").doc(auth.uid);
+
   try {
-    await admin
-      .firestore()
-      .collection("users")
-      .doc(auth.uid)
+    await userRef
       .collection("categories")
       .get()
       .then((snapshots) => {
@@ -158,10 +188,7 @@ const importStatement = (admin) => async (
   const chunks = chunkify(csv, 450);
 
   // For each chunk, batch
-  const userTransactionsCollection = db
-    .collection("users")
-    .doc(auth.uid)
-    .collection("transactions");
+  const userTransactionsCollection = userRef.collection("transactions");
 
   console.warn(`Num of Chunks ${chunks.length}`);
 
@@ -184,12 +211,42 @@ const importStatement = (admin) => async (
 
   const status = await batchCommit();
 
+  await setTransactionCount(userRef, csv.length);
+
   return status;
+};
+
+const getTransactionCount = (admin) => async (
+  { isEmulating, ...body },
+  { auth }
+) => {
+  const db = admin.firestore();
+  let resp;
+
+  if (isEmulating) {
+    db.emulatorOrigin = "http://localhost:8080";
+  }
+
+  let transactionCount = 0;
+
+  await db
+    .collection("users")
+    .doc(auth.uid)
+    .collection("meta")
+    .get("transactionCount")
+    .then((snapshot) => {
+      snapshot.forEach((shot) => {
+        transactionCount = shot.data().count;
+      });
+    });
+
+  return transactionCount;
 };
 
 module.exports = {
   addTransaction,
   getTransactions,
   importStatement,
+  getTransactionCount,
   getTransactionsByMonth,
 };

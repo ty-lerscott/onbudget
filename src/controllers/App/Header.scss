@@ -14,8 +14,15 @@
     }
 }
 
-.bx--side-nav__item {
+.bx--side-nav__item,
+.bx--header__name {
     cursor: pointer;
+}
+
+.bx--header__name {
+    &:hover {
+        color: var(--primary) !important;
+    }
 }
 
 .bx--header__menu-trigger {

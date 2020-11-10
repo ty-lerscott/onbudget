@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-import { renderRoutes } from "react-router-config";
+import { Switch, Route } from "react-router-dom";
 import React, { useState, useRef, useEffect } from "react";
 import {
   Header,
@@ -20,12 +20,17 @@ import { FaceMask24, RecentlyViewed32 } from "@carbon/icons-react";
 import AppLoading from "components/Loading/AppLoading";
 import NotificationCenter from "components/NotificationCenter/NotificationCenter";
 
+import HomeController from "controllers/Home/Home";
+import RequestAccessController from "controllers/RequestAccess/RequestAccess";
+import ForgotPasswordController from "controllers/ForgotPassword/ForgotPassword";
+import TransactionHistoryController from "controllers/TransactionHistory/TransactionHistory";
+
 import { logoutAction } from "components/SignIn/SignInActions";
 import { isAuthenticated } from "state/selectors/UserSelectors";
 
 import "./Header.scss";
 
-const App = ({ route, logout, isSignedIn, navigateTo }) => {
+const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -67,7 +72,7 @@ const App = ({ route, logout, isSignedIn, navigateTo }) => {
   };
 
   return (
-    <main className="App">
+    <main className="Apps">
       <Header aria-label="On Budget" className="Header">
         <SkipToContent />
         <HeaderMenuButton
@@ -76,7 +81,7 @@ const App = ({ route, logout, isSignedIn, navigateTo }) => {
           onClick={handleToggleLeftMenu}
           isActive={isSideNavExpanded}
         />
-        <HeaderName prefix="" href="#">
+        <HeaderName prefix="" onClick={handleNavigation("/")}>
           OnBudget
         </HeaderName>
         <HeaderGlobalBar>
@@ -128,7 +133,28 @@ const App = ({ route, logout, isSignedIn, navigateTo }) => {
       <NotificationCenter />
       <AppLoading />
 
-      {renderRoutes(route.routes)}
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={(props) => <HomeController {...props} />}
+        />
+        <Route
+          exact
+          path="/request-access"
+          render={(props) => <RequestAccessController {...props} />}
+        />
+        <Route
+          exact
+          path="/forgot-password"
+          render={(props) => <ForgotPasswordController {...props} />}
+        />
+        <Route
+          exact
+          path="/transaction-history"
+          render={(props) => <TransactionHistoryController {...props} />}
+        />
+      </Switch>
     </main>
   );
 };
