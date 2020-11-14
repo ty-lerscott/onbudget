@@ -1,3 +1,41 @@
+.bx--header {
+    background-color: white;
+    box-shadow: 0px 0px 8px var(--shadow);
+    border-bottom-color: var(--white_lilac);
+}
+
+.bx--header__action{
+    &:hover {
+        background-color: transparent;
+
+        svg {
+            color: var(--primary);
+        }
+    }
+}
+
+.bx--side-nav__item,
+.bx--header__name {
+    cursor: pointer;
+}
+
+.bx--header__name {
+    &:hover {
+        color: var(--primary) !important;
+    }
+}
+
+.bx--header__menu-trigger {
+    svg {
+        color: var(--silver);
+        fill: currentColor;
+    }
+}
+
+a.bx--header__name, a.bx--header__name:hover {
+    color: var(--woodsmoke);
+}
+
 .Header {
     .ProfileAction {
         &:hover {

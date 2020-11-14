@@ -1,70 +1,81 @@
+@function hexToRGB($hex) {
+    @return red($hex), green($hex), blue($hex);
+}
+
+@mixin printColor($colorName, $hex) {
+    --#{$colorName}: #{$hex};
+    --#{$colorName}_rgb: #{hexToRGB($hex)};
+}
+
 :root {
     // reds
-    --geraldine: #f79694;
-    --au_chico: #945a59;
-    --congo_brown: #593635;
-    --cocoa_brown: #352020;
+    @include printColor(geraldine, #f79694);
+    @include printColor(au_chico, #945a59);
+    @include printColor(congo_brown, #593635);
+    @include printColor(cocoa_brown, #352020);
 
-    --illusion: #f794c6;
+    @include printColor(illusion, #f794c6);
 
     // oranges
-    --manhattan: #f7b494;
-    --leather: #947759;
-    --millbrook: #594735;
-    --birch: #352b20;
+    @include printColor(manhattan, #f7b494);
+    @include printColor(leather, #947759);
+    @include printColor(millbrook, #594735);
+    @include printColor(birch, #352b20);
 
     // yellows
-    --texas: #f7f794;
-    --clay_creek: #949459;
-    --verdigris: #756c57;
+    @include printColor(texas, #f7f794);
+    @include printColor(clay_creek, #949459);
+    @include printColor(verdigris, #756c57);
 
     // greens
-    --gossip: #c6f794;
-    --asparagus: #779459;
-    --tom_thumb: #475935;
-    --green_kelp: #2b3520;
+    @include printColor(gossip, #c6f794);
+    @include printColor(asparagus, #779459);
+    @include printColor(tom_thumb, #475935);
+    @include printColor(green_kelp, #2b3520);
 
-    --mint_green: #94f794;
-    --spring_leaves: #599459;
+    @include printColor(mint_green, #94f794);
+    @include printColor(spring_leaves, #599459);
 
     // blues
-    --aquamarine: #94f7c6;
-    --aqua_forest: #599477;
-    --stromboli: #355947;
-    --everglade: #20352b;
+    @include printColor(aquamarine, #94f7c6);
+    @include printColor(aqua_forest, #599477);
+    @include printColor(stromboli, #355947);
+    @include printColor(everglade, #20352b);
 
-    --charlotte: #94f7f7;
-    --breaker_bay: #599494;
-    --spectra: #355959;
-    --outer_space: #203535;
+    @include printColor(charlotte, #94f7f7);
+    @include printColor(breaker_bay, #599494);
+    @include printColor(spectra, #355959);
+    @include printColor(outer_space, #203535);
 
-    --malibu: #94c6f7;
-    --waikawa_gray: #597794;
-    --pickled_bluewood: #354759;
-    --ebony_clay: #202b35;
+    @include printColor(malibu, #94c6f7);
+    @include printColor(waikawa_gray, #597794);
+    @include printColor(pickled_bluewood, #354759);
+    @include printColor(ebony_clay, #202b35);
 
     // violets
-    --portage: #9494f7;
-    --martinique: #353559;
+    @include printColor(portage, #9494f7);
+    @include printColor(martinique, #353559);
 
-    --perfume: #c694f7;
-    --trendy_pink: #775994;
-    --eggplant: #593559;
-    --thunder: #352035;
+    @include printColor(perfume, #c694f7);
+    @include printColor(trendy_pink, #775994);
+    @include printColor(eggplant, #593559);
+    @include printColor(thunder, #352035);
 
-    --lavender_rose: #f794f7;
-    --strikemaster: #945994;
-    --voodoo: #473559;
-    --bleached_cedar: #2b2035;
+    @include printColor(lavender_rose, #f794f7);
+    @include printColor(strikemaster, #945994);
+    @include printColor(voodoo, #473559);
+    @include printColor(bleached_cedar, #2b2035);
 
-    --valencia: #d4373e;
+    // Application State
+    @include printColor(error, #d4373e);
 
-    --white_lilac: #f6f8fc;
-    --shadow: #e8e8e8;
-    --silver: #929292;
-    --mine_shaft: #3c3c3c;
+    @include printColor(white_lilac, #f6f8fc);
+    @include printColor(shadow, #e8e8e8);
+    @include printColor(silver, #929292);
+    @include printColor(mine_shaft, #3c3c3c);
+    @include printColor(woodsmoke, #181a1c);
 
 
-    --woodsmoke: #181a1c;
-    --primary: var(--geraldine);
+    --primary: var(--malibu);
+    --primary_rgb: var(--malibu_rgb);
 }

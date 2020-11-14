@@ -11,6 +11,7 @@ const Card = ({
   small = false,
   wrapped = false,
   optionalContent,
+  infinite = false,
   centered = false,
   flexContent = true,
   gridContent = false,
@@ -24,6 +25,7 @@ const Card = ({
         "Card",
         {
           CardSmall: small,
+          CardInfinite: infinite,
           CardTransparent: transparent,
         },
         className

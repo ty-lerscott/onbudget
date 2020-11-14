@@ -1,13 +1,19 @@
 import React from "react";
 import { render } from "@testing-library/react";
 
-import ImportStatement from "./ImportStatement";
+import ImportStatement from "./form";
 import { TestProvider } from "utils/TestUtils";
 
 const setup = (props) => {
+  const resetParentModal = jest.fn();
+
   return render(
     <TestProvider>
-      <ImportStatement {...props} />
+      <ImportStatement
+        {...props}
+        resetParentModal={resetParentModal}
+        isOpen={true}
+      />
     </TestProvider>
   );
 };

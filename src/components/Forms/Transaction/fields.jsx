@@ -14,32 +14,33 @@ import {
 
 import { CategoryProps } from "definitions";
 
-import "./AddTransaction.scss";
+import "./fields.scss";
 
-const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
-  const setState = (key) => (value) => {
-    const nextState = {
-      ...formValues,
-      [key]: isNaN(value) ? value : Number(value),
-    };
+const FIELD_IDS = {
+  date: "date",
+  amount: "amount",
+  categoryId: "categoryId",
+  description: "description",
+};
 
-    setFormValues(nextState);
-  };
+const TransactionFormFields = ({ formValues, setFormValues, categories }) => {
+  const handleSetFormValues = (key) => (e) => {
+    let value;
 
-  const handleInputChange = (fieldName) => (e) => {
-    setState(fieldName)(e.target.value);
-  };
-
-  const handleDateChange = (args) => {
-    let date;
-    // this is a DatePicker calendar select
-    if (Array.isArray(args)) {
-      date = args[0];
-    } else {
-      date = new Date(args.target.value);
+    switch (key) {
+      case "date":
+        value = Array.isArray(e) ? e[0] : new Date(e.target.value);
+        break;
+      case "amount":
+      case "categoryId":
+      case "description":
+        value = e.target.value;
+        break;
+      default:
+        break;
     }
 
-    setState("date")(date.getTime());
+    setFormValues({ [key]: value });
   };
 
   const sortedCategories = () => {
@@ -54,54 +55,62 @@ const AddTransactionForm = ({ formValues, setFormValues, categories }) => {
     <div className="AddTransactionForm" data-testid="AddTransactionForm">
       <div className="Row">
         <NumberInput
-          id="amount"
           label="Amount *"
           allowEmpty={false}
-          onChange={handleInputChange("amount")}
+          id={FIELD_IDS.amount}
+          value={formValues[FIELD_IDS.amount]}
           invalidText="Please provide a valid amount"
+          onChange={handleSetFormValues(FIELD_IDS.amount)}
         />
       </div>
       <div className="flex space-between split no-flex">
         <Select
           light
-          id="category"
+          id="category" //TODO: fix this id as well
           labelText="Category *"
           placeholder="Filter..."
-          onChange={handleInputChange("categoryId")}
           className="CategoryDropdown"
+          value={formValues[FIELD_IDS.categoryId]}
+          onChange={handleSetFormValues(FIELD_IDS.categoryId)}
         >
+          <SelectItem disabled hidden value="" text="Select a Category..." />
           {sortedCategories().map((category, index) => (
             <SelectItem
-              key={`Select-option-${index}`}
               value={category.id}
               text={category.name}
+              key={`Select-option-${index}`}
             />
           ))}
         </Select>
 
-        <DatePicker datePickerType="single" onChange={handleDateChange}>
+        <DatePicker
+          datePickerType="single"
+          value={formValues[FIELD_IDS.date]}
+          onChange={handleSetFormValues(FIELD_IDS.date)}
+        >
           <DatePickerInput
             required
-            id="paidOn"
+            id="paidOn" //TODO: fix this id
             labelText="Date *"
             placeholder="MM/DD/YYYY"
-            onChange={handleDateChange}
+            onChange={handleSetFormValues(FIELD_IDS.date)}
             autoComplete={"off"}
           />
         </DatePicker>
       </div>
       <div className="Row">
         <TextInput
-          id="description"
           labelText="Description"
-          onChange={handleInputChange("description")}
+          id={FIELD_IDS.description}
+          value={formValues[FIELD_IDS.description]}
+          onChange={handleSetFormValues(FIELD_IDS.description)}
         />
       </div>
     </div>
   );
 };
 
-AddTransactionForm.propTypes = {
+TransactionFormFields.propTypes = {
   formValues: PropTypes.object,
   setFormValues: PropTypes.func,
   categories: PropTypes.arrayOf(CategoryProps),
@@ -113,4 +122,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(AddTransactionForm);
+export default connect(mapStateToProps)(TransactionFormFields);

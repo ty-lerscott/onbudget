@@ -1,0 +1,29 @@
+.Page-TransactionHistory {
+
+    .bx--data-table-header,
+    .bx--table-toolbar {
+        background: var(--shadow);
+    }
+    .bx--data-table tbody tr:hover {
+        background: var(--primary);
+    }
+}
+
+.MonthDisplay-intable {
+    height: auto;
+    padding: 0;
+
+    .Month {
+        font-size: 1.5rem;
+        margin: 0 1rem;
+        position: initial;
+        width: 110px;
+        text-align: center;
+    }
+
+    .Button {
+        svg {
+            margin-top: 6px;
+        }
+    }
+}

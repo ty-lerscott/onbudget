@@ -3,13 +3,16 @@ import { combineReducers } from "redux";
 
 export const STATEMENT = "STATEMENT";
 export const CATEGORIES = "CATEGORIES";
+export const SET_PER_PAGE = "SET_PER_PAGE";
 export const TRANSACTIONS = "TRANSACTIONS";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 const initialState = {
   isLoading: true,
   categories: [],
   isFetching: false,
   transactions: [],
+  hasFetchedTransactionsOnce: false,
 };
 
 const isLoading = (state = initialState.isLoading, { type }) => {
@@ -25,6 +28,17 @@ const isLoading = (state = initialState.isLoading, { type }) => {
   }
 };
 
+const isFetching = (state = initialState.isFetching, { type }) => {
+  switch (type) {
+    case `${CATEGORIES}_PENDING`:
+      return true;
+    case `${CATEGORIES}_SUCCESS`:
+    case `${CATEGORIES}_FAILURE`:
+      return false;
+    default:
+      return state;
+  }
+};
 const categories = (state = initialState.categories, { type, payload }) => {
   switch (type) {
     case `${CATEGORIES}_SUCCESS`:
@@ -61,13 +75,13 @@ const transactions = (state = initialState.transactions, { type, payload }) => {
   }
 };
 
-const isFetching = (state = initialState.isFetching, { type }) => {
+const hasFetchedTransactionsOnce = (
+  state = initialState.hasFetchedTransactionsOnce,
+  { type }
+) => {
   switch (type) {
-    case `${CATEGORIES}_PENDING`:
+    case `${TRANSACTIONS}_BY_MONTH_SUCCESS`:
       return true;
-    case `${CATEGORIES}_SUCCESS`:
-    case `${CATEGORIES}_FAILURE`:
-      return false;
     default:
       return state;
   }
@@ -78,4 +92,5 @@ export default combineReducers({
   categories,
   isFetching,
   transactions,
+  hasFetchedTransactionsOnce,
 });

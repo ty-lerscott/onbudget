@@ -2,7 +2,7 @@ const { chunkify } = require("../utils/array.js");
 const { addMonths, startOfMonth, endOfMonth } = require("date-fns");
 
 const getTransactions = (admin) => async (
-  { isEmulating, ...body },
+  { isEmulating, limit, startAt, ...body },
   { auth }
 ) => {
   const db = admin.firestore();
@@ -14,21 +14,27 @@ const getTransactions = (admin) => async (
   const statement = [];
   const today = new Date();
 
-  const yearAgo = startOfMonth(addMonths(today, -12)).getTime();
+  const yearAgo = startOfMonth(addMonths(today, -11)).getTime();
+
+  const transactionsRef = admin
+    .firestore()
+    .collection("users")
+    .doc(auth.uid)
+    .collection("transactions");
+
+  const query = !!limit
+    ? transactionsRef
+        .orderBy("date", "desc")
+        .startAt(startAt ? startAt + 1 : today.getTime())
+        .limit(limit)
+    : transactionsRef.where("date", ">=", yearAgo).orderBy("date");
 
   try {
-    await admin
-      .firestore()
-      .collection("users")
-      .doc(auth.uid)
-      .collection("transactions")
-      .where("date", ">=", yearAgo)
-      .get()
-      .then((snapshots) => {
-        snapshots.forEach((snapshot) => {
-          statement.push({ id: snapshot.id, ...snapshot.data() });
-        });
+    await query.get().then((snapshots) => {
+      snapshots.forEach((snapshot) => {
+        statement.push({ id: snapshot.id, ...snapshot.data() });
       });
+    });
   } catch (err) {
     return {
       errors: [
@@ -38,7 +44,6 @@ const getTransactions = (admin) => async (
       ],
     };
   }
-
   return statement;
 };
 
@@ -93,10 +98,9 @@ const addTransaction = (admin) => async (
     db.emulatorOrigin = "http://localhost:8080";
   }
 
-  await admin
-    .firestore()
-    .collection("users")
-    .doc(auth.uid)
+  const userRef = admin.firestore().collection("users").doc(auth.uid);
+
+  await userRef
     .collection("transactions")
     .doc()
     .set(body)
@@ -122,7 +126,7 @@ const normalizeEntry = ({ entry, fallbackCategoryId, categories }) => ({
 });
 
 const importStatement = (admin) => async (
-  { isEmulating, csv, ...rest },
+  { isEmulating, body, ...rest },
   { auth }
 ) => {
   const db = admin.firestore();
@@ -133,11 +137,10 @@ const importStatement = (admin) => async (
 
   const categories = [];
 
+  const userRef = admin.firestore().collection("users").doc(auth.uid);
+
   try {
-    await admin
-      .firestore()
-      .collection("users")
-      .doc(auth.uid)
+    await userRef
       .collection("categories")
       .get()
       .then((snapshots) => {
@@ -155,13 +158,10 @@ const importStatement = (admin) => async (
     categories.find(({ name }) => name.toLowerCase() === "other") || {};
 
   // firebase has a hard limit of 500 writes per batch
-  const chunks = chunkify(csv, 450);
+  const chunks = chunkify(body, 450);
 
   // For each chunk, batch
-  const userTransactionsCollection = db
-    .collection("users")
-    .doc(auth.uid)
-    .collection("transactions");
+  const userTransactionsCollection = userRef.collection("transactions");
 
   console.warn(`Num of Chunks ${chunks.length}`);
 

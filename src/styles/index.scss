@@ -1,3 +1,4 @@
+
 @import "./reset";
 @import "./colors";
 @import "./button";
@@ -37,6 +38,13 @@ body {
   align-items: center;
 }
 
+.text-centered,
+.bx--data-table td.text-centered {
+  font-size: 1.25rem;
+  padding: 0.75rem;
+  text-align: center;
+}
+
 .space-between {
   justify-content: space-between;
 }
@@ -46,8 +54,6 @@ body {
 }
 
 /* MODAL */
-
-
 .bx--loading__stroke {
   stroke: var(--primary) !important;
 }
@@ -78,18 +84,8 @@ body {
   }
 }
 
-.bx--header {
-  background-color: white;
-  box-shadow: 0px 0px 8px var(--shadow);
-  border-bottom-color: var(--white_lilac);
-}
-
-a.bx--header__name, a.bx--header__name:hover {
-  color: var(--woodsmoke);
-}
-
 .error {
-  color: var(--valencia);
+  color: var(--error);
 }
 
 .bx--toast-notification {
@@ -105,6 +101,8 @@ a.bx--header__name, a.bx--header__name:hover {
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary) !important;
 }
 
-.bx--skeleton__text::before {
+.bx--skeleton__text::before,
+.bx--data-table.bx--skeleton th span::before,
+*:not(label)::before {
   background-color: var(--primary) !important;
 }

@@ -1,5 +1,48 @@
 import { TRANSACTIONS, STATEMENT } from "state/AppReducer";
 
+export const fetchTransactions = () => async (
+  dispatch,
+  getState,
+  { getFirebase, api }
+) => {
+  return api({
+    dispatch,
+    getState,
+    getFirebase,
+    path: "transactions",
+  }).then(({ transactions } = {}) => {
+    dispatch({
+      type: `${TRANSACTIONS}_SUCCESS`,
+      payload: transactions,
+    });
+
+    return transactions;
+  });
+};
+
+export const fetchTransactionsByMonth = (month) => async (
+  dispatch,
+  getState,
+  { getFirebase, api }
+) => {
+  dispatch({
+    type: `${TRANSACTIONS}_BY_MONTH_PENDING`,
+  });
+
+  return api({
+    dispatch,
+    getState,
+    getFirebase,
+    body: month.getTime(),
+    path: "transactionsByMonth",
+  }).then(({ transactionsByMonth }) => {
+    dispatch({
+      type: `${TRANSACTIONS}_BY_MONTH_SUCCESS`,
+      payload: transactionsByMonth,
+    });
+  });
+};
+
 export const addTransactionAction = (body) => async (
   dispatch,
   getState,
@@ -10,7 +53,11 @@ export const addTransactionAction = (body) => async (
   });
 
   return api({
-    body,
+    body: {
+      ...body,
+      amount: Number(body.amount),
+      date: new Date(body.date).getTime() || 0,
+    },
     dispatch,
     getState,
     getFirebase,

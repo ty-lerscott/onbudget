@@ -1,31 +1,42 @@
 import cn from "classnames";
 import { connect } from "react-redux";
-import { renderRoutes } from "react-router-config";
+import { push } from "connected-react-router";
+import { Switch, Route } from "react-router-dom";
 import React, { useState, useRef, useEffect } from "react";
 import {
   Header,
+  SideNav,
   HeaderName,
+  SideNavLink,
+  SideNavItems,
+  SkipToContent,
   HeaderGlobalBar,
+  HeaderMenuButton,
   HeaderGlobalAction,
 } from "carbon-components-react";
 
-import { FaceMask24 } from "@carbon/icons-react";
+import { FaceMask24, RecentlyViewed32 } from "@carbon/icons-react";
 
 import AppLoading from "components/Loading/AppLoading";
 import NotificationCenter from "components/NotificationCenter/NotificationCenter";
+
+import HomeController from "controllers/Home/Home";
+import RequestAccessController from "controllers/RequestAccess/RequestAccess";
+import ForgotPasswordController from "controllers/ForgotPassword/ForgotPassword";
+import TransactionHistoryController from "controllers/TransactionHistory/TransactionHistory";
 
 import { logoutAction } from "components/SignIn/SignInActions";
 import { isAuthenticated } from "state/selectors/UserSelectors";
 
 import "./Header.scss";
 
-const App = ({ route, logout, isSignedIn }) => {
+const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
     if (isMenuOpen) {
-      console.log(dropdownRef.current);
       dropdownRef.current.focus();
     }
   }, [isMenuOpen]);
@@ -51,10 +62,25 @@ const App = ({ route, logout, isSignedIn }) => {
     console.warn("todo");
   };
 
+  const handleToggleLeftMenu = () => {
+    setIsSideNavExpanded(!isSideNavExpanded);
+  };
+
+  const handleNavigation = (path) => () => {
+    navigateTo(path);
+  };
+
   return (
     <main className="App">
       <Header aria-label="On Budget" className="Header">
-        <HeaderName prefix="" href="#">
+        <SkipToContent />
+        <HeaderMenuButton
+          isCollapsible
+          aria-label="Open menu"
+          onClick={handleToggleLeftMenu}
+          isActive={isSideNavExpanded}
+        />
+        <HeaderName prefix="" onClick={handleNavigation("/")}>
           OnBudget
         </HeaderName>
         <HeaderGlobalBar>
@@ -87,17 +113,53 @@ const App = ({ route, logout, isSignedIn }) => {
             </li>
           </ul>
         </div>
+        <SideNav
+          isRail
+          aria-label="Side navigation"
+          expanded={isSideNavExpanded}
+        >
+          <SideNavItems>
+            <SideNavLink
+              onClick={handleNavigation("/transaction-history")}
+              renderIcon={RecentlyViewed32}
+            >
+              Transaction History
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
       </Header>
 
       <NotificationCenter />
       <AppLoading />
 
-      {renderRoutes(route.routes)}
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={(props) => <HomeController {...props} />}
+        />
+        <Route
+          exact
+          path="/request-access"
+          render={(props) => <RequestAccessController {...props} />}
+        />
+        <Route
+          exact
+          path="/forgot-password"
+          render={(props) => <ForgotPasswordController {...props} />}
+        />
+        <Route
+          exact
+          path="/transaction-history"
+          render={(props) => <TransactionHistoryController {...props} />}
+        />
+      </Switch>
     </main>
   );
 };
 
 const mapDispatchToProps = {
+  navigateTo: push,
   logout: logoutAction,
 };
 

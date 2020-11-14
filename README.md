@@ -2,7 +2,8 @@
 
 <a href="https://www.buymeacoffee.com/tylerscott" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-[![codecov](https://codecov.io/gh/tsw38/onbudget/branch/master/graph/badge.svg?token=oDXSocriA6)](https://codecov.io/gh/tsw38/onbudget)
+[![codecov](https://codecov.io/gh/tsw38/onbudget/branch/master/graph/badge.svg?token=oDXSocriA6)](https://codecov.io/gh/tsw38/onbudget) [![Build](https://github.com/tsw38/onbudget/workflows/Build/badge.svg)](https://google.com) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
 
 ## About
 

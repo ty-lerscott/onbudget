@@ -1,7 +1,7 @@
 const isEmulating = !!process.env.REACT_APP_EMULATING;
 
 const api = async (options) => {
-  const { body, path, dispatch, getFirebase } = options;
+  const { body = {}, path, dispatch, getFirebase } = options;
   const firebase = await getFirebase();
 
   if (isEmulating) {
@@ -15,7 +15,7 @@ const api = async (options) => {
 
   const func = firebase.functions().httpsCallable(path);
 
-  const isBodyObject = Object.keys(body || {}).length;
+  const isBodyObject = Array.isArray(body) ? false : Object.keys(body)?.length;
 
   return func({ isEmulating, ...(isBodyObject ? body : { body }) })
     .then(({ data, errors, result }) => {

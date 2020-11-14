@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { startOfMonth } from "date-fns";
 
 export const DATE = "DATE";
 export const LOADING_COMPLETE = "LOADING_COMPLETE";
@@ -6,7 +7,7 @@ export const LOADING_COMPLETE = "LOADING_COMPLETE";
 const now = new Date();
 
 const initialState = {
-  date: now,
+  date: startOfMonth(now),
   dashboard: {
     isLoading: {
       overview: true,

@@ -1,3 +1,4 @@
+import clone from "clone-deep";
 import { createSelector } from "reselect";
 import {
   format,
@@ -11,6 +12,7 @@ import {
   getBillCategories,
   getDepositCategories,
   getUnplannedCategories,
+  getCategoriesFromState,
 } from "./CategorySelectors";
 
 const getActiveDateFromState = (state) => state.ui.date;
@@ -33,7 +35,7 @@ const filterTransactions = ({ thisMonth }) => (
     return thisMonth
       ? isSameMonth(date, activeDate) && categoryIsIncluded
       : categoryIsIncluded &&
-          isAfter(new Date(date), startOfMonth(addMonths(activeDate, -12))) &&
+          isAfter(new Date(date), startOfMonth(addMonths(activeDate, -11))) &&
           !isAfter(new Date(date), activeDate);
   });
 };
@@ -70,9 +72,29 @@ export const getMonthTransactions = createSelector(
   }
 );
 
-export const getYearTransactions = createSelector(
-  [getTransactionsFromState, getUnplannedCategories, getActiveDateFromState],
-  filterTransactions({ thisMonth: false })
+export const getAllMonthTransactions = createSelector(
+  [getTransactionsFromState, getCategoriesFromState, getActiveDateFromState],
+  (transactions, categories, activeDate) => {
+    return transactions.reduce((acc, transaction) => {
+      if (isSameMonth(new Date(transaction.date), activeDate)) {
+        const cloned = clone(transaction);
+
+        cloned.category =
+          categories.find(({ id }) => id === cloned.categoryId)?.name || "";
+        acc.push(cloned);
+      }
+
+      return acc;
+    }, []);
+  }
+);
+
+export const hasRequestedYearsWorth = createSelector(
+  [getTransactionsFromState, getActiveDateFromState],
+  (transactions, activeDate) =>
+    transactions.some((transaction) =>
+      isSameMonth(transaction.date, addMonths(activeDate, -11))
+    )
 );
 
 export const formatTransactionsForStackedBarGraph = createSelector(

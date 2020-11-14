@@ -1,9 +1,19 @@
-import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { startOfMonth, addMonths } from "date-fns";
 
-import { fetchCategories, fetchTransactions } from "./DashboardActions";
+import { fetchCategories } from "actions/CategoryActions";
+import {
+  fetchTransactions,
+  fetchTransactionsByMonth,
+} from "actions/TransactionActions";
+import { setLoadingComplete } from "./DashboardActions";
 
-import { getMonthTransactions } from "state/selectors/TransactionSelectors";
+import { isAuthenticated } from "state/selectors/UserSelectors";
+import {
+  getMonthTransactions,
+  hasRequestedYearsWorth,
+} from "state/selectors/TransactionSelectors";
 
 import MonthDisplay from "components/MonthDisplay/MonthDisplay";
 import CategoryList from "components/CategoryList/CategoryList";
@@ -14,16 +24,37 @@ import TransactionOverview from "components/TransactionOverview/TransactionOverv
 import StackedCategoryChart from "components/StackedCategoryChart/StackedCategoryChart";
 
 const Dashboard = ({
+  thisMonth,
+  isSignedIn,
   getCategories,
   getTransactions,
+  hasRequestedYear,
+  handleLoadingComplete,
+  getTransactionsByMonth,
   transactions: { bills, deposits, unplanned },
 }) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    getCategories();
-    getTransactions();
+    Promise.all([getCategories(), getTransactions()]).then(() => {
+      [
+        "overview",
+        "categoryList",
+        "overallSpending",
+        "categoryBreakdown",
+        "transactionOverview",
+      ].forEach((area) => {
+        handleLoadingComplete(area);
+      });
+    });
   }, []);
-  /* eslint-disable react-hooks/exhaustive-deps */
+
+  useEffect(() => {
+    if (isSignedIn && !hasRequestedYear) {
+      const yearAndOneMonth = startOfMonth(addMonths(thisMonth, -11));
+      getTransactionsByMonth(yearAndOneMonth);
+    }
+  }, [isSignedIn, thisMonth]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <>
@@ -54,11 +85,16 @@ const Dashboard = ({
 const mapDispatchToProps = {
   getCategories: fetchCategories,
   getTransactions: fetchTransactions,
+  handleLoadingComplete: setLoadingComplete,
+  getTransactionsByMonth: fetchTransactionsByMonth,
 };
 
 const mapStateToProps = (state) => ({
+  thisMonth: state.ui.date,
   isFetching: state.app.isFetching,
+  isSignedIn: isAuthenticated(state),
   transactions: getMonthTransactions(state),
+  hasRequestedYear: hasRequestedYearsWorth(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
