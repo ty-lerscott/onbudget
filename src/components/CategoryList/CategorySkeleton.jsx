@@ -6,6 +6,7 @@ import "./Category.scss";
 
 const CategorySkeleton = () => (
   <li
+    data-testid="CategorySkeleton"
     className={cn("Category", "CategorySkeleton")}
     style={{
       borderLeftColor: `var(--shadow)`,

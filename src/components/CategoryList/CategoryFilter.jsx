@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import FILTERS from "./utils/filters";
 
@@ -33,6 +34,10 @@ const CategoryFilter = ({ setFilter }) => {
       ))}
     </Select>
   );
+};
+
+CategoryFilter.propTypes = {
+  setFilter: PropTypes.func,
 };
 
 export default CategoryFilter;

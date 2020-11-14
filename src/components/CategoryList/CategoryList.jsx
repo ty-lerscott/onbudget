@@ -1,4 +1,5 @@
 import cn from "classnames";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 
@@ -26,6 +27,8 @@ import {
   getDepositCategories,
   getUnplannedCategories,
 } from "state/selectors/CategorySelectors";
+
+import { CategoryProps, TransactionProps } from "definitions";
 
 import "./CategoryList.scss";
 
@@ -109,7 +112,7 @@ const CategoryList = ({
   };
 
   const handleClearForm = () => {
-    setFormValues(getInitialState());
+    setFormValues(getInitialState().values);
   };
 
   const handleEditCategory = ({ total, quantity, ...category }) => () => {
@@ -166,6 +169,17 @@ const CategoryList = ({
       <AddCategoryForm />
     </Card>
   );
+};
+
+CategoryList.propTypes = {
+  notify: PropTypes.func,
+  isLoading: PropTypes.bool,
+  classNames: PropTypes.string,
+  editCategory: PropTypes.func,
+  bills: PropTypes.arrayOf(TransactionProps),
+  categories: PropTypes.arrayOf(CategoryProps),
+  deposits: PropTypes.arrayOf(TransactionProps),
+  unplanned: PropTypes.arrayOf(TransactionProps),
 };
 
 const mapStateToProps = (state) => ({
