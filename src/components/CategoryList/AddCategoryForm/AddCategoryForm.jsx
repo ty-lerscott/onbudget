@@ -74,6 +74,10 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
       });
   };
 
+  const handleDismountFields = () => {
+    setAreFieldsMounted(false);
+  };
+
   return (
     <>
       <Modal
@@ -85,12 +89,11 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
         handleCloseModal={handleCloseModal}
         handlePrimaryClick={handleSubmitForm}
         handleSecondaryClick={handleClearForm}
+        handleCloseModalComplete={handleDismountFields}
         isDisabled={!values.name.length || isSubmitting}
       >
         {areFieldsMounted && (
-          <div className="CategoryFormFields">
-            <Fields formValues={values} setFormValues={setFormValues} />
-          </div>
+          <Fields formValues={values} setFormValues={setFormValues} />
         )}
       </Modal>
       <div className="AddCategory">

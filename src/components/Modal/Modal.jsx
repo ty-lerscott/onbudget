@@ -33,6 +33,7 @@ const Modal = ({
       }, 300);
     }
   };
+
   return (
     <DefaultModal
       hasForm

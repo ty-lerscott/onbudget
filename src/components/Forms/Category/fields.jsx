@@ -8,7 +8,7 @@ const CategoryFormFields = ({ formValues, setFormValues }) => {
   };
 
   return (
-    <div data-testid="CategoryFormFields">
+    <div className="CategoryFormFields" data-testid="CategoryFormFields">
       <div className="Row">
         <TextInput
           id="name"

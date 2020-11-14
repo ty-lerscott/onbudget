@@ -35,10 +35,26 @@ describe("<AddCategoryForm />", () => {
   });
 
   it("renders fields after clicking button", () => {
-    const { debug, queryByTestId, getByRole } = selectors;
+    const { queryByTestId, getByRole } = selectors;
+
+    expect(queryByTestId("CategoryFormFields")).toBeFalsy();
 
     fireEvent.click(getByRole("button", { name: "Add Category" }));
 
     expect(queryByTestId("CategoryFormFields")).toBeTruthy();
   });
+
+  it("closes the modal when clicking the close button", async () => {
+    const { getByTitle, getByRole, queryByTestId } = selectors;
+
+    fireEvent.click(getByRole("button", { name: "Add Category" }));
+
+    fireEvent.click(getByTitle("Close"));
+
+    await waitFor(() => {
+      expect(queryByTestId("CategoryFormFields")).toBeFalsy();
+    });
+  });
+
+  // handleSubmitForm
 });
