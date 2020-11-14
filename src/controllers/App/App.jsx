@@ -162,7 +162,7 @@ const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
 
 App.propTypes = {
   logout: PropTypes.func,
-  route: PropTypes.array,
+  route: PropTypes.object,
   children: PropTypes.node,
   isSignedIn: PropTypes.bool,
   navigateTo: PropTypes.func,

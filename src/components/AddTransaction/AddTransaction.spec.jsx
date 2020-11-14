@@ -28,24 +28,22 @@ describe("<AddTransaction />", () => {
   });
 
   it("renders correctly with the add transaction form type after clicking the right button", async () => {
-    const { getByTestId, queryByLabelText } = selectors;
+    const { getByTestId, getByLabelText } = selectors;
 
     fireEvent.click(getByTestId("OpenModal-AddTransaction"));
 
-    expect(queryByLabelText("Amount *")).toBeTruthy();
-    expect(queryByLabelText("Category *")).toBeTruthy();
-    expect(queryByLabelText("Date *")).toBeTruthy();
-    expect(queryByLabelText("Description")).toBeTruthy();
+    expect(getByLabelText("Amount *")).toBeTruthy();
+    expect(getByLabelText("Category *")).toBeTruthy();
+    expect(getByLabelText("Date *")).toBeTruthy();
+    expect(getByLabelText("Description")).toBeTruthy();
   });
 
-  it("renders correctly with the add transaction form type after clicking the right button", async () => {
+  it("renders correctly with the import transactions form type after clicking the right button", async () => {
     const { getByText, getByTestId } = selectors;
 
     fireEvent.click(getByTestId("OpenModal-ImportTransactions"));
 
-    await waitFor(() => {
-      expect(getByText("File")).toBeTruthy();
-      expect(getByText("Choose a File")).toBeTruthy();
-    });
+    expect(getByText("File")).toBeTruthy();
+    expect(getByText("Choose a File")).toBeTruthy();
   });
 });

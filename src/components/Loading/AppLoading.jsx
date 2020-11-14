@@ -7,8 +7,8 @@ import "./AppLoading.scss";
 
 const AppLoading = ({ isLoading }) =>
   isLoading ? (
-    <div className="AppLoading">
-      <Loading withOverlay />{" "}
+    <div className="AppLoading" data-testid="AppLoading">
+      <Loading withOverlay />
     </div>
   ) : null;
 

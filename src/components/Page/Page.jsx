@@ -5,16 +5,17 @@ import PropTypes from "prop-types";
 import "./Page.scss";
 
 const Page = ({ children, name, ...props }) => {
+  const pageName = `Page-${name}`;
   return (
-    <div className={cn("Page", `Page-${name}`)} {...props}>
+    <div data-testid={pageName} className={cn("Page", pageName)} {...props}>
       {children}
     </div>
   );
 };
 
 Page.propTypes = {
-  name: PropTypes.string,
   children: PropTypes.node,
+  name: PropTypes.string.isRequired,
 };
 
 export default Page;
