@@ -9,7 +9,7 @@ const CategoryFormFields = ({ formValues, setFormValues }) => {
 
   return (
     <>
-      <div className="Row">
+      <div className="Row" data-testid="CategoryFormFields">
         <TextInput
           id="name"
           labelText="Name"
