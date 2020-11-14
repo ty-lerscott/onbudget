@@ -1,6 +1,8 @@
-import cn from "classnames";
 import React from "react";
+import cn from "classnames";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
 import { Add32 } from "@carbon/icons-react";
 
 import colors from "utils/colors";
@@ -107,6 +109,12 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
       </div>
     </>
   );
+};
+
+AddCategoryForm.propTypes = {
+  notify: PropTypes.func,
+  categories: PropTypes.array,
+  addCategory: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
