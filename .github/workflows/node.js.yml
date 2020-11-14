@@ -6,8 +6,8 @@ name: Build
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  # pull_request:  //TODO: pull request, just test
+  #   branches: [ master ]
 
 jobs:
   build:

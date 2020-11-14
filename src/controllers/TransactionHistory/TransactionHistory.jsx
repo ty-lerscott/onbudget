@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 
-import Modal from "components/Modal/Modal";
+// import Modal from "components/Modal/Modal";
 import View from "views/transaction-history";
 
 import { fetchCategories } from "actions/CategoryActions";
