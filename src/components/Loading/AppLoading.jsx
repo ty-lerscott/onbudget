@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Loading } from "carbon-components-react";
 
@@ -10,6 +11,10 @@ const AppLoading = ({ isLoading }) =>
       <Loading withOverlay />{" "}
     </div>
   ) : null;
+
+AppLoading.propTypes = {
+  isLoading: PropTypes.bool,
+};
 
 const mapStateToProps = (state) => ({
   isLoading: state.app.isLoading,

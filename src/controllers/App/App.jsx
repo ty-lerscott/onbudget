@@ -1,8 +1,10 @@
 import cn from "classnames";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { Switch, Route } from "react-router-dom";
 import React, { useState, useRef, useEffect } from "react";
+
 import {
   Header,
   SideNav,
@@ -156,6 +158,14 @@ const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
       </Switch>
     </main>
   );
+};
+
+App.propTypes = {
+  logout: PropTypes.func,
+  route: PropTypes.array,
+  children: PropTypes.node,
+  isSignedIn: PropTypes.bool,
+  navigateTo: PropTypes.func,
 };
 
 const mapDispatchToProps = {

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { TextInput } from "carbon-components-react";
 
@@ -46,6 +47,15 @@ const SignInForm = ({ error, formValues, setState }) => {
       </div>
     </>
   );
+};
+
+SignInForm.propTypes = {
+  error: PropTypes.string,
+  formValues: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+  }),
+  setState: PropTypes.func,
 };
 
 export default SignInForm;

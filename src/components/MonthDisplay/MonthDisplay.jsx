@@ -1,5 +1,7 @@
 import cn from "classnames";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
+
 import {
   format,
   addMonths,
@@ -69,6 +71,13 @@ const MonthDisplay = ({ date, setMonth, classNames, onPreviousClick }) => {
       </div>
     </Card>
   );
+};
+
+MonthDisplay.propTypes = {
+  date: PropTypes.instanceOf(Date),
+  setMonth: PropTypes.func,
+  classNames: PropTypes.string,
+  onPreviousClick: PropTypes.func,
 };
 
 const mapDispatchToProps = {

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { TextInput, Checkbox } from "carbon-components-react";
 
@@ -34,6 +35,15 @@ const CategoryFormFields = ({ formValues, setFormValues }) => {
       </div>
     </div>
   );
+};
+
+CategoryFormFields.propTypes = {
+  setFormValues: PropTypes.func,
+  formValues: PropTypes.shape({
+    name: PropTypes.string,
+    isBill: PropTypes.bool,
+    isDeposit: PropTypes.bool,
+  }),
 };
 
 export default CategoryFormFields;

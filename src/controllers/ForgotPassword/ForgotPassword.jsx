@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import React, { useEffect } from "react";
 import { replace } from "connected-react-router";
 
 import View from "views/forgot-password";

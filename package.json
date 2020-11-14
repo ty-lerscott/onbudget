@@ -56,7 +56,10 @@
     "create-component": "NODE_ENV=development node ./config/create-component"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "react/prop-types": ["error"]
+    }
   },
   "browserslist": {
     "production": [

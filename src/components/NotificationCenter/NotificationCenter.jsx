@@ -1,11 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import React, { useEffect, useRef } from "react";
 
 import "./NotificationCenter.scss";
 
 import { dequeueNotification } from "./NotificationActions";
 
 import Notification from "./Notification";
+
+import { NotificationProps } from "definitions";
 
 const NotificationCenter = ({ dequeue, notifications }) => {
   const memoDequeue = useRef(() => dequeue()).current;
@@ -27,6 +30,11 @@ const NotificationCenter = ({ dequeue, notifications }) => {
       </div>
     </div>
   );
+};
+
+NotificationCenter.propTypes = {
+  dequeue: PropTypes.func,
+  notifications: PropTypes.arrayOf(NotificationProps),
 };
 
 const mapDispatchToProps = {

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import Dashboard from "./Dashboard";
@@ -14,6 +15,11 @@ const Home = ({ isSignedIn, hasFirebaseLoaded }) =>
   !hasFirebaseLoaded ? null : (
     <Page name="Home">{isSignedIn ? <Dashboard /> : <SignInModal />}</Page>
   );
+
+Home.propTypes = {
+  isSignedIn: PropTypes.bool,
+  hasFirebaseLoaded: PropTypes.bool,
+};
 
 const mapStateToProps = (state) => ({
   isSignedIn: isAuthenticated(state),

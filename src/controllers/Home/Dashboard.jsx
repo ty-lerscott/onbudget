@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import { startOfMonth, addMonths } from "date-fns";
@@ -22,6 +23,8 @@ import AddTransaction from "components/AddTransaction/AddTransaction";
 import OverallSpending from "components/OverallSpending/OverallSpending";
 import TransactionOverview from "components/TransactionOverview/TransactionOverview";
 import StackedCategoryChart from "components/StackedCategoryChart/StackedCategoryChart";
+
+import { TransactionProps } from "definitions";
 
 const Dashboard = ({
   thisMonth,
@@ -80,6 +83,17 @@ const Dashboard = ({
       <StackedCategoryChart />
     </>
   );
+};
+
+Dashboard.propTypes = {
+  thisMonth: PropTypes.instanceOf(Date),
+  isSignedIn: PropTypes.bool,
+  getCategories: PropTypes.func,
+  getTransactions: PropTypes.func,
+  hasRequestedYear: PropTypes.bool,
+  handleLoadingComplete: PropTypes.func,
+  getTransactionsByMonth: PropTypes.func,
+  transactions: PropTypes.arrayOf(TransactionProps),
 };
 
 const mapDispatchToProps = {

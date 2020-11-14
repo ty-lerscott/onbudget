@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 
@@ -98,6 +99,14 @@ const AddTransaction = ({
       )}
     </Modal>
   );
+};
+
+AddTransaction.propTypes = {
+  notify: PropTypes.func,
+  isOpen: PropTypes.bool,
+  addTransaction: PropTypes.func,
+  getTransactions: PropTypes.func,
+  resetParentModal: PropTypes.func,
 };
 
 const mapDispatchToProps = {

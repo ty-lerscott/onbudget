@@ -1,4 +1,5 @@
 import cn from "classnames";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import React, { useState } from "react";
 import { Modal } from "carbon-components-react";
@@ -89,6 +90,10 @@ const SignInModal = ({ login }) => {
       </Modal>
     </div>
   );
+};
+
+SignInModal.propTypes = {
+  login: PropTypes.func,
 };
 
 const mapDispatchToProps = {

@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Doughnut } from "react-chartjs-2";
 import { InlineLoading } from "carbon-components-react";
@@ -10,7 +11,7 @@ import formatTransactionsForChart from "./utils/formatTransactionsForChart";
 
 import "./OverviewChart.scss";
 
-//TODO: proptypes
+import { CategoryProps, TransactionProps } from "definitions";
 
 const OverviewChart = ({ isLoading, unplanned, classNames, categories }) => {
   const data = formatTransactionsForChart(unplanned, categories);
@@ -41,6 +42,13 @@ const OverviewChart = ({ isLoading, unplanned, classNames, categories }) => {
       )}
     </Card>
   );
+};
+
+OverviewChart.propTypes = {
+  isLoading: PropTypes.bool,
+  classNames: PropTypes.string,
+  categories: PropTypes.arrayOf(CategoryProps),
+  unplanned: PropTypes.arrayOf(TransactionProps),
 };
 
 const mapStateToProps = (state) => ({

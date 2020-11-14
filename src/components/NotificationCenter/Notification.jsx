@@ -6,6 +6,8 @@ import { ToastNotification } from "carbon-components-react";
 
 import { deleteNotification } from "./NotificationActions";
 
+import { NotificationProps } from "definitions";
+
 const Notification = ({
   id,
   subtitle = "",
@@ -31,6 +33,8 @@ const Notification = ({
     />
   );
 };
+
+Notification.propTypes = NotificationProps;
 
 const mapDispatchToProps = {
   deleteThisNotification: deleteNotification,

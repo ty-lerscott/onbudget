@@ -70,19 +70,20 @@ Modal.defaultProps = {
 
 Modal.propTypes = {
   size: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   hasForm: PropTypes.bool,
   children: PropTypes.node,
-  isDisabled: PropTypes.bool,
   className: PropTypes.string,
+  isDisabled: PropTypes.bool,
   isSubmitting: PropTypes.bool,
   isScrollable: PropTypes.bool,
   handleCloseModal: PropTypes.func,
-  isOpen: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  handleCloseModalComplete: PropTypes.func,
-  preventCloseOnClickOutside: PropTypes.bool,
+  primaryButtonText: PropTypes.string,
   handlePrimaryClick: PropTypes.func.isRequired,
   handleSecondaryClick: PropTypes.func.isRequired,
+  handleCloseModalComplete: PropTypes.func,
+  preventCloseOnClickOutside: PropTypes.bool,
 };
 
 export default Modal;

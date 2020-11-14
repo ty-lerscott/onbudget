@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { SkeletonText } from "carbon-components-react";
 
@@ -10,7 +11,7 @@ import { sumTransactions } from "utils/transactions";
 
 import "./TransactionOverview.scss";
 
-//TODO: proptypes
+import { TransactionProps } from "definitions";
 
 const TransactionOverview = ({
   date,
@@ -64,6 +65,16 @@ const TransactionOverview = ({
       </div>
     </Card>
   );
+};
+
+TransactionOverview.propTypes = {
+  dispatch: PropTypes.func,
+  isLoading: PropTypes.bool,
+  classNames: PropTypes.string,
+  date: PropTypes.instanceOf(Date),
+  bills: PropTypes.arrayOf(TransactionProps),
+  deposits: PropTypes.arrayOf(TransactionProps),
+  unplanned: PropTypes.arrayOf(TransactionProps),
 };
 
 const mapStateToProps = (state) => ({

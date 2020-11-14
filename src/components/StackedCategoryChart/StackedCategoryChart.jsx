@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Bar } from "react-chartjs-2";
 import { InlineLoading } from "carbon-components-react";
@@ -43,6 +44,11 @@ const StackedCategoryChart = ({ isLoading, chartData }) => {
       ) : null}
     </Card>
   );
+};
+
+StackedCategoryChart.propTypes = {
+  isLoading: PropTypes.bool,
+  chartData: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
