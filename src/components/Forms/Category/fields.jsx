@@ -8,7 +8,7 @@ const CategoryFormFields = ({ formValues, setFormValues }) => {
   };
 
   return (
-    <>
+    <div data-testid="CategoryFormFields">
       <div className="Row">
         <TextInput
           id="name"
@@ -32,7 +32,7 @@ const CategoryFormFields = ({ formValues, setFormValues }) => {
           onChange={handleSetFormValues("isDeposit")}
         />
       </div>
-    </>
+    </div>
   );
 };
 

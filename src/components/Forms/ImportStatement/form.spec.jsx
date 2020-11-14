@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 
 import ImportStatement from "./form";
-import { TestProvider } from "utils/TestUtils";
+import { TestProvider } from "utils/test/utils";
 
 const setup = (props) => {
   const resetParentModal = jest.fn();

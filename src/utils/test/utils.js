@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
-import createStore, { getHistory } from "./createStore";
+import createStore, { getHistory } from "../createStore";
 import { ConnectedRouter } from "connected-react-router";
 
 import reducers from "state";

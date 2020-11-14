@@ -11,7 +11,7 @@ describe("<Card />", () => {
   it("doesnt render if no children", () => {
     const { queryByTestId } = setup();
 
-    expect(queryByTestId("Card")).toBeNull();
+    expect(queryByTestId("Card")).toBeFalsy();
   });
 
   describe("title heading", () => {

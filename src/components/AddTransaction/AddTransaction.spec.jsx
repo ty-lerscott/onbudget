@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 
 import AddTransaction from "./AddTransaction";
-import { TestProvider } from "utils/TestUtils";
+import { TestProvider } from "utils/test/utils";
 
 const setup = (props) => {
   const allProps = {
