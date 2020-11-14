@@ -6,13 +6,9 @@
 .Button, .bx--btn {
     font-weight: 600;
     color: var(--white_lilac);
-    background-color: var(--mine_shaft);
     border: 1px solid rgba(65, 65, 65, 0.25);
     text-shadow: 0px 1px 1px rgba(65, 65, 65, 0.5);
-
-    &:hover {
-        opacity: 1;
-    }
+    background-color: rgba(var(--mine_shaft_rgb), 0.8);
 }
 
 .Button {
@@ -25,10 +21,14 @@
         cursor: no-drop;
         background-color: var(--mine_shaft);
     }
+
+    &:hover {
+        background-color: rgba(var(--mine_shaft_rgb), 1);
+    }
 }
 
 .Button--Primary {
-    background-color: var(--primary);
+    background-color: rgba(var(--primary_rgb), 0.8);
 
     &-disabled {
         text-shadow: none;
@@ -41,7 +41,9 @@
         }
     }
 
-
+    &:hover {
+        background-color: rgba(var(--primary_rgb), 1);
+    }
 }
 
 .TextButton {

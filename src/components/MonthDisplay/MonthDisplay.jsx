@@ -1,26 +1,22 @@
-import React, { useState } from "react";
 import cn from "classnames";
-import { format, addMonths, isSameMonth, startOfMonth } from "date-fns";
+import React, { useState } from "react";
+import {
+  format,
+  addMonths,
+  isSameMonth,
+  isThisMonth,
+  startOfMonth,
+} from "date-fns";
 import { connect } from "react-redux";
 
 import { ChevronLeft32, ChevronRight32 } from "@carbon/icons-react";
 
 import Card from "components/Card/Card";
-
-import isThisMonth from "date-fns/isThisMonth";
-import {
-  setMonthAction,
-  fetchTransactionsByMonthAction,
-} from "./MonthDisplayActions";
+import { setMonthAction } from "./MonthDisplayActions";
 
 import "./MonthDisplay.scss";
 
-const MonthDisplay = ({
-  date,
-  setMonth,
-  classNames,
-  fetchTransactionsByMonth,
-}) => {
+const MonthDisplay = ({ date, setMonth, classNames, onPreviousClick }) => {
   const [fetchedMonth, setFetchedMonth] = useState([date]);
 
   if (!date) {
@@ -30,20 +26,21 @@ const MonthDisplay = ({
   const onNext = () => {
     const nextMonth = addMonths(date, 1);
 
-    setMonth(nextMonth);
+    setMonth(startOfMonth(nextMonth));
   };
 
   const onPrevious = () => {
     const previousMonth = addMonths(date, -1);
 
+    setMonth(startOfMonth(previousMonth));
+
     if (!fetchedMonth.some((month) => isSameMonth(previousMonth, month))) {
-      const yearAndOneMonth = startOfMonth(addMonths(previousMonth, -12));
-
       setFetchedMonth(fetchedMonth.concat(previousMonth));
-      fetchTransactionsByMonth(yearAndOneMonth.getTime());
-    }
 
-    setMonth(previousMonth);
+      if (onPreviousClick) {
+        onPreviousClick();
+      }
+    }
   };
 
   const isDisabled = isThisMonth(date);
@@ -76,7 +73,6 @@ const MonthDisplay = ({
 
 const mapDispatchToProps = {
   setMonth: setMonthAction,
-  fetchTransactionsByMonth: fetchTransactionsByMonthAction,
 };
 
 const mapStateToProps = (state) => ({

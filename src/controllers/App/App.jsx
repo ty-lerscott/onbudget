@@ -37,7 +37,6 @@ const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
 
   useEffect(() => {
     if (isMenuOpen) {
-      console.log(dropdownRef.current);
       dropdownRef.current.focus();
     }
   }, [isMenuOpen]);
@@ -72,7 +71,7 @@ const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
   };
 
   return (
-    <main className="Apps">
+    <main className="App">
       <Header aria-label="On Budget" className="Header">
         <SkipToContent />
         <HeaderMenuButton

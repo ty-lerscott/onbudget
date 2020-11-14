@@ -1,31 +1,8 @@
 const { chunkify } = require("../utils/array.js");
 const { addMonths, startOfMonth, endOfMonth } = require("date-fns");
 
-const setTransactionCount = async (ref, amount) => {
-  let transactionCount = 0;
-
-  await ref
-    .collection("meta")
-    .get("transactionCount")
-    .then((snapshot) => {
-      snapshot.forEach((shot) => {
-        transactionCount = shot.data().count;
-      });
-    });
-
-  await ref
-    .collection("meta")
-    .doc("transactionCount")
-    .set(
-      {
-        count: transactionCount + amount,
-      },
-      { merge: true }
-    );
-};
-
 const getTransactions = (admin) => async (
-  { isEmulating, limit, page, ...body },
+  { isEmulating, limit, startAt, ...body },
   { auth }
 ) => {
   const db = admin.firestore();
@@ -37,7 +14,7 @@ const getTransactions = (admin) => async (
   const statement = [];
   const today = new Date();
 
-  const yearAgo = startOfMonth(addMonths(today, -12)).getTime();
+  const yearAgo = startOfMonth(addMonths(today, -11)).getTime();
 
   const transactionsRef = admin
     .firestore()
@@ -45,13 +22,12 @@ const getTransactions = (admin) => async (
     .doc(auth.uid)
     .collection("transactions");
 
-  const query =
-    limit && page
-      ? transactionsRef
-          .orderBy("date")
-          .startAt(limit * (page - 1))
-          .limit(limit)
-      : transactionsRef.where("date", ">=", yearAgo).orderBy("date");
+  const query = !!limit
+    ? transactionsRef
+        .orderBy("date", "desc")
+        .startAt(startAt ? startAt + 1 : today.getTime())
+        .limit(limit)
+    : transactionsRef.where("date", ">=", yearAgo).orderBy("date");
 
   try {
     await query.get().then((snapshots) => {
@@ -68,7 +44,6 @@ const getTransactions = (admin) => async (
       ],
     };
   }
-
   return statement;
 };
 
@@ -135,8 +110,6 @@ const addTransaction = (admin) => async (
       };
     });
 
-  await setTransactionCount(userRef, 1);
-
   return resp;
 };
 
@@ -153,7 +126,7 @@ const normalizeEntry = ({ entry, fallbackCategoryId, categories }) => ({
 });
 
 const importStatement = (admin) => async (
-  { isEmulating, csv, ...rest },
+  { isEmulating, body, ...rest },
   { auth }
 ) => {
   const db = admin.firestore();
@@ -185,7 +158,7 @@ const importStatement = (admin) => async (
     categories.find(({ name }) => name.toLowerCase() === "other") || {};
 
   // firebase has a hard limit of 500 writes per batch
-  const chunks = chunkify(csv, 450);
+  const chunks = chunkify(body, 450);
 
   // For each chunk, batch
   const userTransactionsCollection = userRef.collection("transactions");
@@ -211,42 +184,12 @@ const importStatement = (admin) => async (
 
   const status = await batchCommit();
 
-  await setTransactionCount(userRef, csv.length);
-
   return status;
-};
-
-const getTransactionCount = (admin) => async (
-  { isEmulating, ...body },
-  { auth }
-) => {
-  const db = admin.firestore();
-  let resp;
-
-  if (isEmulating) {
-    db.emulatorOrigin = "http://localhost:8080";
-  }
-
-  let transactionCount = 0;
-
-  await db
-    .collection("users")
-    .doc(auth.uid)
-    .collection("meta")
-    .get("transactionCount")
-    .then((snapshot) => {
-      snapshot.forEach((shot) => {
-        transactionCount = shot.data().count;
-      });
-    });
-
-  return transactionCount;
 };
 
 module.exports = {
   addTransaction,
   getTransactions,
   importStatement,
-  getTransactionCount,
   getTransactionsByMonth,
 };

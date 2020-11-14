@@ -1,9 +1,12 @@
 import React from "react";
-import { render } from "@testing-library/react";
-import AddTransaction from "./AddTransaction";
+import { render, fireEvent, waitFor } from "@testing-library/react";
+
+import AddTransaction from "./form";
 import { TestProvider } from "utils/TestUtils";
 
 const setup = (props) => {
+  const resetParentModal = jest.fn();
+
   return render(
     <TestProvider
       state={{
@@ -12,14 +15,24 @@ const setup = (props) => {
         },
       }}
     >
-      <AddTransaction {...props} />
+      <AddTransaction
+        {...props}
+        resetParentModal={resetParentModal}
+        isOpen={true}
+      />
     </TestProvider>
   );
 };
 
-describe("<AddTransaction />", () => {
+describe("<AddTransactionForm />", () => {
+  let selectors;
+
+  beforeEach(() => {
+    selectors = setup();
+  });
+
   it("renders correctly", () => {
-    const { getByLabelText } = setup();
+    const { getByLabelText } = selectors;
 
     expect(getByLabelText("Amount *")).toBeTruthy();
     expect(getByLabelText("Category *")).toBeTruthy();

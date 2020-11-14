@@ -1,23 +1,18 @@
 import clone from "clone-deep";
 import { combineReducers } from "redux";
 
-const SET_PER_PAGE = "SET_PER_PAGE";
 export const STATEMENT = "STATEMENT";
 export const CATEGORIES = "CATEGORIES";
+export const SET_PER_PAGE = "SET_PER_PAGE";
 export const TRANSACTIONS = "TRANSACTIONS";
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 const initialState = {
   isLoading: true,
   categories: [],
   isFetching: false,
   transactions: [],
-  transactionHistory: {
-    perPage: 100,
-    currentPage: 1,
-    viewedPages: {},
-    transactionCount: 0,
-  },
+  hasFetchedTransactionsOnce: false,
 };
 
 const isLoading = (state = initialState.isLoading, { type }) => {
@@ -80,41 +75,13 @@ const transactions = (state = initialState.transactions, { type, payload }) => {
   }
 };
 
-const transactionHistory = (
-  state = initialState.transactionHistory,
-  { type, payload }
+const hasFetchedTransactionsOnce = (
+  state = initialState.hasFetchedTransactionsOnce,
+  { type }
 ) => {
   switch (type) {
-    case SET_CURRENT_PAGE:
-      const { currentPage, ...data } = payload;
-      return {
-        ...state,
-        currentPage,
-        viewedPages: Object.keys(state.viewedPages).includes(currentPage)
-          ? state.viewedPages
-          : {
-              ...state.viewedPages,
-              [currentPage]: data,
-            },
-      };
-    case SET_PER_PAGE:
-      return {
-        ...state,
-        perPage: payload,
-      };
-    case `PAGINATED_${TRANSACTIONS}_SUCCESS`:
-      return {
-        ...state,
-        viewedPages: {
-          ...state.viewedPages,
-          [payload.page]: payload.data,
-        },
-      };
-    case `${TRANSACTIONS}_COUNT_SUCCESS`:
-      return {
-        ...state,
-        transactionCount: payload,
-      };
+    case `${TRANSACTIONS}_BY_MONTH_SUCCESS`:
+      return true;
     default:
       return state;
   }
@@ -125,5 +92,5 @@ export default combineReducers({
   categories,
   isFetching,
   transactions,
-  transactionHistory,
+  hasFetchedTransactionsOnce,
 });

@@ -27,33 +27,25 @@ describe("<AddTransaction />", () => {
     selectors = setup();
   });
 
-  it("renders correctly without form defined", () => {
-    const { getAllByRole, queryByTestId } = selectors;
+  it("renders correctly with the add transaction form type after clicking the right button", async () => {
+    const { getByTestId, queryByLabelText } = selectors;
 
-    expect(getAllByRole("button").length).toEqual(5);
-    expect(queryByTestId("AddTransactionForm")).toBeFalsy();
-    expect(queryByTestId("ImportStatementForm")).toBeFalsy();
+    fireEvent.click(getByTestId("OpenModal-AddTransaction"));
+
+    expect(queryByLabelText("Amount *")).toBeTruthy();
+    expect(queryByLabelText("Category *")).toBeTruthy();
+    expect(queryByLabelText("Date *")).toBeTruthy();
+    expect(queryByLabelText("Description")).toBeTruthy();
   });
 
   it("renders correctly with the add transaction form type after clicking the right button", async () => {
-    const { getByText, findByText, getByTestId } = selectors;
+    const { getByText, getByTestId } = selectors;
 
-    fireEvent.click(getByText("Add Transaction"));
+    fireEvent.click(getByTestId("OpenModal-ImportTransactions"));
 
-    await waitFor(() => expect(getByTestId("AddTransactionForm")).toBeTruthy());
-
-    expect(findByText("Add Transaction")).toBeTruthy();
-  });
-
-  it("renders correctly with the add transaction form type after clicking the right button", async () => {
-    const { getByText, queryAllByText, getByTestId } = selectors;
-
-    fireEvent.click(getByText("Import Statement"));
-
-    await waitFor(() =>
-      expect(getByTestId("ImportStatementForm")).toBeTruthy()
-    );
-
-    expect(queryAllByText("Import Statement").length).toEqual(2);
+    await waitFor(() => {
+      expect(getByText("File")).toBeTruthy();
+      expect(getByText("Choose a File")).toBeTruthy();
+    });
   });
 });

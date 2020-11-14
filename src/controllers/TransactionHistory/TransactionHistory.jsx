@@ -2,64 +2,81 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 
+import Modal from "components/Modal/Modal";
 import View from "views/transaction-history";
 
-import { getTransactionCountAction, fetchTransactions } from "./actions";
+import { fetchCategories } from "actions/CategoryActions";
+import { fetchTransactionsByMonth } from "actions/TransactionActions";
+import { getAllMonthTransactions } from "state/selectors/TransactionSelectors";
 
 import { isAuthenticated } from "state/selectors/UserSelectors";
 
+import { TransactionProps } from "definitions";
+
 const TransactionHistory = ({
-  perPage,
+  thisMonth,
   isSignedIn,
-  viewedPages,
-  currentPage,
-  getTransactions,
-  transactionCount,
-  getTransactionCount,
+  transactions,
+  getCategories,
+  fetchTransactions,
+  categoriesHaveLength,
+  hasFetchedTransactionsOnce,
 }) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    getTransactionCount();
-  }, []);
-  /* eslint-disable react-hooks/exhaustive-deps */
+    if (isSignedIn) {
+      if (!categoriesHaveLength) {
+        getCategories();
+      }
 
-  useEffect(() => {
-    console.warn("viewedPages", viewedPages, "currentPage", currentPage);
-
-    if (!viewedPages[currentPage] && isSignedIn) {
-      console.log("gettingtransactions");
-      getTransactions({ page: currentPage, limit: perPage });
+      if (!transactions.length) {
+        fetchTransactions(thisMonth);
+      }
     }
-  }, [currentPage, isSignedIn]);
+  }, [isSignedIn, thisMonth]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
-  const handlePaginate = (direction) => () => {
-    // setCurrentPage
+  const handleFindTransaction = (id) =>
+    transactions.find((transaction) => transaction.id === id);
+
+  const handleEditTransaction = ({ id }) => () => {
+    console.log("edit", handleFindTransaction(id));
+  };
+
+  const handleDeleteTransaction = ({ id }) => () => {
+    console.log("delete", handleFindTransaction(id));
   };
 
   return (
     <View
-      perPage={perPage}
-      currentPage={currentPage}
-      handlePaginate={handlePaginate}
-      data={viewedPages[currentPage]}
-      transactionCount={transactionCount}
-    />
+      onEditTransaction={handleEditTransaction}
+      onDeleteTransaction={handleDeleteTransaction}
+      {...(hasFetchedTransactionsOnce ? { transactions } : {})}
+    ></View>
   );
 };
 
-TransactionHistory.propTypes = {};
+TransactionHistory.propTypes = {
+  isSignedIn: PropTypes.bool,
+  getCategories: PropTypes.func,
+  fetchTransactions: PropTypes.func,
+  categoriesHaveLength: PropTypes.bool,
+  thisMonth: PropTypes.instanceOf(Date),
+  hasFetchedTransactionsOnce: PropTypes.bool,
+  transactions: PropTypes.arrayOf(TransactionProps),
+};
 
 const mapDispatchToProps = {
-  getTransactions: fetchTransactions,
-  getTransactionCount: getTransactionCountAction,
+  getCategories: fetchCategories,
+  fetchTransactions: fetchTransactionsByMonth,
 };
 
 const mapStateToProps = (state) => ({
+  thisMonth: state.ui.date,
   isSignedIn: isAuthenticated(state),
-  perPage: state.app.transactionHistory.perPage,
-  viewedPages: state.app.transactionHistory.viewedPages,
-  currentPage: state.app.transactionHistory.currentPage,
-  transactionCount: state.app.transactionHistory.transactionCount,
+  transactions: getAllMonthTransactions(state),
+  categoriesHaveLength: !!state.app.categories.length,
+  hasFetchedTransactionsOnce: state.app.hasFetchedTransactionsOnce,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionHistory);

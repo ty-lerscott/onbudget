@@ -26,6 +26,7 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
   ] = useFormReducer();
 
   const handleOpenModal = () => {
+    handleClearForm();
     setAreFieldsMounted(true);
     setIsModalOpen(true);
   };
@@ -37,7 +38,7 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
   };
 
   const handleClearForm = () => {
-    setFormValues(getInitialState());
+    setFormValues(getInitialState().values);
   };
 
   const handleSubmitForm = () => {
@@ -70,7 +71,6 @@ const AddCategoryForm = ({ notify, categories, addCategory }) => {
       })
       .finally(() => {
         setIsSubmitting(false);
-        setAreFieldsMounted(false);
       });
   };
 
