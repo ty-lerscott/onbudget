@@ -5,6 +5,10 @@ import FILTERS from "./utils/filters";
 import { Select, SelectItem } from "carbon-components-react";
 
 const CategoryFilter = ({ setFilter }) => {
+  if (!setFilter) {
+    return null;
+  }
+
   const filterCategory = (e) => {
     setFilter(FILTERS[e.target.value]);
   };
