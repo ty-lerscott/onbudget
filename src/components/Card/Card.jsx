@@ -61,6 +61,7 @@ Card.propTypes = {
   small: PropTypes.bool,
   title: PropTypes.string,
   wrapped: PropTypes.bool,
+  infinite: PropTypes.bool,
   children: PropTypes.node,
   centered: PropTypes.bool,
   flexContent: PropTypes.bool,

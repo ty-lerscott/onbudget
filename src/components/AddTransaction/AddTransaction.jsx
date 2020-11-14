@@ -1,4 +1,5 @@
 import cn from "classnames";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import React, { useState } from "react";
 
@@ -58,6 +59,12 @@ const AddTransaction = ({ categoriesExist }) => {
       </button>
     </Card>
   );
+};
+
+AddTransaction.propTypes = {
+  notify: PropTypes.func,
+  categoriesExist: PropTypes.bool,
+  getTransactions: PropTypes.func,
 };
 
 const mapDispatchToProps = {
