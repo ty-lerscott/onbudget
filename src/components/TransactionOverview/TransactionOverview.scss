@@ -15,6 +15,13 @@
             font-size: 1rem;
             color: var(--woodsmoke);
             font-weight: 600;
+
+            &.positive {
+                color: var(--spring_leaves);
+            }
+            &.negative {
+                color: var(--error);
+            }
         }
     }
 }
