@@ -4,7 +4,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import CategoryList from './CategoryList'
 import { TestProvider } from 'utils/test/utils'
 
-import categories from './utils/test/categories'
+import categories from '__test-data__/categories'
 import { bills, deposits, unplanned } from './utils/test/CategoryList'
 
 const setup = ({ listProps, providerProps }) => {

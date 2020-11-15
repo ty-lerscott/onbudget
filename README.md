@@ -126,7 +126,13 @@ ex: `npm run create-component -- -c Test`
 A script that creates a component with appropriate scaffolding for scss files, tests and the component
 
 ## Dependencies
-**TODO**
+
+|Package|Details|
+|-------|-------|
+|[canvas](https://www.npmjs.com/package/canvas)| chartjs utilized canvases and jest cannot natively test that api, this package allows jest to render canvas elements|
+
+
+
 
 <br />
 <br />

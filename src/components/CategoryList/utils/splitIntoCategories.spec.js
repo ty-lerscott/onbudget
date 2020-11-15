@@ -1,8 +1,8 @@
 import splitIntoCategories from './splitIntoCategories'
 
-import categories from './test/categories'
+import categories from '__test-data__/categories'
 import expected from './test/expectedResult'
-import transactions from './test/transactions'
+import transactions from '__test-data__/transactions'
 
 describe('splitIntoCategories', () => {
 	describe('incomplete args', () => {

@@ -35,13 +35,11 @@ describe('<NotificationCenter />', () => {
 	})
 
 	it('renders a list of notifications', async () => {
-		const { debug, queryByRole, queryAllByRole } = setup(notifications)
+		const { queryAllByRole } = setup(notifications)
 
 		expect(queryAllByRole('alert')).toHaveLength(2)
-
-		await waitFor(() => {
-			expect(queryAllByRole('alert')).toHaveLength(0)
-		})
+		jest.advanceTimersByTime(10000)
+		expect(queryAllByRole('alert')).toHaveLength(0)
 	})
 
 	// Running all pending timers and switching to real timers using Jest

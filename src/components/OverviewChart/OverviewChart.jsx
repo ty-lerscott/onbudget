@@ -21,12 +21,16 @@ const OverviewChart = ({ isLoading, unplanned, classNames, categories }) => {
 			wrapped
 			centered
 			title='Overview'
+			data-testid={
+				isLoading ? 'OverviewChart-Loading' : 'OverviewChart-canvas'
+			}
 			className={cn('OverviewChart', classNames)}>
 			{isLoading ? (
 				<InlineLoading />
 			) : (
 				Array.isArray(data?.datasets?.[0]?.data) && (
 					<Doughnut
+						data-testid='OverviewChart'
 						options={{
 							cutoutPercentage: 75,
 							circumference: Math.PI,
