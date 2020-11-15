@@ -12,13 +12,14 @@ const Notification = ({
 	id,
 	subtitle = '',
 	type = 'info',
-	deleteThisNotification
+	deleteThisNotification,
+	...props
 }) => {
 	const handleDelete = () => {
 		deleteThisNotification(id)
 	}
 
-	const title = type[0].toUpperCase() + type.substr(1)
+	const title = props.title || type[0].toUpperCase() + type.substr(1)
 
 	return (
 		<ToastNotification
@@ -27,8 +28,8 @@ const Notification = ({
 			lowContrast
 			role='alert'
 			title={title}
-			subtitle={subtitle}
 			caption={false}
+			subtitle={subtitle}
 			onCloseButtonClick={handleDelete}
 		/>
 	)
