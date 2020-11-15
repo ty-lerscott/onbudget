@@ -1,1 +1,1 @@
-export { default as SentryMiddleware } from "./sentryMiddleware";
+export { default as SentryMiddleware } from './sentryMiddleware'

@@ -1,29 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import Dashboard from "./Dashboard";
-import Page from "components/Page/Page";
-import SignInModal from "components/SignIn/SignIn";
+import Dashboard from './Dashboard'
+import Page from 'components/Page/Page'
+import SignInModal from 'components/SignIn/SignIn'
 
-import { isAuthenticated } from "state/selectors/UserSelectors";
-import { hasFirebaseLoaded } from "state/selectors/FirebaseSelectors";
+import { isAuthenticated } from 'state/selectors/UserSelectors'
+import { hasFirebaseLoaded } from 'state/selectors/FirebaseSelectors'
 
-import "./Home.scss";
+import './Home.scss'
 
 const Home = ({ isSignedIn, hasFirebaseLoaded }) =>
-  !hasFirebaseLoaded ? null : (
-    <Page name="Home">{isSignedIn ? <Dashboard /> : <SignInModal />}</Page>
-  );
+	!hasFirebaseLoaded ? null : (
+		<Page name='Home'>{isSignedIn ? <Dashboard /> : <SignInModal />}</Page>
+	)
 
 Home.propTypes = {
-  isSignedIn: PropTypes.bool,
-  hasFirebaseLoaded: PropTypes.bool,
-};
+	isSignedIn: PropTypes.bool,
+	hasFirebaseLoaded: PropTypes.bool
+}
 
-const mapStateToProps = (state) => ({
-  isSignedIn: isAuthenticated(state),
-  hasFirebaseLoaded: hasFirebaseLoaded(state),
-});
+const mapStateToProps = state => ({
+	isSignedIn: isAuthenticated(state),
+	hasFirebaseLoaded: hasFirebaseLoaded(state)
+})
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Home)

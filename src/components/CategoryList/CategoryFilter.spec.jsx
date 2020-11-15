@@ -1,47 +1,47 @@
-import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import React from 'react'
+import { render, fireEvent } from '@testing-library/react'
 
-import CategoryFilter from "./CategoryFilter";
+import CategoryFilter from './CategoryFilter'
 
-const setup = (props) => {
-  return render(<CategoryFilter {...props} />);
-};
+const setup = props => {
+	return render(<CategoryFilter {...props} />)
+}
 
-describe("<CategoryFilter />", () => {
-  it("does not render without a category name", () => {
-    const { queryByLabelText } = setup();
+describe('<CategoryFilter />', () => {
+	it('does not render without a category name', () => {
+		const { queryByLabelText } = setup()
 
-    expect(queryByLabelText("Filter")).toBeFalsy();
-  });
+		expect(queryByLabelText('Filter')).toBeFalsy()
+	})
 
-  describe("happy path", () => {
-    let setFilter = jest.fn();
-    let selectors;
+	describe('happy path', () => {
+		let setFilter = jest.fn()
+		let selectors
 
-    beforeEach(() => {
-      selectors = setup({
-        setFilter,
-      });
-    });
+		beforeEach(() => {
+			selectors = setup({
+				setFilter
+			})
+		})
 
-    it("renders select dropdown properly", () => {
-      const { getByLabelText, getByText } = selectors;
+		it('renders select dropdown properly', () => {
+			const { getByLabelText, getByText } = selectors
 
-      expect(getByLabelText("Filter")).toBeTruthy();
+			expect(getByLabelText('Filter')).toBeTruthy()
 
-      ["All", "Bills", "Deposits"].forEach((option) => {
-        expect(getByText(option)).toBeTruthy();
-      });
-    });
+			;['All', 'Bills', 'Deposits'].forEach(option => {
+				expect(getByText(option)).toBeTruthy()
+			})
+		})
 
-    it("selecting an option properly calls passed down setFilter", async () => {
-      const { getByRole } = selectors;
+		it('selecting an option properly calls passed down setFilter', async () => {
+			const { getByRole } = selectors
 
-      fireEvent.change(getByRole("combobox"), { target: { value: "temp" } });
+			fireEvent.change(getByRole('combobox'), {
+				target: { value: 'temp' }
+			})
 
-      await waitFor(() => {
-        expect(setFilter).toBeCalledTimes(1);
-      });
-    });
-  });
-});
+			expect(setFilter).toBeCalledTimes(1)
+		})
+	})
+})

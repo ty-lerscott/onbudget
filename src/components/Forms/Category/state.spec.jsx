@@ -1,6 +1,6 @@
 //TODO: write test
-describe("<CategoryState />", () => {
-  it("is a dummy test", () => {
-    expect(true).toBeTruthy();
-  });
-});
+describe('<CategoryState />', () => {
+	it('is a dummy test', () => {
+		expect(true).toBeTruthy()
+	})
+})

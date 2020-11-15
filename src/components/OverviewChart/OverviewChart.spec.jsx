@@ -1,5 +1,5 @@
-describe("<OverviewChart />", () => {
-  it("is a dummy test", () => {
-    expect(true).toBeTruthy();
-  });
-});
+describe('<OverviewChart />', () => {
+	it('is a dummy test', () => {
+		expect(true).toBeTruthy()
+	})
+})

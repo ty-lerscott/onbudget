@@ -1,18 +1,18 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect'
 
 import {
-  getFirebaseAuth,
-  hasFirebaseLoaded,
-  hasFirebaseInitialized,
-} from "state/selectors/FirebaseSelectors";
+	getFirebaseAuth,
+	hasFirebaseLoaded,
+	hasFirebaseInitialized
+} from 'state/selectors/FirebaseSelectors'
 
 export const isAuthenticated = createSelector(
-  [hasFirebaseLoaded, hasFirebaseInitialized, getFirebaseAuth],
-  (isLoaded, hasInitialized, auth) => {
-    if (hasInitialized || !isLoaded) {
-      return null;
-    }
+	[hasFirebaseLoaded, hasFirebaseInitialized, getFirebaseAuth],
+	(isLoaded, hasInitialized, auth) => {
+		if (hasInitialized || !isLoaded) {
+			return null
+		}
 
-    return !!auth.uid;
-  }
-);
+		return !!auth.uid
+	}
+)

@@ -1,13 +1,13 @@
 export const sumTransactions = (transactions = []) => {
-  if (!Array.isArray(transactions) || !transactions.length) {
-    return 0;
-  }
+	if (!Array.isArray(transactions) || !transactions.length) {
+		return 0
+	}
 
-  return transactions.reduce((sum, { amount }) => {
-    if (!isNaN(amount)) {
-      sum += amount;
-    }
+	return transactions.reduce((sum, { amount }) => {
+		if (!isNaN(amount)) {
+			sum += amount
+		}
 
-    return sum;
-  }, 0);
-};
+		return sum
+	}, 0)
+}

@@ -1,42 +1,41 @@
-import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import React from 'react'
+import { render, fireEvent } from '@testing-library/react'
 
-import AddTransaction from "./form";
-import { TestProvider } from "utils/test/utils";
+import AddTransaction from './form'
+import { TestProvider } from 'utils/test/utils'
 
-const setup = (props) => {
-  const resetParentModal = jest.fn();
+const setup = props => {
+	const resetParentModal = jest.fn()
 
-  return render(
-    <TestProvider
-      state={{
-        app: {
-          categories: [],
-        },
-      }}
-    >
-      <AddTransaction
-        {...props}
-        resetParentModal={resetParentModal}
-        isOpen={true}
-      />
-    </TestProvider>
-  );
-};
+	return render(
+		<TestProvider
+			state={{
+				app: {
+					categories: []
+				}
+			}}>
+			<AddTransaction
+				{...props}
+				resetParentModal={resetParentModal}
+				isOpen={true}
+			/>
+		</TestProvider>
+	)
+}
+//TODO: Edit the Form (date, description)
+describe('<AddTransactionForm />', () => {
+	let selectors
 
-describe("<AddTransactionForm />", () => {
-  let selectors;
+	beforeEach(() => {
+		selectors = setup()
+	})
 
-  beforeEach(() => {
-    selectors = setup();
-  });
+	it('renders correctly', () => {
+		const { getByLabelText } = selectors
 
-  it("renders correctly", () => {
-    const { getByLabelText } = selectors;
-
-    expect(getByLabelText("Amount *")).toBeTruthy();
-    expect(getByLabelText("Category *")).toBeTruthy();
-    expect(getByLabelText("Date *")).toBeTruthy();
-    expect(getByLabelText("Description")).toBeTruthy();
-  });
-});
+		expect(getByLabelText('Amount *')).toBeTruthy()
+		expect(getByLabelText('Category *')).toBeTruthy()
+		expect(getByLabelText('Date *')).toBeTruthy()
+		expect(getByLabelText('Description')).toBeTruthy()
+	})
+})

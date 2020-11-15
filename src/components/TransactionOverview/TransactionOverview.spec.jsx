@@ -1,6 +1,6 @@
 //TODO: write test
-describe("<TransactionOverview", () => {
-  it("is a dummy test", () => {
-    expect(true).toBeTruthy();
-  });
-});
+describe('<TransactionOverview', () => {
+	it('is a dummy test', () => {
+		expect(true).toBeTruthy()
+	})
+})
