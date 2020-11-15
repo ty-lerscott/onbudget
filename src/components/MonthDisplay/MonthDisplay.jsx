@@ -48,13 +48,20 @@ const MonthDisplay = ({ date, setMonth, classNames, onPreviousClick }) => {
   const isDisabled = isThisMonth(date);
 
   return (
-    <Card small transparent className={cn("MonthDisplay", classNames)}>
+    <Card
+      small
+      transparent
+      className={cn("MonthDisplay", classNames)}
+      data-testid="MonthDisplay"
+    >
       <div className="wrapper flex centered space-between">
         <button
           type="button"
           onClick={onPrevious}
+          name="Previous Month"
           className={cn("Button", "PreviousMonth")}
         >
+          <span className="visually-hidden">Previous Month</span>
           <ChevronLeft32 />
         </button>
 
@@ -66,6 +73,7 @@ const MonthDisplay = ({ date, setMonth, classNames, onPreviousClick }) => {
           disabled={isDisabled}
           className={cn("Button", "NextMonth")}
         >
+          <span className="visually-hidden">Next Month</span>
           <ChevronRight32 />
         </button>
       </div>

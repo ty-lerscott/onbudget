@@ -12,6 +12,10 @@ body {
   position: relative;
 }
 
+.visually-hidden {
+  display: none;
+}
+
 *:focus:not(.bx--modal-container) {
   border-color: var(--primary)!important;
   outline-color: var(--primary)!important;

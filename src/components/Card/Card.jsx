@@ -17,10 +17,11 @@ const Card = ({
   gridContent = false,
   transparent = false,
   spaceBetween = false,
+  ...props
 }) => {
   return !children ? null : (
     <div
-      data-testid="Card"
+      data-testid={props["data-testid"] || "Card"}
       className={cn(
         "Card",
         {
@@ -70,6 +71,7 @@ Card.propTypes = {
   transparent: PropTypes.bool,
   spaceBetween: PropTypes.bool,
   optionalContent: PropTypes.node,
+  "data-testid": PropTypes.string,
 };
 
 export default Card;

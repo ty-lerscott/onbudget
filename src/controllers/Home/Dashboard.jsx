@@ -93,7 +93,12 @@ Dashboard.propTypes = {
   hasRequestedYear: PropTypes.bool,
   handleLoadingComplete: PropTypes.func,
   getTransactionsByMonth: PropTypes.func,
-  transactions: PropTypes.arrayOf(TransactionProps),
+  transactions: PropTypes.shape({
+    all: PropTypes.arrayOf(TransactionProps),
+    bills: PropTypes.arrayOf(TransactionProps),
+    deposits: PropTypes.arrayOf(TransactionProps),
+    unplanned: PropTypes.arrayOf(TransactionProps),
+  }),
 };
 
 const mapDispatchToProps = {
