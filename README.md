@@ -111,13 +111,15 @@ Takes the functions folder and uploads them to firebase functions
 ### `npm run firebase:populate`
 Spins up a firebase emulator with any previously stored data
 
-### `npm run deploy`
-My lazyness coming through, just a simple function to deploy to master and production
-**TODO:** remove this and add a CICD pipeline
-
 ### `npm test`
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run test:watch`
+Runs all unit tests in watch mode for file changes
+
+### `npm run test:coverage`
+Runs all unit tests and generates a coverage report
 
 ### `npm run create-component`
 ex: `npm run create-component -- -c Test`
