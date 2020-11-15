@@ -6,7 +6,7 @@ import { Modal } from 'carbon-components-react'
 
 import { loginAction } from './SignInActions'
 
-import { SignInForm } from './Forms'
+import { SignInForm } from 'components/Forms/SignIn'
 
 import './SignIn.scss'
 

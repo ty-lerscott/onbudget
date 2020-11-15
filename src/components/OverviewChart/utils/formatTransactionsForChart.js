@@ -4,7 +4,7 @@ const getCategory = (categories, id) =>
 // given an array of transactions, group them by category
 // return them as an array sorted by the total spent in that category
 const formatTransactionsForChart = (transactions, categories) => {
-	if (!transactions.length || !categories.length) {
+	if (!transactions?.length || !categories?.length) {
 		return []
 	}
 
