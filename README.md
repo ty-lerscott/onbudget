@@ -130,16 +130,16 @@ A script that creates a component with appropriate scaffolding for scss files, t
 |Package|Details|
 |-------|-------|
 |[canvas](https://www.npmjs.com/package/canvas)| chartjs utilized canvases and jest cannot natively test that api, this package allows jest to render canvas elements|
+|[carbon components](https://www.carbondesignsystem.com/)| Carbon design system brings most of the application to life so that I didnt have to write components from scratch|
+|[sentry](https://sentry.io/)| Sentry is an application error monitoring platform|
+|[testing library](https://testing-library.com/)| Simple and complete testing utilities that encourage good testing practices |
+|[jest](https://jestjs.io/)| Jest is a delightful JavaScript Testing Framework with a focus on simplicity |
+|[chart.js](https://www.chartjs.org/)| Simple yet flexible JavaScript charting for designers & developers |
+|[date-fns](https://date-fns.org/)| Provides the most comprehensive, yet simple and consistent toolset for manipulating JavaScript dates in a browser & Node.js. |
+|[firebase](https://firebase.google.com/docs/web/setup)| THE BREAD AND BUTTER, it provides a database, authentication and serverless functions for my application|
 
 
-
-
-<br />
-<br />
-<br />
-<br />
-<br />
-#### too lazy to remove this for now, just some notes for myself
-
-Using Sentry for error tracking
+#### NOTES TO MYSELF
+---
+##### Using Sentry for error tracking
 If solving a sentry bug, include the issue # within the commit
