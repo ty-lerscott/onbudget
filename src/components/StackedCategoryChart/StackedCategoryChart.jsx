@@ -17,6 +17,11 @@ const StackedCategoryChart = ({ isLoading, chartData }) => {
 			wrapped
 			centered
 			title='Category Breakdown'
+			data-testid={
+				isLoading
+					? 'CategoryBreakdown-Loading'
+					: 'CategoryBreakdown-canvas'
+			}
 			className={cn('StackedCategoryChart', {
 				'StackedCategoryChart--Loading': isLoading
 			})}>

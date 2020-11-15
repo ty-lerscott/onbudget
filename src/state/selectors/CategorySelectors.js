@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-export const getCategoriesFromState = state => state.app.categories
+export const getCategoriesFromState = state => state.app.categories || []
 
 export const getBillCategories = createSelector(
 	[getCategoriesFromState],

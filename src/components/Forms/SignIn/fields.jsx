@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { TextInput } from 'carbon-components-react'
 
-const SignInForm = ({ error, formValues, setState }) => {
+const SignInFormFields = ({ error, formValues, setState }) => {
 	const hasRequestedAccess = !!localStorage.getItem('hasRequestedAccess')
 
 	return (
@@ -49,7 +49,7 @@ const SignInForm = ({ error, formValues, setState }) => {
 	)
 }
 
-SignInForm.propTypes = {
+SignInFormFields.propTypes = {
 	error: PropTypes.string,
 	formValues: PropTypes.shape({
 		email: PropTypes.string,
@@ -58,4 +58,4 @@ SignInForm.propTypes = {
 	setState: PropTypes.func
 }
 
-export default SignInForm
+export default SignInFormFields

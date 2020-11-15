@@ -6,7 +6,7 @@ import { Modal } from 'carbon-components-react'
 
 import { loginAction } from './SignInActions'
 
-import { SignInForm } from 'components/Forms/SignIn'
+import { Fields } from 'components/Forms/SignIn'
 
 import './SignIn.scss'
 
@@ -80,7 +80,7 @@ const SignInModal = ({ login }) => {
 				primaryButtonText='Sign In'
 				onRequestSubmit={handleSubmitForm}
 				onSecondarySubmit={handleClearForm}>
-				<SignInForm
+				<Fields
 					error={error}
 					setState={setState}
 					formTypes={formTypes}
