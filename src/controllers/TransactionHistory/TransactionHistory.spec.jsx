@@ -30,9 +30,7 @@ describe('<TransactionHistory />', () => {
 		).toBeTruthy()
 	})
 	it('renders the table when given transactions', () => {
-		const { getByText, debug } = setup(
-			state({ hasFetchedTransactionsOnce: true })
-		)
+		const { getByText } = setup(state({ hasFetchedTransactionsOnce: true }))
 
 		expect(getByText('Date')).toBeTruthy()
 		expect(getByText('Category')).toBeTruthy()
