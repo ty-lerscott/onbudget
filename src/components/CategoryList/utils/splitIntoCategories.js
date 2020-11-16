@@ -10,7 +10,7 @@ const defaultBreakdown = {
 // given an array of transactions, group them by category
 // return them as an array sorted by the total spent in that category
 const splitIntoCategories = ({ transactions, categories } = {}) => {
-	if (!categories?.length || !transactions?.length) {
+	if (!categories?.length) {
 		return []
 	}
 
