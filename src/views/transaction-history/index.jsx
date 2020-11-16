@@ -46,7 +46,13 @@ const TransactionHistory = ({
 	return (
 		<Page name='TransactionHistory'>
 			<Card infinite>
-				<div className='TransactionHistoryTable'>
+				<div
+					className='TransactionHistoryTable'
+					data-testid={
+						!!transactions
+							? 'TransactionHistoryTable'
+							: 'TransactionHistoryTable-loading'
+					}>
 					{!!transactions ? (
 						<DataTable
 							rows={transactions}
@@ -137,7 +143,7 @@ const TransactionHistory = ({
 											) : (
 												<TableRow>
 													<TableCell className='text-centered'>
-														There is no transaction
+														There's no transaction
 														data for this month
 													</TableCell>
 												</TableRow>
