@@ -81,6 +81,7 @@ const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
 					aria-label='Open menu'
 					onClick={handleToggleLeftMenu}
 					isActive={isSideNavExpanded}
+					onBlur={handleToggleLeftMenu}
 				/>
 				<HeaderName prefix='' onClick={handleNavigation('/')}>
 					OnBudget
@@ -90,6 +91,7 @@ const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
 						<HeaderGlobalAction
 							aria-label='Search'
 							className='ProfileAction'
+							onBlur={handleClosePanel}
 							onClick={handleOpenPanel}>
 							<FaceMask24 className='Icon' />
 						</HeaderGlobalAction>
@@ -99,8 +101,7 @@ const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
 				<div className='DropdownMenu'>
 					<ul
 						ref={dropdownRef}
-						className={cn('menu', { 'menu--opened': isMenuOpen })}
-						onBlur={handleClosePanel}>
+						className={cn('menu', { 'menu--opened': isMenuOpen })}>
 						<li className='ListItem'>
 							<button className='TextButton' onClick={signOut}>
 								Sign Out
