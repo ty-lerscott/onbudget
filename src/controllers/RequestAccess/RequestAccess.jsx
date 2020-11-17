@@ -51,7 +51,7 @@ const RequestAccess = ({
 			})
 	}
 
-	return (
+	return isSignedIn ? null : (
 		<View
 			error={error}
 			values={values}
