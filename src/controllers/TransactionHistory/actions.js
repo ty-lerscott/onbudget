@@ -1,39 +1,14 @@
-import { TRANSACTIONS, SET_CURRENT_PAGE } from 'state/AppReducer'
+import { TRANSACTION } from 'state/AppReducer'
 
-export const fetchTransactions = ({ page, limit, startAt }) => async (
-	dispatch,
-	getState,
-	{ getFirebase, api }
-) => {
-	dispatch({
-		type: `PAGINATED_${TRANSACTIONS}_PENDING`
-	})
-
-	return api({
-		dispatch,
-		getState,
-		getFirebase,
-		path: 'transactions',
-		body: {
-			limit,
-			startAt
-		}
-	}).then(({ transactions } = {}) => {
-		dispatch({
-			type: `PAGINATED_${TRANSACTIONS}_SUCCESS`,
-			payload: {
-				page,
-				data: transactions
-			}
-		})
-
-		return transactions
-	})
+export const setDeleteTransaction = id => dispatch => {
+  dispatch({
+    type: `SET_DELETE_${TRANSACTION}`,
+    payload: id
+  })
 }
 
-export const setCurrentPageAction = page => dispatch => {
-	dispatch({
-		type: SET_CURRENT_PAGE,
-		payload: page
-	})
+export const ussetDeleteTransaction = id => dispatch => {
+  dispatch({
+    type: `UNSET_DELETE_${TRANSACTION}`
+  })
 }
