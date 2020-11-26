@@ -17,11 +17,19 @@ jobs:
       matrix:
         node-version: [12.13.0]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: cypress-io/github-action@v2
+    - name: Setup Node
+      uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Cypress install + run
+      uses: cypress-io/github-action@v2
+      with:
+        record: false
+        tag: node-${{ matrix.node-version }}
     - run: NODE_ENV=test npm ci
     - run: npm run test:coverage
     - run: npm run coverage:upload
@@ -35,6 +43,7 @@ jobs:
         REACT_APP_FIREBASE_messagingSenderId: ${{ secrets.REACT_APP_FIREBASE_messagingSenderId }}
         REACT_APP_FIREBASE_appId: ${{ secrets.REACT_APP_FIREBASE_appId }}
         REACT_APP_FIREBASE_measurementId: ${{ secrets.REACT_APP_FIREBASE_measurementId }}
+
     - name: Upload Build Directory
       uses: up9cloud/action-rsync@v1.2
       env:
@@ -51,6 +60,7 @@ jobs:
             echo start at:
             date -u --rfc-3339=ns
         POST_SCRIPT: "echo done at: && date -u --rfc-3339=ns"
+
     - name: Upload Public Directory
       uses: up9cloud/action-rsync@v1.2
       env:
