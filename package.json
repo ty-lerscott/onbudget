@@ -56,7 +56,7 @@
     "create-component": "NODE_ENV=development node ./config/create-component"
   },
   "eslintConfig": {
-    "extends": "react-app",
+    "extends": ["react-app", "plugin:cypress/recommended"],
     "rules": {
       "react/prop-types": [
         "error"
