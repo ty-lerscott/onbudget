@@ -6,7 +6,6 @@
   },
   "include": [
     "src",
-    "src/**/*",
-    "node_modules/cypress", "./cypress/**/*.js"
+    "src/**/*"
   ]
 }

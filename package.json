@@ -56,7 +56,7 @@
     "create-component": "NODE_ENV=development node ./config/create-component"
   },
   "eslintConfig": {
-    "extends": ["react-app", "plugin:cypress/recommended"],
+    "extends": ["react-app"],
     "rules": {
       "react/prop-types": [
         "error"
@@ -106,10 +106,7 @@
     ]
   },
   "devDependencies": {
-    "@cypress/code-coverage": "^3.8.3",
-    "@cypress/webpack-preprocessor": "^5.4.11",
     "@react-mock/localstorage": "^0.1.2",
-    "@testing-library/cypress": "^7.0.1",
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "11.1.0",
     "@testing-library/user-event": "12.1.10",
@@ -119,8 +116,6 @@
     "codecov": "^3.8.1",
     "colors": "1.4.0",
     "command-line-args": "5.1.1",
-    "cypress": "6.0.0",
-    "cypress-react-unit-test": "^4.17.0",
     "jest": "26.6.0",
     "jest-chain": "1.1.5",
     "jest-extended": "0.11.5",
