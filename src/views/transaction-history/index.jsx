@@ -19,10 +19,10 @@ import {
   DataTableSkeleton,
   TableToolbarContent
 } from 'carbon-components-react'
-
 import Page from 'components/Page/Page'
 import Card from 'components/Card/Card'
 import MonthDisplay from 'components/MonthDisplay/MonthDisplay'
+import { EditTransactionModal } from 'components/Forms/Transaction'
 import DeleteTransactionModal from 'components/Modals/DeleteTransaction/DeleteTransaction'
 
 import './styles.scss'
@@ -57,6 +57,7 @@ const TransactionHistory = ({
           {!!transactions ? (
             <>
               <DeleteTransactionModal />
+              <EditTransactionModal />
 
               <DataTable
                 rows={transactions}

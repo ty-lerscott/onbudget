@@ -23,7 +23,7 @@ const initialState = {
     isSubmitting: false,
     modal: {
       delete: false,
-      edit: false
+      edit: {}
     }
   }
 }
@@ -68,11 +68,25 @@ const transactionHistory = (
         ...state,
         id: payload,
         modal: {
-          ...initialState.transactionHistory.modal,
+          edit: {},
+          // TODO: remove id from parent scope,
+          // TODO: make delete an object like edit
           delete: true
         }
       }
-    case `UNSET_DELETE_${TRANSACTION}`:
+    case `SET_EDIT_${TRANSACTION}`:
+      return {
+        ...state,
+        id: payload.id,
+        modal: {
+          // TODO: remove id from parent scope,
+          // TODO: make delete an object like edit
+          delete: false,
+          edit: payload
+        }
+      }
+    case `UNSET_MODIFY_${TRANSACTION}_MODAL`:
+    case `UNSET_DELETE_${TRANSACTION}`: //TODO: change delete action to use above action
       return {
         ...state,
         ...getInitialState.transactionHistory()

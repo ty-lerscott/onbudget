@@ -4,17 +4,18 @@ import React, { useEffect } from 'react'
 
 import View from 'views/transaction-history'
 
-import { setDeleteTransaction } from './actions'
+import { setDeleteTransaction, setEditTransaction } from './actions'
 
 import { fetchCategories } from 'actions/CategoryActions'
 import { fetchTransactionsByMonth } from 'actions/TransactionActions'
-import { getAllMonthTransactions } from 'state/selectors/TransactionSelectors'
 
 import { isAuthenticated } from 'state/selectors/UserSelectors'
+import { getAllMonthTransactions } from 'state/selectors/TransactionSelectors'
 
 import { TransactionProps } from 'definitions'
 
 const TransactionHistory = ({
+  setEdit,
   thisMonth,
   setDelete,
   isSignedIn,
@@ -42,7 +43,13 @@ const TransactionHistory = ({
     transactions.find(transaction => transaction.id === id)
 
   const handleEditTransaction = ({ id }) => () => {
-    console.log('edit', handleFindTransaction(id))
+    const transaction = handleFindTransaction(id)
+
+    if (!transaction) {
+      return
+    }
+
+    setEdit(transaction)
   }
 
   const handleDeleteTransaction = ({ id }) => () => setDelete(id)
@@ -56,6 +63,7 @@ const TransactionHistory = ({
 }
 
 TransactionHistory.propTypes = {
+  setEdit: PropTypes.func,
   setDelete: PropTypes.func,
   isSignedIn: PropTypes.bool,
   getCategories: PropTypes.func,
@@ -67,6 +75,7 @@ TransactionHistory.propTypes = {
 }
 
 const mapDispatchToProps = {
+  setEdit: setEditTransaction,
   getCategories: fetchCategories,
   setDelete: setDeleteTransaction,
   fetchTransactions: fetchTransactionsByMonth

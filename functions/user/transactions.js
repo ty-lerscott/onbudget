@@ -110,6 +110,36 @@ const addTransaction = admin => async ({ isEmulating, ...body }, { auth }) => {
   return resp
 }
 
+const editTransaction = admin => async (
+  { isEmulating, id, ...transaction },
+  { auth }
+) => {
+  const db = admin.firestore()
+  let resp
+
+  if (isEmulating) {
+    db.emulatorOrigin = 'http://localhost:8080'
+  }
+
+  await admin
+    .firestore()
+    .collection('users')
+    .doc(auth.uid)
+    .collection('transactions')
+    .doc(id)
+    .update(transaction)
+    .then(() => {
+      resp = {}
+    })
+    .catch(err => {
+      resp = {
+        errors: [{ message: err.message }]
+      }
+    })
+
+  return resp
+}
+
 const deleteTransaction = admin => async (
   { isEmulating, transactionId, ...body },
   { auth }
@@ -214,6 +244,7 @@ const importStatement = admin => async (
 
 module.exports = {
   addTransaction,
+  editTransaction,
   getTransactions,
   importStatement,
   deleteTransaction,

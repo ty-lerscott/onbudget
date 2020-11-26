@@ -8,6 +8,7 @@ const {
 } = require('./user/categories.js')
 const {
   addTransaction,
+  editTransaction,
   getTransactions,
   importStatement,
   deleteTransaction,
@@ -36,6 +37,7 @@ exports.editCategory = functions.https.onCall(editCategory(admin))
 
 exports.transactions = functions.https.onCall(getTransactions(admin))
 exports.addTransaction = functions.https.onCall(addTransaction(admin))
+exports.editTransaction = functions.https.onCall(editTransaction(admin))
 exports.deleteTransaction = functions.https.onCall(deleteTransaction(admin))
 
 exports.transactionsByMonth = functions.https.onCall(

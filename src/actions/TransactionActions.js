@@ -72,6 +72,41 @@ export const addTransactionAction = body => async (
   })
 }
 
+export const editTransactionAction = body => async (
+  dispatch,
+  getState,
+  { getFirebase, api }
+) => {
+  dispatch({
+    type: `EDIT_${TRANSACTION}_PENDING`
+  })
+
+  return api({
+    body: {
+      ...body,
+      amount: Number(body.amount),
+      date: new Date(body.date).getTime() || 0
+    },
+    dispatch,
+    getState,
+    getFirebase,
+    path: 'editTransaction'
+  }).then(({ editTransaction }) => {
+    dispatch({
+      type: `EDIT_${TRANSACTION}_SUCCESS`,
+      payload: editTransaction
+    })
+
+    return editTransaction
+  })
+}
+
+export const clearReduxState = () => dispatch => {
+  dispatch({
+    type: `UNSET_MODIFY_${TRANSACTION}_MODAL`
+  })
+}
+
 export const deleteTransactionAction = transactionId => async (
   dispatch,
   getState,

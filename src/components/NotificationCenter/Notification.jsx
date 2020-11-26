@@ -9,36 +9,40 @@ import { deleteNotification } from './NotificationActions'
 import { NotificationProps } from 'definitions'
 
 const Notification = ({
-	id,
-	subtitle = '',
-	type = 'info',
-	deleteThisNotification,
-	...props
+  id,
+  subtitle = '',
+  type = 'info',
+  deleteThisNotification,
+  ...props
 }) => {
-	const handleDelete = () => {
-		deleteThisNotification(id)
-	}
+  const handleDelete = () => {
+    deleteThisNotification(id)
+  }
 
-	const title = props.title || type[0].toUpperCase() + type.substr(1)
+  const title = props.title || type[0].toUpperCase() + type.substr(1)
 
-	return (
-		<ToastNotification
-			className={cn('Notification', `Notification--${type}`)}
-			kind={type}
-			lowContrast
-			role='alert'
-			title={title}
-			caption={false}
-			subtitle={subtitle}
-			onCloseButtonClick={handleDelete}
-		/>
-	)
+  return (
+    <ToastNotification
+      className={cn('Notification', `Notification--${type}`)}
+      kind={type}
+      lowContrast
+      role='alert'
+      title={title}
+      caption={false}
+      subtitle={subtitle}
+      onCloseButtonClick={handleDelete}
+    />
+  )
+}
+
+Notification.defaultProps = {
+  isRequired: {} // still dont know what this is for
 }
 
 Notification.propTypes = NotificationProps
 
 const mapDispatchToProps = {
-	deleteThisNotification: deleteNotification
+  deleteThisNotification: deleteNotification
 }
 
 export default connect(null, mapDispatchToProps)(Notification)

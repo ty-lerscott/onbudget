@@ -7,8 +7,22 @@ export const setDeleteTransaction = id => dispatch => {
   })
 }
 
-export const ussetDeleteTransaction = id => dispatch => {
+export const setEditTransaction = values => dispatch => {
+  dispatch({
+    type: `SET_EDIT_${TRANSACTION}`,
+    payload: values
+  })
+}
+
+//TODO: make this one action with the edit one also
+export const ussetDeleteTransaction = () => dispatch => {
   dispatch({
     type: `UNSET_DELETE_${TRANSACTION}`
+  })
+}
+
+export const ussetEditTransaction = () => dispatch => {
+  dispatch({
+    type: `UNSET_EDIT_${TRANSACTION}`
   })
 }
