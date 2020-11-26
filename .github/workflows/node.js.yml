@@ -27,9 +27,9 @@ jobs:
 
     - name: Cypress install + run
       uses: cypress-io/github-action@v2
-      with:
-        record: false
-        tag: node-${{ matrix.node-version }}
+      # with:
+        # record: false
+        # tag: node-${{ matrix.node-version }}
     - run: NODE_ENV=test npm ci
     - run: npm run test:coverage
     - run: npm run coverage:upload
