@@ -1,11 +1,12 @@
 {
-    "compilerOptions": {
-      "baseUrl": "src",
-      "target": "es6",
-      "module": "commonjs"
-    },
-    "include": [
-      "src",
-      "src/**/*"
-    ]
+  "compilerOptions": {
+    "baseUrl": "src",
+    "target": "es6",
+    "module": "commonjs"
+  },
+  "include": [
+    "src",
+    "src/**/*",
+    "node_modules/cypress", "./cypress/**/*.js"
+  ]
 }
