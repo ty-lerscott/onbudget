@@ -14,49 +14,47 @@ import './OverviewChart.scss'
 import { CategoryProps, TransactionProps } from 'definitions'
 
 const OverviewChart = ({ isLoading, unplanned, classNames, categories }) => {
-	const data = formatTransactionsForChart(unplanned, categories)
+  const data = formatTransactionsForChart(unplanned, categories)
 
-	return (
-		<Card
-			wrapped
-			centered
-			title='Overview'
-			data-testid={
-				isLoading ? 'OverviewChart-Loading' : 'OverviewChart-canvas'
-			}
-			className={cn('OverviewChart', classNames)}>
-			{isLoading ? (
-				<InlineLoading />
-			) : (
-				Array.isArray(data?.datasets?.[0]?.data) && (
-					<Doughnut
-						data-testid='OverviewChart'
-						options={{
-							cutoutPercentage: 75,
-							circumference: Math.PI,
-							rotation: Math.PI,
-							legend: {
-								display: false
-							}
-						}}
-						data={data}
-					/>
-				)
-			)}
-		</Card>
-	)
+  return (
+    <Card
+      wrapped
+      centered
+      title='Overview'
+      data-testid={isLoading ? 'OverviewChart-Loading' : 'OverviewChart-canvas'}
+      className={cn('OverviewChart', classNames)}>
+      {isLoading ? (
+        <InlineLoading />
+      ) : (
+        Array.isArray(data?.datasets?.[0]?.data) && (
+          <Doughnut
+            data-testid='OverviewChart'
+            options={{
+              cutoutPercentage: 75,
+              circumference: Math.PI,
+              rotation: Math.PI,
+              legend: {
+                display: false
+              }
+            }}
+            data={data}
+          />
+        )
+      )}
+    </Card>
+  )
 }
 
 OverviewChart.propTypes = {
-	isLoading: PropTypes.bool,
-	classNames: PropTypes.string,
-	categories: PropTypes.arrayOf(CategoryProps),
-	unplanned: PropTypes.arrayOf(TransactionProps)
+  isLoading: PropTypes.bool,
+  classNames: PropTypes.string,
+  categories: PropTypes.arrayOf(CategoryProps),
+  unplanned: PropTypes.arrayOf(TransactionProps)
 }
 
 const mapStateToProps = state => ({
-	categories: state.app.categories,
-	isLoading: state.ui.dashboard.isLoading.overview
+  categories: state.app.categories,
+  isLoading: state.ui.dashboard.isLoading.overview
 })
 
 export default connect(mapStateToProps)(OverviewChart)
