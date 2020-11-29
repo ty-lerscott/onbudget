@@ -44,14 +44,6 @@ const EditTransaction = ({
     setIsModalOpen(isOpen)
   }, [isOpen])
 
-  //   // self says it's closed
-  //   useEffect(() => {
-  //     if (!isModalOpen && resetParentModal) {
-  //       resetParentModal()
-  //     }
-  //   }, [isModalOpen])
-  /* eslint-enable react-hooks/exhaustive-deps */
-
   const handleCloseModal = () => {
     setIsModalOpen(false)
     return
@@ -77,6 +69,11 @@ const EditTransaction = ({
       })
       .finally(() => {
         setIsSubmitting(false)
+        handleCloseModal()
+
+        setTimeout(() => {
+          resetReduxState()
+        }, 300)
       })
   }
 

@@ -60,6 +60,7 @@ const TransactionHistory = ({
               <EditTransactionModal />
 
               <DataTable
+                isSortable
                 rows={transactions}
                 headers={[].concat(
                   transactions?.length
