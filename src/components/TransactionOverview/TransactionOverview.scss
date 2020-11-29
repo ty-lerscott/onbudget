@@ -1,17 +1,22 @@
 .TransactionOverview {
+
+    .content {
+        height: calc(100% - 1rem);
+    }
     .overviewGroup {
         width: 30%;
-        margin-top: 1rem;
         text-align: center;
 
         .title {
             display: block;
-            font-size: 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
             color: var(--silver);
+            font-weight: 400;
         }
 
         .amount {
-            margin-top: 0.25rem;
+            margin-bottom: 0.30rem;
             display: block;
             font-size: 1rem;
             color: var(--woodsmoke);

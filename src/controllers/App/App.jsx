@@ -17,7 +17,7 @@ import {
   HeaderGlobalAction
 } from 'carbon-components-react'
 
-import { FaceMask24, ArrowsVertical32 } from '@carbon/icons-react'
+import { FaceMask24, ArrowsVertical32, Home32 } from '@carbon/icons-react'
 
 import AppLoading from 'components/Loading/AppLoading'
 import NotificationCenter from 'components/NotificationCenter/NotificationCenter'
@@ -119,6 +119,9 @@ const App = ({ route, logout, isSignedIn, navigateTo, children, ...rest }) => {
           aria-label='Side navigation'
           expanded={isSideNavExpanded}>
           <SideNavItems>
+            <SideNavLink onClick={handleNavigation('/')} renderIcon={Home32}>
+              Dashboard
+            </SideNavLink>
             <SideNavLink
               onClick={handleNavigation('/transaction-history')}
               renderIcon={ArrowsVertical32}>
