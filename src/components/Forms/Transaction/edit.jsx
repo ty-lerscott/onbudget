@@ -71,6 +71,7 @@ const EditTransaction = ({
         setIsSubmitting(false)
         handleCloseModal()
 
+        //TODO: figure out how to remove this timeout, I'd like this to run in the modal, not on the submit action
         setTimeout(() => {
           resetReduxState()
         }, 300)
