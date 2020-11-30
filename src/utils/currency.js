@@ -8,7 +8,8 @@ const toCurrency = (amount, withSymbol = true) => {
     currency: 'USD'
   }).format(amount)
 
-  return withSymbol ? currency.substring(0).replace(',', '') : currency
+  // if with symbol, leave it normal, else remove all non digit characters except for period
+  return withSymbol ? currency : currency.replace(/\D(?<!\.)/g, '')
 }
 
 export default toCurrency
