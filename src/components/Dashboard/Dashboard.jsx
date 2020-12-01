@@ -18,10 +18,10 @@ import {
 
 import MonthDisplay from 'components/MonthDisplay/MonthDisplay'
 import CategoryList from 'components/CategoryList/CategoryList'
-import OverviewChart from 'components/OverviewChart/OverviewChart'
 import AddTransaction from 'components/AddTransaction/AddTransaction'
 import OverallSpending from 'components/OverallSpending/OverallSpending'
 import TransactionOverview from 'components/TransactionOverview/TransactionOverview'
+import AverageDailySpending from 'components/AverageDailySpending/AverageDailySpending'
 import StackedCategoryChart from 'components/StackedCategoryChart/StackedCategoryChart'
 
 import { TransactionProps } from 'definitions'
@@ -40,11 +40,11 @@ const Dashboard = ({
   useEffect(() => {
     Promise.all([getCategories(), getTransactions()]).then(() => {
       ;[
-        'overview',
         'categoryList',
         'overallSpending',
         'categoryBreakdown',
-        'transactionOverview'
+        'transactionOverview',
+        'averageDailySpending'
       ].forEach(area => {
         handleLoadingComplete(area)
       })
@@ -71,7 +71,9 @@ const Dashboard = ({
         />
       </div>
 
-      <OverviewChart unplanned={unplanned} />
+      {/* <OverviewChart unplanned={unplanned} /> */}
+
+      <AverageDailySpending unplanned={unplanned} />
 
       <div className='monthAndAdd'>
         <MonthDisplay />

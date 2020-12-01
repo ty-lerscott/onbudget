@@ -11,11 +11,11 @@ const initialState = {
   date: startOfMonth(now),
   dashboard: {
     isLoading: {
-      overview: true,
       categoryList: true,
       overallSpending: true,
       categoryBreakdown: true,
-      transactionOverview: true
+      transactionOverview: true,
+      averageDailySpending: true
     }
   },
   transactionHistory: {

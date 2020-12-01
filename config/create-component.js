@@ -1,26 +1,22 @@
-const fs = require("fs");
-const path = require("path");
-const colors = require("colors");
-const mkdirp = require("mkdirp");
-const commandLineArgs = require("command-line-args");
+const fs = require('fs')
+const path = require('path')
+const colors = require('colors')
+const mkdirp = require('mkdirp')
+const commandLineArgs = require('command-line-args')
 
-const projectDir = path.resolve(__dirname, "../");
-const defaultDestination = path.resolve(projectDir, "src/components");
+const projectDir = path.resolve(__dirname, '../')
+const defaultDestination = path.resolve(projectDir, 'src/components')
 
 //ex: npm run create-component -- -c Test
 
 const createNewDir = ({ path }) => {
-  console.log("creating directory:", path);
-  mkdirp.sync(path);
-};
+  console.log('creating directory:', path)
+  mkdirp.sync(path)
+}
 
 const createSassFile = ({ path, component }) => {
-  fs.writeFileSync(
-    `${path}/${component}.module.scss`,
-    `.${component} {\r\r}`,
-    "utf-8"
-  );
-};
+  fs.writeFileSync(`${path}/${component}.scss`, `.${component} {\r\r}`, 'utf-8')
+}
 
 const createTestFile = ({ path, component }) => {
   fs.writeFileSync(
@@ -34,39 +30,39 @@ import {render, fireEvent, waitFor, screen} from '@testing-library/react'
 
 import ${component} from './${component}';
 
-describe('${component}', () => {
+describe('<${component} />', () => {
     it('renders properly', () => {
         expect(true).toBeTruthy();
     })
 })
         `
-  );
-};
+  )
+}
 
 const createComponentFile = ({ path, component, isCarbonComponent }) => {
   const componentTemplate = `
 import React from 'react';
+import PropTypes from 'prop-types'
 import classNames from 'classnames';
 ${
   isCarbonComponent
-    ? "import {" + component + "} from 'carbon-components-react';"
-    : ""
+    ? 'import {' + component + "} from 'carbon-components-react';"
+    : ''
 }
 
-import styles from './${component}.module.scss';
+import './${component}.scss';
 
-export interface ${component}Props {
-}
-
-const ${component}: React.FC<${component}Props> = ({
+const ${component} = ({
     ...props
-}) => <div data-testid="${component}" className={styles.${component}}></div>;
+}) => <div data-testid="${component}" className="${component}"></div>;
+
+${component}.propTypes = {}
 
 export default ${component};
-`;
+`
 
-  fs.writeFileSync(`${path}/${component}.jsx`, componentTemplate, "utf-8");
-};
+  fs.writeFileSync(`${path}/${component}.jsx`, componentTemplate, 'utf-8')
+}
 
 const createStoryFile = ({ path, component }) => {
   const componentTemplate = `
@@ -83,55 +79,63 @@ export default {
 } as Meta;
 
 export const Default = (args) => <${component}Component {...args} />
-`;
+`
 
   fs.writeFileSync(
     `${path}/${component}.stories.jsx`,
     componentTemplate,
-    "utf-8"
-  );
-};
+    'utf-8'
+  )
+}
 
 const run = () => {
-  if (process.env.NODE_ENV !== "development") {
-    throw new Error("Please run this via npm");
+  if (process.env.NODE_ENV !== 'development') {
+    throw new Error('Please run this via npm')
   }
 
-  const { destination, component, carbonComponent } = commandLineArgs([
-    { name: "component", alias: "c", type: String },
+  const {
+    destination,
+    component,
+    carbonComponent,
+    withStory
+  } = commandLineArgs([
+    { name: 'component', alias: 'c', type: String },
     {
-      name: "destination",
-      alias: "d",
+      name: 'destination',
+      alias: 'd',
       type: String,
-      defaultValue: defaultDestination,
+      defaultValue: defaultDestination
     },
-    { name: "carbonComponent", alias: "C", type: Boolean },
-  ]);
+    { name: 'carbonComponent', alias: 'C', type: Boolean },
+    { name: 'withStory', alias: 'S', type: Boolean, defaultValue: false }
+  ])
 
   const componentArgs = {
     path: `${destination}/${component}`,
     component,
-    isCarbonComponent: carbonComponent,
-  };
+    isCarbonComponent: carbonComponent
+  }
 
-  createNewDir(componentArgs);
-  createSassFile(componentArgs);
-  createTestFile(componentArgs);
-  createComponentFile(componentArgs);
-  createStoryFile(componentArgs);
-};
+  createNewDir(componentArgs)
+  createSassFile(componentArgs)
+  createTestFile(componentArgs)
+  createComponentFile(componentArgs)
+  if (withStory) {
+    createStoryFile(componentArgs)
+  }
+}
 
 try {
-  run();
+  run()
 } catch (err) {
-  console.log(err.message);
+  console.log(err.message)
   console.log(
     `${err.message}:`,
     colors.green(
       `npm run create-component -- ${process.argv
-        .slice(process.argv.indexOf("--") - 1)
-        .join(" ")}`
+        .slice(process.argv.indexOf('--') - 1)
+        .join(' ')}`
     ),
-    "\n"
-  );
+    '\n'
+  )
 }

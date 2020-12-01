@@ -14,43 +14,43 @@ import { TransactionProps } from 'definitions'
 import './OverallSpending.scss'
 
 const OverallSpending = ({
-	dispatch,
-	isLoading,
-	classNames,
-	transactions,
-	...props
+  dispatch,
+  isLoading,
+  classNames,
+  transactions,
+  ...props
 }) => {
-	const total = sumTransactions(transactions)
+  const total = sumTransactions(transactions)
 
-	return (
-		<Card
-			small
-			wrapped
-			centered
-			title='Overall Spending'
-			data-testid='OverallSpending'
-			className={cn('OverallSpending', classNames)}
-			{...props}>
-			<div className={cn('amount', { isLoading })}>
-				{isLoading ? (
-					<SkeletonText data-testid='OverallSpendingSkeleton' />
-				) : (
-					toCurrency(total)
-				)}
-			</div>
-		</Card>
-	)
+  return (
+    <Card
+      small
+      wrapped
+      centered
+      title='Overall Spending'
+      data-testid='OverallSpending'
+      className={cn('OverallSpending', classNames)}
+      {...props}>
+      <div className={cn('amount', { isLoading })}>
+        {isLoading ? (
+          <SkeletonText data-testid='OverallSpendingSkeleton' />
+        ) : (
+          toCurrency(total)
+        )}
+      </div>
+    </Card>
+  )
 }
 
 OverallSpending.propTypes = {
-	dispatch: PropTypes.func, //TODO: why is this being passed to the component?
-	isLoading: PropTypes.bool,
-	classNames: PropTypes.string,
-	transactions: PropTypes.arrayOf(TransactionProps)
+  dispatch: PropTypes.func, //TODO: why is this being passed to the component?
+  isLoading: PropTypes.bool,
+  classNames: PropTypes.string,
+  transactions: PropTypes.arrayOf(TransactionProps)
 }
 
 const mapStateToProps = state => ({
-	isLoading: state.ui.dashboard.isLoading.overallSpending
+  isLoading: state.ui.dashboard.isLoading.overallSpending
 })
 
 export default connect(mapStateToProps)(OverallSpending)

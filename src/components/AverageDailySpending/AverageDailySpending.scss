@@ -1,0 +1,11 @@
+.AverageDailySpending {
+    .content {
+        height: calc(100% - 1rem);
+    }
+
+    .amount {
+        font-size: 2rem;
+        color: var(--woodsmoke);
+        font-weight: 600;
+    }
+}
