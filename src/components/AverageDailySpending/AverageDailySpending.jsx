@@ -25,7 +25,9 @@ const AverageDailySpending = ({ unplanned, isLoading, ...props }) => {
       className='AverageDailySpending'
       data-testid='AverageDailySpending'
       {...props}>
-      <div className={cn('amount', { isLoading })}>
+      <div
+        aria-label='Average daily spending amount'
+        className={cn('amount', { isLoading })}>
         {isLoading ? (
           <SkeletonText data-testid='AverageDailySpendingSkeleton' />
         ) : (

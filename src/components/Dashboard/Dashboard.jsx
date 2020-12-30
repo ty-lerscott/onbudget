@@ -39,13 +39,15 @@ const Dashboard = ({
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     Promise.all([getCategories(), getTransactions()]).then(() => {
-      ;[
+      const areas = [
         'categoryList',
         'overallSpending',
         'categoryBreakdown',
         'transactionOverview',
         'averageDailySpending'
-      ].forEach(area => {
+      ]
+
+      areas.forEach(area => {
         handleLoadingComplete(area)
       })
     })

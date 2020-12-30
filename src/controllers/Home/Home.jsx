@@ -12,18 +12,18 @@ import { hasFirebaseLoaded } from 'state/selectors/FirebaseSelectors'
 import './Home.scss'
 
 const Home = ({ isSignedIn, hasFirebaseLoaded }) =>
-	!hasFirebaseLoaded ? null : (
-		<Page name='Home'>{isSignedIn ? <Dashboard /> : <SignInModal />}</Page>
-	)
+  !hasFirebaseLoaded ? null : (
+    <Page name='Home'>{isSignedIn ? <Dashboard /> : <SignInModal />}</Page>
+  )
 
 Home.propTypes = {
-	isSignedIn: PropTypes.bool,
-	hasFirebaseLoaded: PropTypes.bool
+  isSignedIn: PropTypes.bool,
+  hasFirebaseLoaded: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
-	isSignedIn: isAuthenticated(state),
-	hasFirebaseLoaded: hasFirebaseLoaded(state)
+  isSignedIn: isAuthenticated(state),
+  hasFirebaseLoaded: hasFirebaseLoaded(state)
 })
 
 export default connect(mapStateToProps)(Home)

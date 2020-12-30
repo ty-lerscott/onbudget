@@ -3,22 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@carbon/icons-react": "10.19.0",
+    "@carbon/icons-react": "10.22.0",
     "@loadable/component": "5.14.1",
-    "@sentry/react": "5.27.3",
-    "@sentry/tracing": "5.27.3",
-    "@sentry/webpack-plugin": "1.13.0",
-    "carbon-components": "10.22.0",
-    "carbon-components-react": "7.22.0",
+    "@sentry/react": "5.29.2",
+    "@sentry/tracing": "5.29.2",
+    "@sentry/webpack-plugin": "1.14.0",
+    "carbon-components": "10.25.0",
+    "carbon-components-react": "7.25.0",
     "carbon-icons": "7.0.7",
     "chart.js": "2.9.4",
     "classnames": "2.2.6",
     "clone-deep": "4.0.1",
     "connected-react-router": "6.8.0",
     "date-fns": "2.16.1",
-    "firebase": "7.24.0",
-    "firebase-functions": "3.11.0",
-    "fs": "0.0.1-security",
+    "firebase": "8.2.1",
+    "firebase-functions": "3.13.0",
     "history": "4.10.1",
     "mkdirp": "1.0.4",
     "node-sass": "4.14.1",
@@ -26,19 +25,20 @@
     "path": "0.12.7",
     "prop-types": "15.7.2",
     "react": "17.0.1",
-    "react-chartjs-2": "2.10.0",
+    "react-chartjs-2": "2.11.1",
     "react-dom": "17.0.1",
-    "react-redux": "7.2.1",
-    "react-redux-firebase": "3.7.0",
+    "react-redux": "7.2.2",
+    "react-redux-firebase": "3.8.1",
     "react-router": "5.2.0",
     "react-router-config": "5.1.1",
-    "react-scripts": "4.0.0",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "4.0.1",
     "redux": "4.0.5",
     "redux-firestore": "0.14.0",
     "redux-logger": "3.0.6",
     "redux-thunk": "2.3.0",
     "reselect": "4.0.0",
-    "uuid": "8.3.1"
+    "uuid": "8.3.2"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
@@ -49,11 +49,10 @@
     "firebase": "firebase emulators:start",
     "firebase:deploy": "firebase deploy --only functions",
     "firebase:populate": "firebase emulators:start --export-on-exit=./firebase --import=./firebase",
-    "test": "NODE_ENV=test react-scripts test --watchAll=false",
-    "test:watch": "DEBUG_PRINT_LIMIT=40000 NODE_ENV=test react-scripts test",
-    "test:coverage": "npm test -- --coverage",
+    "test": "otis test",
+    "test:watch": "otis test -u -w",
     "coverage:upload": "codecov",
-    "create-component": "NODE_ENV=development node ./config/create-component"
+    "crc": "crc"
   },
   "eslintConfig": {
     "extends": [
@@ -69,6 +68,22 @@
         "avoid-escape"
       ]
     }
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "esmodules": true
+          }
+        }
+      ],
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-react-jsx"
+    ]
   },
   "prettier": {
     "tabWidth": 2,
@@ -108,31 +123,20 @@
     ]
   },
   "devDependencies": {
-    "@react-mock/localstorage": "^0.1.2",
-    "@testing-library/jest-dom": "5.11.4",
-    "@testing-library/react": "11.1.0",
-    "@testing-library/user-event": "12.1.10",
-    "babel-jest": "^26.6.0",
-    "babel-plugin-istanbul": "6.0.0",
-    "canvas": "^2.6.1",
-    "codecov": "^3.8.1",
+    "@tsw38/create-react-component": "1.0.1",
+    "@tsw38/otis": "1.0.6",
+    "axios": "0.21.1",
+    "canvas": "2.6.1",
+    "codecov": "3.8.1",
     "colors": "1.4.0",
-    "command-line-args": "5.1.1",
-    "firebase-mock": "^2.3.2",
-    "jest": "26.6.0",
-    "jest-chain": "1.1.5",
-    "jest-extended": "0.11.5",
-    "mockdate": "^3.0.2",
-    "prettier": "^2.1.2",
-    "react-router-dom": "^5.2.0",
-    "source-map-explorer": "^2.5.0"
+    "deepmerge": "4.2.2",
+    "firebase-admin": "9.4.2",
+    "prettier": "2.2.1",
+    "source-map-explorer": "2.5.1"
   },
   "jest": {
-    "clearMocks": true,
-    "resetMocks": true,
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/node_modules/**"
+    "setupFilesAfterEnv": [
+      "<rootDir>/__test__/jest/setup-after-env.js"
     ]
   }
 }

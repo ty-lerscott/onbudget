@@ -1,0 +1,81 @@
+{
+    "result": [
+        {
+            "id": "0mrib6zBtK1VLWRs1aaP",
+            "name": "Student Loans",
+            "isDeposit": false,
+            "color": "#cccccc",
+            "isBill": true
+        },
+        {
+            "id": "1CFP2ccm49iEqrZzFaLf",
+            "name": "Savings",
+            "isBill": false,
+            "isDeposit": false,
+            "color": "#f794f7"
+        },
+        {
+            "id": "23ZoQaFQaHemgVh5e3kc",
+            "isBill": true,
+            "isDeposit": false,
+            "color": "#cccccc",
+            "name": "Credit Card"
+        },
+        {
+            "id": "28CqLgx1gtkvUdnoIwLu",
+            "name": "Medical",
+            "isDeposit": false,
+            "isBill": false,
+            "color": "#9494f7"
+        },
+        {
+            "id": "50WRYkgQedtxEWMinUbW",
+            "isDeposit": false,
+            "isBill": true,
+            "name": "SlingTV",
+            "color": "#cccccc"
+        },
+        {
+            "id": "6ay9nJCjgHNGWXg9yZMr",
+            "name": "Clothing",
+            "isBill": false,
+            "isDeposit": false,
+            "color": "#f7f794"
+        },
+        {
+            "id": "ADaUCV118aUOK3wGArxq",
+            "color": "#cccccc",
+            "isBill": true,
+            "isDeposit": false,
+            "name": "Peleton"
+        },
+        {
+            "id": "CowM5Ubnu28l8EbIkPIf",
+            "name": "Other",
+            "isDeposit": false,
+            "color": "#cccccc",
+            "isBill": false
+        },
+        {
+            "id": "F1PewlwUk7x97LxO5mFX",
+            "color": "#cccccc",
+            "name": "Phone",
+            "isBill": true,
+            "isDeposit": false
+        },
+        {
+            "id": "FNCvqitOl4axbzVapS85",
+            "color": "#949459",
+            "isBill": false,
+            "name": "Travel",
+            "isDeposit": false
+        },
+        {
+            "id": "FPeqZYg7q8KV5ogxtsir",
+            "isDeposit": false,
+            "color": "#cccccc",
+            "name": "Electricity",
+            "isBill": true
+        }
+    ]
+}

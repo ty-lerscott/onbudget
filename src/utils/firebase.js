@@ -4,19 +4,25 @@ import 'firebase/firestore'
 import 'firebase/functions'
 import { createFirestoreInstance } from 'redux-firestore'
 
-const initializeFirebase = store => {
-  firebase.initializeApp({
-    appId: process.env.REACT_APP_FIREBASE_appId,
-    apiKey: process.env.REACT_APP_FIREBASE_apiKey,
-    projectId: process.env.REACT_APP_FIREBASE_projectId,
-    authDomain: process.env.REACT_APP_FIREBASE_authDomain,
-    databaseURL: process.env.REACT_APP_FIREBASE_databaseURL,
-    storageBucket: process.env.REACT_APP_FIREBASE_storageBucket,
-    measurementId: process.env.REACT_APP_FIREBASE_measurementId,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_messagingSenderId
-  })
+let hasInitialized = false
 
-  firebase.firestore()
+const initializeFirebase = store => {
+  if (!hasInitialized) {
+    hasInitialized = true
+
+    firebase.initializeApp({
+      appId: process.env.REACT_APP_FIREBASE_appId,
+      apiKey: process.env.REACT_APP_FIREBASE_apiKey,
+      projectId: process.env.REACT_APP_FIREBASE_projectId,
+      authDomain: process.env.REACT_APP_FIREBASE_authDomain,
+      databaseURL: process.env.REACT_APP_FIREBASE_databaseURL,
+      storageBucket: process.env.REACT_APP_FIREBASE_storageBucket,
+      measurementId: process.env.REACT_APP_FIREBASE_measurementId,
+      messagingSenderId: process.env.REACT_APP_FIREBASE_messagingSenderId
+    })
+
+    firebase.firestore()
+  }
 
   return {
     firebase,

@@ -31,7 +31,9 @@ const OverallSpending = ({
       data-testid='OverallSpending'
       className={cn('OverallSpending', classNames)}
       {...props}>
-      <div className={cn('amount', { isLoading })}>
+      <div
+        className={cn('amount', { isLoading })}
+        aria-label='Overall Spending Amount'>
         {isLoading ? (
           <SkeletonText data-testid='OverallSpendingSkeleton' />
         ) : (

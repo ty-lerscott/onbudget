@@ -1,0 +1,676 @@
+{
+    "result": [
+        {
+            "id": "4c6F9AV17pra7oNbLgwK",
+            "categoryId": "MGzbltfr1SqN1wjzIzuG",
+            "category": "Groceries",
+            "amount": 18.98,
+            "description": "POS Debit - Visa Check Card 4244 - WHOLEFDS FTM106 6891 FORT MY",
+            "date": 1577944800000
+        },
+        {
+            "id": "62OSpPUUKdXmGRGMkUQZ",
+            "description": "POS Debit - Visa Check Card 4244 - MELLOW MUSHROOM FT FORT MYERS",
+            "category": "Entertainment",
+            "amount": 54.97,
+            "date": 1577944800000,
+            "categoryId": "VqSFiDpBZdg91DhjGcX5"
+        },
+        {
+            "id": "YIgHh42ft3mX6G9YojU4",
+            "categoryId": "dVhxTd5bADwUAlsGijAS",
+            "description": "POS Debit - Visa Check Card 4244 - NOIRE THE NAIL BAR FORT MYERS",
+            "amount": 80,
+            "date": 1577944800000,
+            "category": "Personal"
+        },
+        {
+            "id": "mfQLDwmo7GaLpjstUxA3",
+            "amount": 1470.85,
+            "categoryId": "adBwQc2LJzYYRljaYuBS",
+            "category": "Income",
+            "description": "Transfer from JOSEPH L FAGNIL",
+            "date": 1577944800000
+        },
+        {
+            "id": "0GNY61IRhxDgas4qcZW2",
+            "categoryId": "23ZoQaFQaHemgVh5e3kc",
+            "description": "Transfer to Credit Card",
+            "date": 1578031200000,
+            "category": "Credit Card",
+            "amount": 300
+        },
+        {
+            "id": "1tQGqw8wqo0UbTKEu27S",
+            "categoryId": "0mrib6zBtK1VLWRs1aaP",
+            "date": 1578031200000,
+            "description": "ACH Transaction - EDUCATIONAL COMP ACH LNPYMT 0004300012",
+            "category": "Student Loans",
+            "amount": 90
+        },
+        {
+            "id": "3eFCApSx9lZriitEQrew",
+            "categoryId": "ZqksEz5YHDQRjeSnSQdQ",
+            "amount": 2941.7,
+            "date": 1578031200000,
+            "category": "Rent",
+            "description": "ACH Transaction - MORNINGSIDEEQUI- WEB PMTS 0011192468"
+        },
+        {
+            "id": "Dt9HMsD7Kwtz6T1vvpiQ",
+            "categoryId": "1CFP2ccm49iEqrZzFaLf",
+            "date": 1578031200000,
+            "amount": 6.37,
+            "category": "Savings",
+            "description": "ACH Transaction - Acorns Invest Transfer 0011192468"
+        },
+        {
+            "id": "JOnVqxbHWsfwR7tTzv2g",
+            "categoryId": "UzWA5ZLwhjykhLyto6zB",
+            "date": 1578290400000,
+            "category": "Takeout",
+            "amount": 8.93,
+            "description": "POS Debit - Visa Check Card 4244 - BURGER KING CONC B FT MYERS"
+        },
+        {
+            "id": "Nm1irf5FHdfNsRmcDCVS",
+            "description": "ACH Transaction - PAYPAL INST XFER 0009100001",
+            "date": 1578290400000,
+            "category": "Other",
+            "amount": 61.24,
+            "categoryId": "CowM5Ubnu28l8EbIkPIf"
+        },
+        {
+            "id": "Xmn8W117mxhYe09RntwA",
+            "category": "Other",
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "description": "ACH Transaction - VENMO PAYMENT 0009100001",
+            "amount": 28.5,
+            "date": 1578290400000
+        },
+        {
+            "id": "XyDF6JVmAQk2jB44iTR5",
+            "categoryId": "adBwQc2LJzYYRljaYuBS",
+            "amount": 16.8,
+            "date": 1578290400000,
+            "category": "Income",
+            "description": "Deposit - VENMO"
+        },
+        {
+            "id": "dGhU6JIOuUymsM2nMbq9",
+            "category": "Income",
+            "amount": 38.16,
+            "date": 1578290400000,
+            "categoryId": "adBwQc2LJzYYRljaYuBS",
+            "description": "Deposit - VENMO"
+        },
+        {
+            "id": "eUG0xmMufIQrHiTFu158",
+            "description": "POS Debit - Visa Check Card 4244 - BURGER KING 594 LAKEWOOD OH",
+            "categoryId": "UzWA5ZLwhjykhLyto6zB",
+            "amount": 10.78,
+            "date": 1578290400000,
+            "category": "Takeout"
+        },
+        {
+            "id": "f8BWJk1BfT7RpockO2vI",
+            "date": 1578290400000,
+            "categoryId": "VqSFiDpBZdg91DhjGcX5",
+            "category": "Entertainment",
+            "amount": 36.94,
+            "description": "POS Debit - Visa Check Card 4244 - SIMONES BEVERAGE DEL LAKEWOOD"
+        },
+        {
+            "id": "nhStBg9T0BUF5gpBb040",
+            "amount": 142.6,
+            "date": 1578290400000,
+            "category": "Phone",
+            "description": "ACH Transaction - VERIZON WIRELESS PAYMENTS 0002100002",
+            "categoryId": "F1PewlwUk7x97LxO5mFX"
+        },
+        {
+            "id": "pYPJxtk1CXVfYO9nNxgi",
+            "description": "ACH Transaction - PAYPAL INST XFER 0009100001",
+            "date": 1578290400000,
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "category": "Other",
+            "amount": 40.38
+        },
+        {
+            "id": "yRWP7213xVDWLYHyIOZM",
+            "description": "POS Debit - Visa Check Card 4244 - TST FLYING FIG CLEVELAND OH",
+            "category": "Entertainment",
+            "categoryId": "VqSFiDpBZdg91DhjGcX5",
+            "date": 1578290400000,
+            "amount": 54
+        },
+        {
+            "id": "PtGpysxqXIkz6NKiBdn9",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "date": 1578376800000,
+            "amount": 19.25,
+            "category": "Target"
+        },
+        {
+            "id": "eUWTIpQMjHyafvrPnV5o",
+            "description": "POS Debit - Visa Check Card 4244 - SUBWAY 0402 LAKEWOOD OH",
+            "categoryId": "VqSFiDpBZdg91DhjGcX5",
+            "date": 1578376800000,
+            "category": "Entertainment",
+            "amount": 16.43
+        },
+        {
+            "id": "ie7hCxfpZT2sqBjgfYYb",
+            "description": "ACH Transaction - Acorns Invest Transfer 0011192468",
+            "amount": 20,
+            "categoryId": "1CFP2ccm49iEqrZzFaLf",
+            "date": 1578376800000,
+            "category": "Savings"
+        },
+        {
+            "id": "44CSDzUwQs2AmhW7n8IJ",
+            "description": "POS Debit - Visa Check Card 4244 - HOME RESERVE 260-969-6939 IN",
+            "category": "Housing",
+            "date": 1578463200000,
+            "amount": 4.24,
+            "categoryId": "UIrGlJN5lzS7HA23MUOL"
+        },
+        {
+            "id": "AgboHxjFuIrO1v4Fj7CP",
+            "amount": 82.43,
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "category": "Target",
+            "date": 1578463200000,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM"
+        },
+        {
+            "id": "GUxHFFTvduFZjz14ztVh",
+            "categoryId": "zsk4fgqUXyd8mxheJTMB",
+            "date": 1578463200000,
+            "description": "POS Debit - Visa Check Card 4244 - APPLECOM BILL 866-712-7753 C",
+            "category": "iCloud",
+            "amount": 8.49
+        },
+        {
+            "id": "jcvIQ4LaggmRLQZYHpR4",
+            "categoryId": "MGzbltfr1SqN1wjzIzuG",
+            "category": "Groceries",
+            "description": "POS Debit - Visa Check Card 4244 - ALDI 40003 CHICAGO IL",
+            "amount": 8.33,
+            "date": 1578463200000
+        },
+        {
+            "id": "lqHP20G1jiWyiibfrSru",
+            "description": "ACH Transaction - BK OF AMER VI MC ONLINE PMT 0012114128",
+            "amount": 400,
+            "category": "Credit Card",
+            "date": 1578463200000,
+            "categoryId": "23ZoQaFQaHemgVh5e3kc"
+        },
+        {
+            "id": "sppVCK5xAM7dZFFWNCHc",
+            "date": 1578463200000,
+            "categoryId": "X5infml0O17kVSPjnMQX",
+            "description": "POS Debit - Visa Check Card 4244 - AMZN MKTP US8F97M AMZNCOM B",
+            "amount": 50.48,
+            "category": "Amazon"
+        },
+        {
+            "id": "ULpziox5t42GZM5agAGJ",
+            "categoryId": "FPeqZYg7q8KV5ogxtsir",
+            "date": 1578549600000,
+            "category": "Electricity",
+            "description": "ACH Transaction - COMED UTIL BIL 0009100001",
+            "amount": 68.84
+        },
+        {
+            "id": "Yh31UzBls5OtVLdJCWBy",
+            "amount": 16.99,
+            "date": 1578549600000,
+            "categoryId": "X5infml0O17kVSPjnMQX",
+            "description": "POS Debit - Visa Check Card 4244 - AMZN MKTP US939FG AMZNCOM B",
+            "category": "Amazon"
+        },
+        {
+            "id": "axXNB62Y67MpUw1SFSdt",
+            "date": 1578549600000,
+            "category": "Savings",
+            "amount": 5.12,
+            "categoryId": "1CFP2ccm49iEqrZzFaLf",
+            "description": "ACH Transaction - Acorns Invest Transfer 0011192468"
+        },
+        {
+            "id": "S7LBFoYaj4ueFHbnRCbf",
+            "description": "POS Debit - Visa Check Card 4244 - AMAZONCOMK60QH41 AMZNCOM B",
+            "category": "Amazon",
+            "amount": 45.44,
+            "date": 1578636000000,
+            "categoryId": "X5infml0O17kVSPjnMQX"
+        },
+        {
+            "id": "ggACURhDHH6yA3AWg1b7",
+            "category": "Housing",
+            "categoryId": "UIrGlJN5lzS7HA23MUOL",
+            "description": "POS Debit - Visa Check Card 4244 - HOME RESERVE 260-969-6939 IN",
+            "date": 1578636000000,
+            "amount": 8.48
+        },
+        {
+            "id": "znAC6ZE7phAyxhkvtosI",
+            "description": "ACH Transaction - NINTENDO IAT PAYPAL 0009100001",
+            "category": "Video Games",
+            "date": 1578636000000,
+            "categoryId": "h1O4vqUpgQb2Q3HgseG1",
+            "amount": 27.55
+        },
+        {
+            "id": "0p50zgSv4CnENIfAR3rF",
+            "category": "Target",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "amount": 37.79,
+            "date": 1578895200000,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM"
+        },
+        {
+            "id": "6V1IBXNGKSzL231YFUC7",
+            "date": 1578895200000,
+            "amount": 9.99,
+            "category": "Other",
+            "description": "ACH Transaction - PAYPAL INST XFER 0009100001",
+            "categoryId": "CowM5Ubnu28l8EbIkPIf"
+        },
+        {
+            "id": "HJ0EfcLVOb9whCi3AFQx",
+            "category": "Target",
+            "amount": 36,
+            "date": 1578895200000,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag"
+        },
+        {
+            "id": "eQ2nzmGi5m0EJXaEDHC5",
+            "category": "Groceries",
+            "date": 1578895200000,
+            "description": "POS Debit - Visa Check Card 4244 - MARIANOS 3030 N BROAD CHICAGO",
+            "categoryId": "MGzbltfr1SqN1wjzIzuG",
+            "amount": 20.15
+        },
+        {
+            "id": "iOIoLq9Bhleg8E8QRdmz",
+            "categoryId": "UIrGlJN5lzS7HA23MUOL",
+            "amount": 69.57,
+            "category": "Housing",
+            "date": 1578895200000,
+            "description": "POS Debit - Visa Check Card 4244 - THE HOME DEPOT 1976 CHICAGO I"
+        },
+        {
+            "id": "liKPI63ApMq6xpZaUPCU",
+            "description": "ACH Transaction - Acorns Invest Transfer 0011192468",
+            "amount": 5.72,
+            "category": "Savings",
+            "categoryId": "1CFP2ccm49iEqrZzFaLf",
+            "date": 1578895200000
+        },
+        {
+            "id": "wf7JVgX4mmsEm9rRX2qv",
+            "description": "ACH Transaction - PAYPAL INST XFER 0009100001",
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "amount": 48.26,
+            "date": 1578895200000,
+            "category": "Other"
+        },
+        {
+            "id": "Xv3Ffdba0byzPpUzDBJ6",
+            "categoryId": "UIrGlJN5lzS7HA23MUOL",
+            "category": "Housing",
+            "date": 1578981600000,
+            "amount": 2.12,
+            "description": "POS Debit - Visa Check Card 4244 - HOME RESERVE 260-969-6939 IN"
+        },
+        {
+            "id": "xsTXu5pfhNhDowawqOVG",
+            "description": "ACH Transaction - Acorns Invest Transfer 0011192468",
+            "category": "Savings",
+            "amount": 20,
+            "categoryId": "1CFP2ccm49iEqrZzFaLf",
+            "date": 1578981600000
+        },
+        {
+            "id": "ReoXwzaPrejEGvO5RnoM",
+            "categoryId": "50WRYkgQedtxEWMinUbW",
+            "description": "POS Debit - Visa Check Card 4244 - AMZSLING TV L L VERIFICATI",
+            "category": "SlingTV",
+            "amount": 38.14,
+            "date": 1579068000000
+        },
+        {
+            "id": "yythJFsZT2PprkaCfWpi",
+            "amount": 35.71,
+            "categoryId": "X5infml0O17kVSPjnMQX",
+            "description": "POS Debit - Visa Check Card 4244 - AMAZONCOMSD10W68 AMZNCOM B",
+            "category": "Amazon",
+            "date": 1579068000000
+        },
+        {
+            "id": "U0MyP5HArncOqYTZ39XN",
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "date": 1579154400000,
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "amount": 26.7,
+            "category": "Target"
+        },
+        {
+            "id": "2ZTawCIcJAFhPLmO5Cqt",
+            "category": "Target",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "amount": 19.59,
+            "date": 1579240800000
+        },
+        {
+            "id": "iFDO5XB5bGvoj6Yc6KEy",
+            "description": "ACH Transaction - GREAT LAKES STUDENT LN 0004103604",
+            "date": 1579240800000,
+            "category": "Student Loans",
+            "amount": 235.52,
+            "categoryId": "0mrib6zBtK1VLWRs1aaP"
+        },
+        {
+            "id": "3DsnSuFoi7nqpYWiJIiT",
+            "date": 1579586400000,
+            "category": "Groceries",
+            "categoryId": "MGzbltfr1SqN1wjzIzuG",
+            "description": "POS Debit - Visa Check Card 4244 - ALDI 40003 CHICAGO IL",
+            "amount": 19.36
+        },
+        {
+            "id": "PtG64nalLpjGF1EwNQ7z",
+            "categoryId": "1CFP2ccm49iEqrZzFaLf",
+            "category": "Savings",
+            "description": "ACH Transaction - Acorns Invest Transfer 0011192468",
+            "amount": 5.71,
+            "date": 1579586400000
+        },
+        {
+            "id": "aolOVIlLs8lVoQBV7D52",
+            "category": "Taxes",
+            "description": "POS Debit - Visa Check Card 4244 - INTUIT TURBOTAX 800-446-8848",
+            "amount": 110,
+            "date": 1579586400000,
+            "categoryId": "fcUyvLUBpM3TNdBVj67X"
+        },
+        {
+            "id": "bTOxCQXaqgNj5KWqROSj",
+            "category": "Target",
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "description": "POS Debit - Visa Check Card 4244 - TARGETCOM BROOKLYN PARKMN",
+            "amount": 43.54,
+            "date": 1579586400000
+        },
+        {
+            "id": "e95rwhtpXCq3G7XgacDw",
+            "amount": 33.75,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "category": "Target",
+            "date": 1579586400000,
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag"
+        },
+        {
+            "id": "nwtEoP4nlZkLFnS6xGXP",
+            "date": 1579586400000,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "amount": 55.11,
+            "category": "Target"
+        },
+        {
+            "id": "sEZfAXY4SbZoENJYe5AB",
+            "date": 1579586400000,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "amount": 17.41,
+            "category": "Target"
+        },
+        {
+            "id": "xdiUweptAwSit5PwA5Gb",
+            "amount": 5.5,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "category": "Target",
+            "date": 1579586400000,
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag"
+        },
+        {
+            "id": "zScvK1ceqp3WfJKPHeSP",
+            "description": "POS Debit - Visa Check Card 4244 - MARIANOS 3030 N BROAD CHICAGO",
+            "category": "Groceries",
+            "categoryId": "MGzbltfr1SqN1wjzIzuG",
+            "amount": 21.5,
+            "date": 1579586400000
+        },
+        {
+            "id": "298biJnfIso5MZYNHezh",
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "category": "Target",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "amount": 17.25,
+            "date": 1579672800000
+        },
+        {
+            "id": "6pT0OxLqyaUD3YxKEZPw",
+            "category": "Other",
+            "date": 1579672800000,
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "description": "ACH Transaction - PAYPAL INST XFER 0009100001",
+            "amount": 38.58
+        },
+        {
+            "id": "CDs0PJM0kWCjlRkrmR6P",
+            "category": "Savings",
+            "amount": 35,
+            "categoryId": "1CFP2ccm49iEqrZzFaLf",
+            "description": "ACH Transaction - Acorns Invest Transfer 0011192468",
+            "date": 1579672800000
+        },
+        {
+            "id": "KmxmMs4rldRkQYkbiZBU",
+            "amount": 33.06,
+            "date": 1579672800000,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "category": "Target"
+        },
+        {
+            "id": "VaINDzHX2Njpc1RAM2xK",
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "category": "Other",
+            "date": 1579672800000,
+            "description": "ACH Transaction - PAYPAL INST XFER 0009100001",
+            "amount": 4.99
+        },
+        {
+            "id": "bFLk8thXzEQgC3ogSGfO",
+            "description": "POS Debit - Visa Check Card 4244 - SQ CHICAGO CONCES CHICAGO IL",
+            "category": "Other",
+            "date": 1579672800000,
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "amount": 20
+        },
+        {
+            "id": "f6g0mgRLDYOGRFsEfcf9",
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "amount": 19.85,
+            "description": "ACH Transaction - PAYPAL INST XFER 0009100001",
+            "category": "Other",
+            "date": 1579759200000
+        },
+        {
+            "id": "0vNLKQKSBLlGqow8GO58",
+            "amount": 22.06,
+            "date": 1579845600000,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "category": "Target",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag"
+        },
+        {
+            "id": "xgQ4gFWCJ9dlcyQiOQzr",
+            "categoryId": "1CFP2ccm49iEqrZzFaLf",
+            "amount": 7.52,
+            "date": 1579845600000,
+            "description": "ACH Transaction - Acorns Invest Transfer 0011192468",
+            "category": "Savings"
+        },
+        {
+            "id": "3ZjtXvKoCenRFSVHYn39",
+            "amount": 24.78,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "category": "Target",
+            "date": 1580104800000,
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag"
+        },
+        {
+            "id": "3oRaULW6FKDJnJdPQgNQ",
+            "category": "Other",
+            "date": 1580104800000,
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "amount": 13,
+            "description": "ACH Transaction - PAYPAL INST XFER 0009100001"
+        },
+        {
+            "id": "JFYOgZ2DzhbGm3Gyfv6b",
+            "date": 1580104800000,
+            "category": "Target",
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "amount": 9.91
+        },
+        {
+            "id": "xNCpN3yWjB1MUtDXhRt1",
+            "category": "Groceries",
+            "date": 1580104800000,
+            "categoryId": "MGzbltfr1SqN1wjzIzuG",
+            "description": "POS Debit - Visa Check Card 4244 - MARIANOS 3030 N BROAD CHICAGO",
+            "amount": 10.21
+        },
+        {
+            "id": "hsp05vMbYlCLvkLX6ZgP",
+            "amount": 27.68,
+            "categoryId": "MGzbltfr1SqN1wjzIzuG",
+            "category": "Groceries",
+            "description": "POS Debit - Visa Check Card 4244 - MARIANOS 3030 N BROAD CHICAGO",
+            "date": 1580191200000
+        },
+        {
+            "id": "iNlkBqulGxNWucPG2EZ2",
+            "description": "ACH Transaction - Acorns Invest Transfer 0011192468",
+            "categoryId": "1CFP2ccm49iEqrZzFaLf",
+            "amount": 35,
+            "category": "Savings",
+            "date": 1580191200000
+        },
+        {
+            "id": "QS8HUIz69kqdbfRXEWR3",
+            "amount": 5303.49,
+            "categoryId": "adBwQc2LJzYYRljaYuBS",
+            "category": "Income",
+            "description": "Deposit - FOOT LOCKER",
+            "date": 1580277600000
+        },
+        {
+            "id": "7TUfY7Zt9W3kMZeXcZWC",
+            "category": "Adobe",
+            "amount": 10.61,
+            "date": 1580364000000,
+            "categoryId": "lzEDNGYxy2CLaHrfN6i6",
+            "description": "POS Debit - Visa Check Card 4244 - ADOBE PHOTOGPHY PL 800-833-66"
+        },
+        {
+            "id": "DopcUsJk49QuBVeBnQDu",
+            "categoryId": "MGzbltfr1SqN1wjzIzuG",
+            "date": 1580364000000,
+            "category": "Groceries",
+            "description": "POS Debit - Visa Check Card 4244 - ALDI 40003 CHICAGO IL",
+            "amount": 21.91
+        },
+        {
+            "id": "IHp4qAgx0X9klht9dso7",
+            "amount": 33.32,
+            "category": "Amazon",
+            "date": 1580364000000,
+            "description": "POS Debit - Visa Check Card 4244 - AMZN MKTP USRV2AB AMZNCOM B",
+            "categoryId": "X5infml0O17kVSPjnMQX"
+        },
+        {
+            "id": "Mq3p463ov6OZh1zxQz0Y",
+            "category": "Spotify",
+            "amount": 10.89,
+            "categoryId": "duQy17afz6xYhswuGLbd",
+            "description": "POS Debit - Visa Check Card 4244 - SPOTIFY USA 877-7781161 NY",
+            "date": 1580364000000
+        },
+        {
+            "id": "sr9xULrVo6Ge1xAriuwy",
+            "category": "Other",
+            "amount": 20,
+            "description": "ACH Transaction - PAYPAL INST XFER 0009100001",
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "date": 1580364000000
+        },
+        {
+            "id": "xL3vj9iPISKgRGBbMI7Y",
+            "description": "POS Debit - Visa Check Card 4244 - TARGET T- 4466 N Broad Chicag",
+            "amount": 40.36,
+            "category": "Target",
+            "date": 1580364000000,
+            "categoryId": "HEdgvWxNYhZhgGRkGyzM"
+        },
+        {
+            "id": "Kg7cRCgKiaq3F6gkiYZO",
+            "categoryId": "Mzaq3jSU5NfiEN2OWC6l",
+            "category": "Subscriptions",
+            "date": 1580450400000,
+            "amount": 1,
+            "description": "ACH Transaction - Subscription Acorns 0011192468"
+        },
+        {
+            "id": "OmgzlN3Zq6A3uRkGULm2",
+            "description": "POS Debit - Visa Check Card 4244 - MARIANOS 3030 N BROAD CHICAGO",
+            "category": "Groceries",
+            "categoryId": "MGzbltfr1SqN1wjzIzuG",
+            "amount": 23.14,
+            "date": 1580450400000
+        },
+        {
+            "id": "SA1bm1efk7EPgJXEhCcb",
+            "description": "Dividend",
+            "date": 1580450400000,
+            "categoryId": "adBwQc2LJzYYRljaYuBS",
+            "category": "Income",
+            "amount": 0.09
+        },
+        {
+            "id": "jIX59WjXu3QYJzCTSCLc",
+            "description": "POS Debit - Visa Check Card 4244 - AUDIBLEI79HY2YY3 AMZNCOM BI",
+            "category": "Audible",
+            "categoryId": "WlTRQEPHKjC8K8PXqPc3",
+            "date": 1580450400000,
+            "amount": 14.95
+        },
+        {
+            "id": "kgq4jxL6qyrflAMUPWM9",
+            "amount": 500,
+            "category": "Credit Card",
+            "date": 1580450400000,
+            "description": "ACH Transaction - BK OF AMER VI MC ONLINE PMT 0012114128",
+            "categoryId": "23ZoQaFQaHemgVh5e3kc"
+        },
+        {
+            "id": "yznC8B2C6ernYRlJNLkK",
+            "description": "ACH Transaction - FREELANCER INTER IAT PAYPAL 0009100001",
+            "categoryId": "CowM5Ubnu28l8EbIkPIf",
+            "amount": 10.48,
+            "date": 1580450400000,
+            "category": "Other"
+        }
+    ]
+}

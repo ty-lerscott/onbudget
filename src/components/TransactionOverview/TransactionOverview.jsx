@@ -40,6 +40,7 @@ const TransactionOverview = ({
       {...props}>
       <div className='overviewGroup'>
         <span
+          aria-label='Revenue Amount'
           className={cn('amount', {
             negative: revenue < 0,
             positive: revenue > 0
@@ -50,13 +51,13 @@ const TransactionOverview = ({
         <span className='title'>Revenue</span>
       </div>
       <div className='overviewGroup'>
-        <span className='amount'>
+        <span className='amount' aria-label='Unplanned Expense Amount'>
           {isLoading ? <SkeletonText /> : toCurrency(unplannedTotal)}
         </span>
         <span className='title'>Unplanned</span>
       </div>
       <div className='overviewGroup'>
-        <span className='amount'>
+        <span className='amount' aria-label='Bill Amount'>
           {isLoading ? <SkeletonText /> : toCurrency(billsTotal)}
         </span>
         <span className='title'>Bills</span>

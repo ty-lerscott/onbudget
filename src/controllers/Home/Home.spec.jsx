@@ -1,48 +1,107 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { renderWithStore, getState } from '__test__/utils'
+import { screen, waitFor, advanceTo, clearDateMock } from '@tsw38/otis'
 
-import ForgotPassword from './Home'
-import { TestProvider } from 'utils/test/utils'
+import Home from './Home'
 
-import state from './__test__/state'
-
-const setup = ({ appState, componentProps } = {}) =>
-  render(
-    <TestProvider {...appState}>
-      <ForgotPassword {...componentProps} />
-    </TestProvider>
-  )
+const render = (store = {}) =>
+  renderWithStore(<Home />, { store: getState(store) })
 
 describe('<Home>', () => {
-  it('doesnt render if firebase has not loaded', () => {
-    const { queryByTestId } = setup()
+  beforeEach(() => {
+    advanceTo(new Date(2020, 10, 5))
+  })
 
-    expect(queryByTestId('Page-Home')).toBeFalsy()
+  afterEach(() => {
+    clearDateMock()
+  })
+
+  it('doesnt render if firebase has not loaded', () => {
+    render()
+
+    expect(screen.queryByTestId('Page-Home')).toBeFalsy()
   })
 
   it('shows sign in form if not logged in', () => {
-    const { getAllByText } = setup({
-      appState: state({ hasFirebaseLoaded: true })
+    render({
+      firebase: {
+        auth: {
+          isLoaded: true
+        }
+      }
     })
 
-    expect(getAllByText('Sign In')).toHaveLength(2)
+    expect(screen.getAllByText('Sign In')).toHaveLength(2)
+    expect(screen.getByLabelText('Email')).toBeInTheDocument()
+    expect(screen.getByLabelText('Password')).toBeInTheDocument()
   })
 
-  it('shows dashboard when user is logged in', () => {
-    const { getByTestId, getAllByTestId } = setup({
-      appState: state({ hasFirebaseLoaded: true, isSignedIn: true })
+  it('shows dashboard when user is logged in', async () => {
+    render({
+      firebase: {
+        auth: {
+          uid: 'tyler.scott.14@gmail.com',
+          isLoaded: true,
+          isInitializing: false
+        }
+      },
+      ui: {
+        date: new Date()
+      }
     })
 
-    expect(getByTestId('Page-Home')).toBeTruthy()
-    expect(getByTestId('OverallSpending')).toBeTruthy()
-    expect(getAllByTestId('Card-ContentWrapper')).toHaveLength(4)
-    expect(getAllByTestId('Card')).toHaveLength(3)
-    expect(getByTestId('MonthDisplay')).toBeTruthy()
-    expect(getByTestId('ImportStatementForm')).toBeTruthy()
-    expect(getByTestId('OpenModal-ImportTransactions')).toBeTruthy()
-    expect(getByTestId('OpenModal-AddTransaction')).toBeTruthy()
+    const {
+      getByTestId,
+      queryByTestId,
+      getByLabelText,
+      getAllByTestId,
+      queryAllByTestId
+    } = screen
+
+    expect(getByTestId('Page-Home')).toBeInTheDocument()
+    expect(getByTestId('OverallSpending')).toBeInTheDocument()
+
+    expect(getAllByTestId('Card-ContentWrapper')).toBeArrayOfSize(5)
+    expect(getAllByTestId('Card')).toBeArrayOfSize(3)
+    expect(getByTestId('MonthDisplay')).toBeInTheDocument()
+    expect(getByTestId('ImportStatementForm')).toBeInTheDocument()
+    expect(getByTestId('OpenModal-ImportTransactions')).toBeInTheDocument()
+    expect(getByTestId('OpenModal-AddTransaction')).toBeInTheDocument()
+
+    // OverallSpending
+    await waitFor(() => {
+      expect(queryByTestId('OverallSpendingSkeleton')).toBeNull()
+    })
+
+    expect(getByLabelText('Overall Spending Amount')).toHaveTextContent(
+      '$1,072.48'
+    )
+
+    // Transaction Overview
+    expect(getByLabelText('Revenue Amount')).toHaveTextContent('-$1,072.48')
+    expect(getByLabelText('Unplanned Expense Amount')).toHaveTextContent(
+      '$297.93'
+    )
+    expect(getByLabelText('Bill Amount')).toHaveTextContent('$774.55')
+
+    // AverageDailySpending
+    await waitFor(() => {
+      expect(queryByTestId('AverageDailySpendingSkeleton')).toBeNull()
+    })
+    expect(getByLabelText('Average daily spending amount')).toHaveTextContent(
+      '$9.93'
+    )
+
+    // CategoryList
+    await waitFor(() => {
+      expect(queryAllByTestId('CategorySkeleton')).toBeArrayOfSize(0)
+    })
+
+    expect(getAllByTestId('Category')).toBeArrayOfSize(11)
+
+    // StackedCategoryChart
+    await waitFor(() => {
+      expect(queryByTestId('CategoryBreakdown-Loading')).toBeNull()
+    })
   })
 })
-
-// hasFirebaseLoaded = false,
-// 	isFirebaseInitializing = false
