@@ -1,25 +1,16 @@
 import React from 'react'
-import '@testing-library/jest-dom'
-import { render, fireEvent, waitFor, screen } from '@testing-library/react'
+import { screen } from '@tsw38/otis'
 
 import AverageDailySpending from './AverageDailySpending'
-import { TestProvider } from 'utils/test/utils'
 
-import transactions from '__test-data__/transactions'
+import {
+  getState,
+  getFixture,
+  FIXTURE_NAMES,
+  renderWithStore
+} from '__test__/utils'
 
-const providerState = isLoading => ({
-  state: {
-    ui: {
-      dashboard: {
-        isLoading: {
-          averageDailySpending: isLoading
-        }
-      }
-    }
-  }
-})
-
-const setup = ({ componentProps, providerProps }) => {
+const render = ({ componentProps, store } = {}) => {
   const allProps = {
     dispatch: jest.fn(),
     transactions: [],
@@ -28,35 +19,44 @@ const setup = ({ componentProps, providerProps }) => {
 
   return {
     transactions: allProps.transactions,
-    selectors: render(
-      <TestProvider {...providerProps}>
-        <AverageDailySpending {...allProps} />
-      </TestProvider>
-    )
+    selectors: renderWithStore(<AverageDailySpending {...allProps} />, {
+      store: getState(store)
+    })
   }
 }
 
 describe('<AverageDailySpending />', () => {
   it('renders the skeleton text if app is loading', () => {
-    const {
-      selectors: { getByTestId }
-    } = setup({
-      providerProps: providerState(true)
-    })
+    render()
 
-    expect(getByTestId('AverageDailySpendingSkeleton')).toBeTruthy()
+    expect(
+      screen.getByTestId('AverageDailySpendingSkeleton')
+    ).toBeInTheDocument()
   })
 
   it('renders the sum total spending given an array of transactions', () => {
-    const {
-      selectors: { getByText }
-    } = setup({
-      providerProps: providerState(),
+    render({
+      store: {
+        firebase: {
+          auth: {
+            uid: 'tyler.scott.14@gmail.com',
+            isLoaded: true,
+            isInitializing: false
+          }
+        },
+        ui: {
+          dashboard: {
+            isLoading: {
+              averageDailySpending: false
+            }
+          }
+        }
+      },
       componentProps: {
-        unplanned: transactions
+        unplanned: getFixture(FIXTURE_NAMES.transactions).result
       }
     })
 
-    expect(getByText('$597.37')).toBeTruthy()
+    expect(screen.getByText('$5,742.93')).toBeInTheDocument()
   })
 })
