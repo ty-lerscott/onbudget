@@ -14,6 +14,9 @@ const getInitialState = (initialState = {}) =>
         transactions: [],
         isFetching: false,
         hasFetchedTransactionsOnce: true
+      },
+      ui: {
+        date: new Date()
       }
     },
     initialState
