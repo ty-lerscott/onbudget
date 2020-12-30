@@ -1,4 +1,4 @@
-import transactions from '__test-data__/transactions'
+import { getFixture, FIXTURE_NAMES } from '__test__/utils'
 
 import calculateSpending from './calculateSpending'
 
@@ -7,6 +7,7 @@ describe('calculateSpending', () => {
     it('should return 0 when no transactions are passed', () => {
       expect(calculateSpending()).toEqual(0)
     })
+
     it('should return 0 when transactions have no length', () => {
       expect(calculateSpending([])).toEqual(0)
     })
@@ -14,9 +15,11 @@ describe('calculateSpending', () => {
 
   describe('happy path', () => {
     it('should return the correct value', () => {
-      const total = calculateSpending(transactions)
+      const total = calculateSpending(
+        getFixture(FIXTURE_NAMES.transactions).result
+      )
 
-      expect(total).toEqual(597.37)
+      expect(Math.floor(total)).toEqual(5742)
     })
   })
 })

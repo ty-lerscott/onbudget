@@ -1,49 +1,44 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { screen, userEvent } from '@tsw38/otis'
+
+import { renderWithStore } from '__test__/utils'
 
 import AddTransaction from './AddTransaction'
-import { TestProvider } from 'utils/test/utils'
 
 const setup = props => {
-	const allProps = {
-		notify: jest.fn(),
-		getTransaction: jest.fn(),
-		addTransaction: jest.fn(),
-		importStatement: jest.fn(),
-		...props
-	}
+  const allProps = {
+    notify: jest.fn(),
+    getTransaction: jest.fn(),
+    addTransaction: jest.fn(),
+    importStatement: jest.fn(),
+    ...props
+  }
 
-	return render(
-		<TestProvider>
-			<AddTransaction {...allProps} />
-		</TestProvider>
-	)
+  return renderWithStore(<AddTransaction {...allProps} />)
 }
 
 describe('<AddTransaction />', () => {
-	let selectors
+  beforeEach(() => {
+    setup()
+  })
 
-	beforeEach(() => {
-		selectors = setup()
-	})
+  it('renders correctly with the add transaction form type after clicking the right button', async () => {
+    const { getByTestId, getByLabelText } = screen
 
-	it('renders correctly with the add transaction form type after clicking the right button', async () => {
-		const { getByTestId, getByLabelText } = selectors
+    userEvent.click(getByTestId('OpenModal-AddTransaction'))
 
-		fireEvent.click(getByTestId('OpenModal-AddTransaction'))
+    expect(getByLabelText('Amount *')).toBeTruthy()
+    expect(getByLabelText('Category *')).toBeTruthy()
+    expect(getByLabelText('Date *')).toBeTruthy()
+    expect(getByLabelText('Description')).toBeTruthy()
+  })
 
-		expect(getByLabelText('Amount *')).toBeTruthy()
-		expect(getByLabelText('Category *')).toBeTruthy()
-		expect(getByLabelText('Date *')).toBeTruthy()
-		expect(getByLabelText('Description')).toBeTruthy()
-	})
+  it('renders correctly with the import transactions form type after clicking the right button', async () => {
+    const { getByText, getByTestId } = screen
 
-	it('renders correctly with the import transactions form type after clicking the right button', async () => {
-		const { getByText, getByTestId } = selectors
+    userEvent.click(getByTestId('OpenModal-ImportTransactions'))
 
-		fireEvent.click(getByTestId('OpenModal-ImportTransactions'))
-
-		expect(getByText('File')).toBeTruthy()
-		expect(getByText('Choose a File')).toBeTruthy()
-	})
+    expect(getByText('File')).toBeTruthy()
+    expect(getByText('Choose a File')).toBeTruthy()
+  })
 })
