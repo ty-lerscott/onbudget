@@ -110,12 +110,12 @@ describe('<CategoryList />', () => {
 
       const nameInput = getByLabelText('Name')
 
-      expect(nameInput).toBeTruthy()
+      expect(nameInput).toBeInTheDocument()
       expect(nameInput.value).toBe('Income')
 
       const depositCheckbox = getByLabelText('Deposit?')
 
-      expect(depositCheckbox).toBeTruthy()
+      expect(depositCheckbox).toBeInTheDocument()
       expect(depositCheckbox.checked).toBeTrue()
     })
 

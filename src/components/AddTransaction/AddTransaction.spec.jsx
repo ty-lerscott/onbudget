@@ -27,10 +27,10 @@ describe('<AddTransaction />', () => {
 
     userEvent.click(getByTestId('OpenModal-AddTransaction'))
 
-    expect(getByLabelText('Amount *')).toBeTruthy()
-    expect(getByLabelText('Category *')).toBeTruthy()
-    expect(getByLabelText('Date *')).toBeTruthy()
-    expect(getByLabelText('Description')).toBeTruthy()
+    expect(getByLabelText('Amount *')).toBeInTheDocument()
+    expect(getByLabelText('Category *')).toBeInTheDocument()
+    expect(getByLabelText('Date *')).toBeInTheDocument()
+    expect(getByLabelText('Description')).toBeInTheDocument()
   })
 
   it('renders correctly with the import transactions form type after clicking the right button', async () => {
@@ -38,7 +38,7 @@ describe('<AddTransaction />', () => {
 
     userEvent.click(getByTestId('OpenModal-ImportTransactions'))
 
-    expect(getByText('File')).toBeTruthy()
-    expect(getByText('Choose a File')).toBeTruthy()
+    expect(getByText('File')).toBeInTheDocument()
+    expect(getByText('Choose a File')).toBeInTheDocument()
   })
 })
