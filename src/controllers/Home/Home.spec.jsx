@@ -89,7 +89,7 @@ describe('<Home>', () => {
       expect(queryByTestId('AverageDailySpendingSkeleton')).toBeNull()
     })
     expect(getByLabelText('Average daily spending amount')).toHaveTextContent(
-      '$99.15'
+      '$95.95'
     )
 
     // CategoryList

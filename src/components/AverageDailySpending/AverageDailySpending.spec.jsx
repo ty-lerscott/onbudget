@@ -57,6 +57,6 @@ describe('<AverageDailySpending />', () => {
       }
     })
 
-    expect(screen.getByText('$5,742.93')).toBeInTheDocument()
+    expect(screen.getByText('$5,557.67')).toBeInTheDocument()
   })
 })

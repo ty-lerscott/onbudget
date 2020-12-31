@@ -123,12 +123,10 @@
     ]
   },
   "devDependencies": {
-    "@tsw38/create-react-component": "1.0.1",
-    "@tsw38/otis": "^1.0.8",
+    "@tsw38/otis": "1.0.10",
     "axios": "0.21.1",
     "canvas": "2.6.1",
     "codecov": "3.8.1",
-    "colors": "1.4.0",
     "deepmerge": "4.2.2",
     "firebase-admin": "9.4.2",
     "prettier": "2.2.1",
