@@ -1,36 +1,30 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { screen } from '@tsw38/otis'
+
+import { renderWithStore, getState } from '__test__/utils'
 
 import ImportStatement from './form'
-import { TestProvider } from 'utils/test/utils'
 
-const setup = props => {
-	const resetParentModal = jest.fn()
-
-	return render(
-		<TestProvider>
-			<ImportStatement
-				{...props}
-				resetParentModal={resetParentModal}
-				isOpen={true}
-			/>
-		</TestProvider>
-	)
-}
+const setup = ({ props, store } = {}) =>
+  renderWithStore(
+    <ImportStatement {...props} resetParentModal={jest.fn()} isOpen={true} />,
+    { store: getState(store) }
+  )
 
 describe('<ImportStatement />', () => {
-	it('renders correctly', () => {
-		const { getByText } = setup()
+  it('renders correctly', () => {
+    setup()
 
-		const testString = {
-			labelText:
-				'Please format the file in this order "date", "description", "debit", "credit", "category"',
-			description: 'Only .csv files are accepted.',
-			chooseFile: 'Choose a File'
-		}
+    const { getByText } = screen
 
-		expect(getByText(testString.labelText)).toBeTruthy()
-		expect(getByText(testString.description)).toBeTruthy()
-		expect(getByText(testString.chooseFile)).toBeTruthy()
-	})
+    const textStrings = [
+      'Please format the file in this order "date", "description", "debit", "credit", "category"',
+      'Only .csv files are accepted.',
+      'Choose a File'
+    ]
+
+    textStrings.forEach(str => {
+      expect(getByText(str)).toBeInTheDocument()
+    })
+  })
 })
