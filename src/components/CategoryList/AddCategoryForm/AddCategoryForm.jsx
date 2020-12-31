@@ -13,117 +13,115 @@ import { enqueueNotification } from 'components/NotificationCenter/NotificationA
 import { addCategoryAction } from './AddCategoryFormActions'
 
 import {
-	Fields,
-	useFormReducer,
-	getInitialState
+  Fields,
+  useFormReducer,
+  getInitialState
 } from 'components/Forms/Category'
 
 const AddCategoryForm = ({ notify, categories, addCategory }) => {
-	const [
-		{
-			values,
-			state: { isModalOpen, isSubmitting, areFieldsMounted }
-		},
-		{ setFormValues, setIsModalOpen, setIsSubmitting, setAreFieldsMounted }
-	] = useFormReducer()
+  const [
+    {
+      values,
+      state: { isModalOpen, isSubmitting, areFieldsMounted }
+    },
+    { setFormValues, setIsModalOpen, setIsSubmitting, setAreFieldsMounted }
+  ] = useFormReducer()
 
-	const handleOpenModal = () => {
-		handleClearForm()
-		setAreFieldsMounted(true)
-		setIsModalOpen(true)
-	}
+  const handleOpenModal = () => {
+    handleClearForm()
+    setAreFieldsMounted(true)
+    setIsModalOpen(true)
+  }
 
-	const handleCloseModal = () => {
-		setIsModalOpen(false)
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
 
-		return
-	}
+    return
+  }
 
-	const handleClearForm = () => {
-		setFormValues(getInitialState().values)
-	}
+  const handleClearForm = () => {
+    setFormValues(getInitialState().values)
+  }
 
-	const handleSubmitForm = () => {
-		let newColor = '#cccccc'
+  const handleSubmitForm = () => {
+    let newColor = '#cccccc'
 
-		if (!values.isBill && !values.isDeposit) {
-			const categoryColors = categories.map(({ color }) => color)
+    if (!values.isBill && !values.isDeposit) {
+      const categoryColors = categories.map(({ color }) => color)
 
-			const [nextColor] = colors.filter(
-				hex => !categoryColors.includes(hex)
-			)
+      const [nextColor] = colors.filter(hex => !categoryColors.includes(hex))
 
-			newColor = nextColor
-		}
+      newColor = nextColor
+    }
 
-		const finalValues = {
-			...values,
-			color: newColor
-		}
+    const finalValues = {
+      ...values,
+      color: newColor
+    }
 
-		setIsSubmitting(true)
+    setIsSubmitting(true)
 
-		addCategory(finalValues)
-			.then(resp => {
-				if (!resp?.errors) {
-					handleCloseModal()
-					notify({
-						type: 'success',
-						subtitle: `You have successfully added a the ${values.name} category.`
-					})
-				}
-			})
-			.finally(() => {
-				setIsSubmitting(false)
-			})
-	}
+    addCategory(finalValues)
+      .then(resp => {
+        if (!resp?.errors) {
+          handleCloseModal()
+          notify({
+            type: 'success',
+            subtitle: `You have successfully added a the ${values.name} category.`
+          })
+        }
+      })
+      .finally(() => {
+        setIsSubmitting(false)
+      })
+  }
 
-	const handleDismountFields = () => {
-		setAreFieldsMounted(false)
-	}
+  const handleDismountFields = () => {
+    setAreFieldsMounted(false)
+  }
 
-	return (
-		<>
-			<Modal
-				isScrollable
-				isOpen={isModalOpen}
-				title='Add Category'
-				className='AddCategoryModal'
-				isSubmitting={isSubmitting}
-				handleCloseModal={handleCloseModal}
-				handlePrimaryClick={handleSubmitForm}
-				handleSecondaryClick={handleClearForm}
-				handleCloseModalComplete={handleDismountFields}
-				isDisabled={!values.name.length || isSubmitting}>
-				{areFieldsMounted && (
-					<Fields formValues={values} setFormValues={setFormValues} />
-				)}
-			</Modal>
-			<div className='AddCategory'>
-				<button
-					type='button'
-					className={cn('Button', 'Button--Primary')}
-					onClick={handleOpenModal}>
-					<Add32 /> Add Category
-				</button>
-			</div>
-		</>
-	)
+  return (
+    <>
+      <Modal
+        isScrollable
+        isOpen={isModalOpen}
+        title='Add Category'
+        className='AddCategoryModal'
+        isSubmitting={isSubmitting}
+        handleCloseModal={handleCloseModal}
+        handlePrimaryClick={handleSubmitForm}
+        handleSecondaryClick={handleClearForm}
+        handleCloseModalComplete={handleDismountFields}
+        isDisabled={!values.name.length || isSubmitting}>
+        {areFieldsMounted && (
+          <Fields formValues={values} setFormValues={setFormValues} />
+        )}
+      </Modal>
+      <div className='AddCategory'>
+        <button
+          type='button'
+          className={cn('Button', 'Button--Primary')}
+          onClick={handleOpenModal}>
+          <Add32 /> Add Category
+        </button>
+      </div>
+    </>
+  )
 }
 
 AddCategoryForm.propTypes = {
-	notify: PropTypes.func,
-	categories: PropTypes.array,
-	addCategory: PropTypes.func
+  notify: PropTypes.func,
+  categories: PropTypes.array,
+  addCategory: PropTypes.func
 }
 
 const mapStateToProps = state => ({
-	categories: state.app.categories
+  categories: state.app.categories
 })
 
 const mapDispatchToProps = {
-	notify: enqueueNotification,
-	addCategory: addCategoryAction
+  notify: enqueueNotification,
+  addCategory: addCategoryAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCategoryForm)

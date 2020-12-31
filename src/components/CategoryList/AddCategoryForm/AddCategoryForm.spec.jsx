@@ -1,60 +1,74 @@
 import React from 'react'
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { waitFor, userEvent, screen } from '@tsw38/otis'
 
 import AddCategoryForm from './AddCategoryForm'
-import { TestProvider } from 'utils/test/utils'
+import { renderWithStore, getState } from '__test__/utils'
 
-const categories = []
-
-const setup = props => {
-	const allProps = {
-		categories,
-		notify: jest.fn(),
-		addCategory: jest.fn(),
-		...props
-	}
-
-	return render(
-		<TestProvider>
-			<AddCategoryForm {...allProps} />
-		</TestProvider>
-	)
-}
+const render = (store = {}) =>
+  renderWithStore(<AddCategoryForm />, { store: getState(store) })
 
 describe('<AddCategoryForm />', () => {
-	let selectors
+  beforeEach(() => {
+    render()
+  })
 
-	beforeEach(() => {
-		selectors = setup()
-	})
+  it('on initial render, fields arent mounted in modal', () => {
+    expect(screen.queryByTestId('CategoryFormFields')).toBeNull()
+  })
 
-	it('on initial render, fields arent mounted in modal', () => {
-		const { queryByTestId } = selectors
+  it('renders fields after clicking button', () => {
+    const { queryByTestId, getByRole } = screen
 
-		expect(queryByTestId('CategoryFormFields')).toBeFalsy()
-	})
+    expect(queryByTestId('CategoryFormFields')).toBeNull()
 
-	it('renders fields after clicking button', () => {
-		const { queryByTestId, getByRole } = selectors
+    userEvent.click(getByRole('button', { name: 'Add Category' }))
 
-		expect(queryByTestId('CategoryFormFields')).toBeFalsy()
+    expect(queryByTestId('CategoryFormFields')).toBeInTheDocument()
+  })
 
-		fireEvent.click(getByRole('button', { name: 'Add Category' }))
+  it('closes the modal when clicking the close button', async () => {
+    const { getByTitle, getByRole, queryByTestId } = screen
 
-		expect(queryByTestId('CategoryFormFields')).toBeTruthy()
-	})
+    userEvent.click(getByRole('button', { name: 'Add Category' }))
 
-	it('closes the modal when clicking the close button', async () => {
-		const { getByTitle, getByRole, queryByTestId } = selectors
+    userEvent.click(getByTitle('Close'))
 
-		fireEvent.click(getByRole('button', { name: 'Add Category' }))
+    await waitFor(() => {
+      expect(queryByTestId('CategoryFormFields')).toBeNull()
+    })
+  })
 
-		fireEvent.click(getByTitle('Close'))
+  it('makes an xhr request when properly submitting form', async () => {
+    const { getByLabelText, getByRole, queryByRole } = screen
 
-		await waitFor(() => {
-			expect(queryByTestId('CategoryFormFields')).toBeFalsy()
-		})
-	})
+    userEvent.click(getByRole('button', { name: 'Add Category' }))
 
-	// handleSubmitForm
+    let nameInput
+    await waitFor(() => {
+      expect(getByLabelText('Name')).toBeInTheDocument()
+      nameInput = getByLabelText('Name')
+    })
+
+    const addCategoryModal = getByLabelText('Add Category Modal', {
+      selector: '[role="presentation"]'
+    })
+
+    expect(addCategoryModal).toHaveClass('Modal--disabled')
+
+    userEvent.type(nameInput, 'Test')
+
+    expect(nameInput).toHaveDisplayValue('Test')
+
+    expect(addCategoryModal).not.toHaveClass('Modal--disabled')
+
+    userEvent.click(getByRole('button', { name: 'Submit' }))
+
+    await waitFor(() => {
+      expect(queryByRole('button', { name: 'Submit' })).toBeNull()
+    })
+
+    await waitFor(() => {
+      expect(queryByRole('button', { name: 'Submit' })).toBeInTheDocument()
+    })
+  })
 })
