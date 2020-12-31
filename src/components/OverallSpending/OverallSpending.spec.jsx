@@ -1,81 +1,70 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { screen, buildFakeModel, fake, sequence } from '@tsw38/otis'
+
+import { getState, renderWithStore } from '__test__/utils'
 
 import OverallSpending from './OverallSpending'
-import { TestProvider } from 'utils/test/utils'
+import toCurrency from 'utils/currency'
 
-const providerState = isLoading => ({
-	state: {
-		ui: {
-			dashboard: {
-				isLoading: {
-					overallSpending: isLoading
-				}
-			}
-		}
-	}
+const buildTransaction = buildFakeModel('Transaction', {
+  fields: {
+    id: sequence().toString(),
+    amount: fake(f => f.random.number()),
+    date: new Date().getTime(),
+    categoryId: fake(f => f.random.alphaNumeric(10)),
+    description: fake(f => f.random.words(10))
+  }
 })
 
-const setup = ({ componentProps, providerProps }) => {
-	const allProps = {
-		dispatch: jest.fn(),
-		transactions: [],
-		...componentProps
-	}
+const state = isLoading => ({
+  ui: {
+    dashboard: {
+      isLoading: {
+        overallSpending: isLoading
+      }
+    }
+  }
+})
 
-	return {
-		transactions: allProps.transactions,
-		selectors: render(
-			<TestProvider {...providerProps}>
-				<OverallSpending {...allProps} />
-			</TestProvider>
-		)
-	}
+const setup = ({ props, store }) => {
+  const allProps = {
+    dispatch: jest.fn(),
+    transactions: [],
+    ...props
+  }
+
+  return renderWithStore(<OverallSpending {...allProps} />, {
+    store: getState(store)
+  })
 }
 
 describe('<OverallSpending />', () => {
-	it('renders the skeleton text if app is loading', () => {
-		const {
-			selectors: { getByTestId }
-		} = setup({
-			providerProps: providerState(true)
-		})
+  it('renders the skeleton text if app is loading', () => {
+    setup({
+      store: state(true)
+    })
 
-		expect(getByTestId('OverallSpendingSkeleton')).toBeTruthy()
-	})
+    expect(screen.getByTestId('OverallSpendingSkeleton')).toBeInTheDocument()
+  })
 
-	it('renders the sum total spending given an array of transactions', () => {
-		const {
-			selectors: { getByText }
-		} = setup({
-			providerProps: providerState(false),
-			componentProps: {
-				transactions: [
-					{
-						id: '1',
-						amount: 10,
-						date: 123,
-						categoryId: '1',
-						description: ''
-					},
-					{
-						id: '2',
-						amount: 20,
-						date: 123,
-						categoryId: '1',
-						description: ''
-					},
-					{
-						id: '3',
-						amount: 30,
-						date: 123,
-						categoryId: '1',
-						description: ''
-					}
-				]
-			}
-		})
+  it('renders the sum total spending given an array of transactions', () => {
+    const transactions = Array(5)
+      .fill(null)
+      .map(e => buildTransaction())
 
-		expect(getByText('$60.00')).toBeTruthy()
-	})
+    setup({
+      store: state(false),
+      props: {
+        transactions
+      }
+    })
+
+    const totalValue = transactions.reduce((acc, transaction) => {
+      acc = acc + transaction.amount
+
+      return acc
+    }, 0)
+
+    expect(screen.getByText(toCurrency(totalValue))).toBeInTheDocument()
+  })
 })
