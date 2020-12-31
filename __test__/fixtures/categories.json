@@ -76,6 +76,160 @@
             "color": "#cccccc",
             "name": "Electricity",
             "isBill": true
+        },
+        {
+            "id": "HEdgvWxNYhZhgGRkGyzM",
+            "isDeposit": false,
+            "name": "Target",
+            "isBill": false,
+            "color": "#f7b494"
+        },
+        {
+            "id": "I6XTyvulU6nZYn1Vj3es",
+            "name": "Health",
+            "isDeposit": false,
+            "color": "#94f7f7",
+            "isBill": false
+        },
+        {
+            "id": "MGzbltfr1SqN1wjzIzuG",
+            "color": "#94f7c6",
+            "isBill": false,
+            "isDeposit": false,
+            "name": "Groceries"
+        },
+        {
+            "id": "MNTfmNUxJTtmWPoz0Tlf",
+            "isBill": true,
+            "isDeposit": false,
+            "name": "Insurance",
+            "color": "#cccccc"
+        },
+        {
+            "id": "Mzaq3jSU5NfiEN2OWC6l",
+            "isBill": true,
+            "color": "#cccccc",
+            "name": "Subscriptions",
+            "isDeposit": false
+        },
+        {
+            "id": "TbZgLwFOhwCKWyW9aN7Y",
+            "name": "OnlyFans",
+            "color": "#cccccc",
+            "isDeposit": false,
+            "isBill": true
+        },
+        {
+            "id": "UIrGlJN5lzS7HA23MUOL",
+            "isBill": false,
+            "isDeposit": false,
+            "name": "Housing",
+            "color": "#94c6f7"
+        },
+        {
+            "id": "UzWA5ZLwhjykhLyto6zB",
+            "isBill": false,
+            "name": "Takeout",
+            "color": "#f794c6",
+            "isDeposit": false
+        },
+        {
+            "id": "VqSFiDpBZdg91DhjGcX5",
+            "color": "#94f794",
+            "isDeposit": false,
+            "name": "Entertainment",
+            "isBill": false
+        },
+        {
+            "id": "WbHEAbduIcpONiUmyi4m",
+            "color": "#cccccc",
+            "isDeposit": false,
+            "name": "Gym",
+            "isBill": true
+        },
+        {
+            "id": "WlTRQEPHKjC8K8PXqPc3",
+            "isDeposit": false,
+            "name": "Audible",
+            "color": "#cccccc",
+            "isBill": true
+        },
+        {
+            "id": "X5infml0O17kVSPjnMQX",
+            "isBill": false,
+            "color": "#f79694",
+            "isDeposit": false,
+            "name": "Amazon"
+        },
+        {
+            "id": "ZqksEz5YHDQRjeSnSQdQ",
+            "isBill": true,
+            "color": "#cccccc",
+            "isDeposit": false,
+            "name": "Rent"
+        },
+        {
+            "id": "adBwQc2LJzYYRljaYuBS",
+            "color": "#cccccc",
+            "isBill": false,
+            "name": "Income",
+            "isDeposit": true
+        },
+        {
+            "id": "dVhxTd5bADwUAlsGijAS",
+            "isDeposit": false,
+            "isBill": false,
+            "name": "Personal",
+            "color": "#c694f7"
+        },
+        {
+            "id": "duQy17afz6xYhswuGLbd",
+            "isBill": true,
+            "color": "#cccccc",
+            "isDeposit": false,
+            "name": "Spotify"
+        },
+        {
+            "id": "fa1dI386zhmjlhR2ZDZA",
+            "color": "#c6f794",
+            "name": "Dog",
+            "isDeposit": false,
+            "isBill": false
+        },
+        {
+            "id": "fcUyvLUBpM3TNdBVj67X",
+            "isBill": false,
+            "color": "#947759",
+            "name": "Taxes",
+            "isDeposit": false
+        },
+        {
+            "id": "h1O4vqUpgQb2Q3HgseG1",
+            "isDeposit": false,
+            "color": "#779459",
+            "name": "Video Games",
+            "isBill": false
+        },
+        {
+            "id": "lzEDNGYxy2CLaHrfN6i6",
+            "isDeposit": false,
+            "color": "#cccccc",
+            "name": "Adobe",
+            "isBill": true
+        },
+        {
+            "id": "yel2L7jXucstB8mGlMqz",
+            "isBill": true,
+            "isDeposit": false,
+            "color": "#cccccc",
+            "name": "Car"
+        },
+        {
+            "id": "zsk4fgqUXyd8mxheJTMB",
+            "isBill": true,
+            "name": "iCloud",
+            "color": "#cccccc",
+            "isDeposit": false
         }
     ]
 }

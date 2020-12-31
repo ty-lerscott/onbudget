@@ -6,6 +6,9 @@ const handlers = [
   rest.post('/categories', (req, res, ctx) =>
     res(ctx.json(getFixture(FIXTURE_NAMES.categories)))
   ),
+  rest.post('/editCategory', (req, res, ctx) =>
+    res(ctx.json(getFixture(FIXTURE_NAMES.editCategory)))
+  ),
   rest.post('/transactions', (req, res, ctx) =>
     res(ctx.json(getFixture(FIXTURE_NAMES.transactions)))
   ),

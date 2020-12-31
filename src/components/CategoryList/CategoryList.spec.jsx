@@ -1,190 +1,180 @@
 import React from 'react'
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, userEvent, waitFor } from '@tsw38/otis'
+
+import {
+  getState,
+  getFixture,
+  FIXTURE_NAMES,
+  renderWithStore
+} from '__test__/utils'
 
 import CategoryList from './CategoryList'
-import { TestProvider } from 'utils/test/utils'
 
-import categories from '__test-data__/categories'
 import { bills, deposits, unplanned } from './utils/test/CategoryList'
 
-const setup = ({ listProps, providerProps }) => {
-	const allProps = {
-		notify: jest.fn(),
-		editCategory: jest.fn(),
-		...listProps
-	}
+const render = ({ listProps, store } = {}) =>
+  renderWithStore(<CategoryList {...listProps} />, {
+    store: getState(store)
+  })
 
-	return {
-		notify: allProps.notify,
-		editCategory: allProps.editCategory,
-		selectors: render(
-			<TestProvider {...providerProps}>
-				<CategoryList {...allProps} />
-			</TestProvider>
-		)
-	}
-}
+const categories = getFixture(FIXTURE_NAMES.categories).result
 
 describe('<CategoryList />', () => {
-	it('renders a loading state', () => {
-		const {
-			selectors: { getAllByTestId }
-		} = setup({})
+  it('renders a loading state', () => {
+    render({})
 
-		expect(getAllByTestId('CategorySkeleton')).toHaveLength(6)
-	})
+    expect(screen.getAllByTestId('CategorySkeleton')).toHaveLength(6)
+  })
 
-	describe('happy paths', () => {
-		let notify
-		let selectors
-		let editCategory
+  describe('happy paths', () => {
+    let rendered
 
-		const beforeEachHelper = () => {
-			const rendered = setup({
-				listProps: { bills, deposits, unplanned },
-				providerProps: {
-					state: {
-						app: {
-							categories
-						},
-						ui: {
-							dashboard: {
-								isLoading: {
-									categoryList: false
-								}
-							}
-						}
-					}
-				}
-			})
+    beforeEach(() => {
+      rendered = render({
+        listProps: { bills, deposits, unplanned },
+        store: {
+          app: {
+            categories
+          },
+          ui: {
+            dashboard: {
+              isLoading: {
+                categoryList: false
+              }
+            }
+          }
+        }
+      })
+    })
 
-			notify = rendered.notify
-			selectors = rendered.selectors
-			editCategory = rendered.editCategory
-		}
+    it('renders the CategoryList properly', () => {
+      expect(screen.queryAllByRole('listitem')).toBeArrayOfSize(33)
 
-		it('renders the CategoryList properly', () => {
-			beforeEachHelper()
+      categories.forEach(category => {
+        expect(screen.getByText(category.name)).toBeInTheDocument()
+      })
+    })
 
-			const { queryAllByRole } = selectors
+    it('displays bills categories - when clicking bills filter', async () => {
+      userEvent.selectOptions(screen.getByRole('combobox'), 'BILLS')
 
-			expect(queryAllByRole('listitem')).toHaveLength(32)
-		})
+      await waitFor(() => {
+        expect(screen.getByRole('combobox')).toHaveValue('BILLS')
+      })
 
-		describe('filtering', () => {
-			beforeEach(beforeEachHelper)
+      expect(screen.queryAllByRole('listitem')).toBeArrayOfSize(16)
 
-			it('filters bills properly', () => {
-				const { getByRole, queryAllByRole, getByText } = selectors
+      categories.forEach(category => {
+        if (category.isBill) {
+          expect(screen.getByText(category.name)).toBeInTheDocument()
+        }
+      })
+    })
 
-				fireEvent.change(getByRole('combobox'), {
-					target: { value: 'BILLS' }
-				})
+    it('displays deposits categories - when clicking deposits filter', async () => {
+      userEvent.selectOptions(screen.getByRole('combobox'), 'DEPOSITS')
 
-				expect(queryAllByRole('listitem')).toHaveLength(15)
-				expect(getByText('Rent')).toBeTruthy()
-			})
+      await waitFor(() => {
+        expect(screen.getByRole('combobox')).toHaveValue('DEPOSITS')
+      })
 
-			it('filters deposits properly', async () => {
-				const { getByRole, queryAllByRole, getByText } = selectors
+      expect(screen.queryAllByRole('listitem')).toBeArrayOfSize(1)
 
-				fireEvent.change(getByRole('combobox'), {
-					target: { value: 'DEPOSITS' }
-				})
+      categories.forEach(category => {
+        if (category.isDeposit) {
+          expect(screen.getByText(category.name)).toBeInTheDocument()
+        }
+      })
+    })
 
-				expect(queryAllByRole('listitem')).toHaveLength(1)
-				expect(getByText('Income')).toBeTruthy()
-			})
+    it('displays unplanned categories - when clicking unplanned filter', async () => {
+      userEvent.selectOptions(screen.getByRole('combobox'), 'UNPLANNED')
 
-			it('filters unplanned properly', async () => {
-				const { getByRole, queryAllByRole, getByText } = selectors
+      await waitFor(() => {
+        expect(screen.getByRole('combobox')).toHaveValue('UNPLANNED')
+      })
 
-				fireEvent.change(getByRole('combobox'), {
-					target: { value: 'UNPLANNED' }
-				})
+      expect(screen.queryAllByRole('listitem')).toBeArrayOfSize(16)
 
-				expect(queryAllByRole('listitem')).toHaveLength(16)
-				expect(getByText('Target')).toBeTruthy()
-			})
-		})
+      categories.forEach(category => {
+        if (!category.isDeposit && !category.isBill) {
+          expect(screen.getByText(category.name)).toBeInTheDocument()
+        }
+      })
+    })
 
-		describe('editing category', () => {
-			beforeEach(beforeEachHelper)
+    it('opens a modal with prefilled inputs - when editing a category', () => {
+      const { getByText, getByLabelText, getByDisplayValue } = screen
 
-			it('opens a modal with prefilled inputs', () => {
-				const {
-					getByText,
-					getByLabelText,
-					getByDisplayValue
-				} = selectors
+      userEvent.click(getByText('Income'))
 
-				fireEvent.click(getByText('Income'))
+      const nameInput = getByLabelText('Name')
 
-				const nameInput = getByLabelText('Name')
+      expect(nameInput).toBeTruthy()
+      expect(nameInput.value).toBe('Income')
 
-				expect(nameInput).toBeTruthy()
-				expect(nameInput.value).toBe('Income')
+      const depositCheckbox = getByLabelText('Deposit?')
 
-				const depositCheckbox = getByLabelText('Deposit?')
+      expect(depositCheckbox).toBeTruthy()
+      expect(depositCheckbox.checked).toBeTrue()
+    })
 
-				expect(depositCheckbox).toBeTruthy()
-				expect(depositCheckbox.checked).toBeTrue()
-			})
+    it('makes an xhr request to edit category - when editing category', async () => {
+      const { getByText, getByLabelText, getAllByText } = screen
 
-			it('can edit a category', () => {
-				const {
-					getByText,
-					getByLabelText,
-					debug,
-					getAllByText
-				} = selectors
+      userEvent.click(getByText('Income'))
 
-				fireEvent.click(getByText('Income'))
+      const nameInput = getByLabelText('Name')
+      const depositCheckbox = getByLabelText('Deposit?')
 
-				const nameInput = getByLabelText('Name')
-				const depositCheckbox = getByLabelText('Deposit?')
+      userEvent.type(nameInput, 's')
+      expect(nameInput.value).toBe('Incomes')
 
-				fireEvent.change(nameInput, { target: { value: 'Incomes' } })
-				expect(nameInput.value).toBe('Incomes')
+      userEvent.click(depositCheckbox)
 
-				fireEvent.click(depositCheckbox)
+      expect(depositCheckbox.checked).toBeFalse()
 
-				expect(depositCheckbox.checked).toBeFalse()
+      const modal = getByLabelText('Edit Category Modal', {
+        selector: '[role="presentation"]'
+      })
 
-				// fireEvent.click(getAllByText("Submit")[0]);
+      expect(modal).toHaveClass('is-visible')
 
-				// debug();
-				//TODO: mock firebase so I can submit this
-			})
+      userEvent.click(getAllByText('Submit')[0])
 
-			it('clears all fields when clicking secondary button', () => {
-				const { getByText, getByLabelText, getAllByText } = selectors
+      await waitFor(() => {
+        expect(modal).not.toHaveClass('is-visible')
+      })
+    })
 
-				fireEvent.click(getByText('Income'))
+    it('clears all fields when clicking secondary button - when editing category', () => {
+      const { getByText, getByLabelText, getAllByText } = screen
 
-				const nameInput = getByLabelText('Name')
-				const depositCheckbox = getByLabelText('Deposit?')
+      userEvent.click(getByText('Income'))
 
-				fireEvent.change(nameInput, { target: { value: 'Incomes' } })
+      const nameInput = getByLabelText('Name')
+      const depositCheckbox = getByLabelText('Deposit?')
 
-				fireEvent.click(getAllByText('Clear')[0])
+      userEvent.type(nameInput, 's')
+      expect(nameInput.value).toBe('Incomes')
 
-				expect(getByLabelText('Name').value).toBe('')
+      userEvent.click(getAllByText('Clear')[0])
 
-				expect(depositCheckbox.checked).toBeFalse()
-			})
+      expect(getByLabelText('Name').value).toBe('')
 
-			it('dismounts fields on modal close', async () => {
-				const { getByText, getAllByTitle, queryByLabelText } = selectors
+      expect(depositCheckbox.checked).toBeFalse()
+    })
 
-				fireEvent.click(getByText('Income'))
+    it('dismounts fields on modal close - when editing category', async () => {
+      const { getByText, getAllByTitle, queryByLabelText } = screen
 
-				fireEvent.click(getAllByTitle('Close')[0])
+      userEvent.click(getByText('Income'))
 
-				await waitFor(() => {
-					expect(queryByLabelText('Name')).toBeFalsy()
-				})
-			})
-		})
-	})
+      userEvent.click(getAllByTitle('Close')[0])
+
+      await waitFor(() => {
+        expect(queryByLabelText('Name')).toBeFalsy()
+      })
+    })
+  })
 })

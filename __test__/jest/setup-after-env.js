@@ -40,6 +40,7 @@ jest.mock('utils/api', body => ({ dispatch, getState, getFirebase, path }) =>
 )
 
 const server = setupServer()
+global.server = server
 
 beforeAll(() => {
   server.beforeAll()

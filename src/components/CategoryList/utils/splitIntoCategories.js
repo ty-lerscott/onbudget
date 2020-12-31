@@ -1,52 +1,56 @@
 const getCategory = (categories, id) =>
-	(categories || []).find(category => category.id === id)
+  (categories || []).find(category => category.id === id)
 
 const defaultBreakdown = {
-	total: 0,
-	quantity: 0,
-	transactions: []
+  total: 0,
+  quantity: 0,
+  transactions: []
 }
 
 // given an array of transactions, group them by category
 // return them as an array sorted by the total spent in that category
 const splitIntoCategories = ({ transactions, categories } = {}) => {
-	if (!categories?.length) {
-		return []
-	}
+  if (!categories?.length) {
+    return []
+  }
 
-	const transactionsForThisMonth = transactions.reduce(
-		(byCategory, transaction) => {
-			const { categoryId } = transaction
+  const transactionsForThisMonth = (transactions || []).reduce(
+    (byCategory, transaction) => {
+      const { categoryId } = transaction
 
-			const category = getCategory(categories, categoryId)
+      const category = getCategory(categories, categoryId)
 
-			if (!byCategory[category.name]) {
-				byCategory[category.name] = {
-					...defaultBreakdown,
-					...category
-				}
-			}
+      if (!category) {
+        return byCategory
+      }
 
-			byCategory[category.name].quantity += 1
-			byCategory[category.name].transactions.push(transaction)
-			byCategory[category.name].total += transaction.amount
+      if (!byCategory[category.name]) {
+        byCategory[category.name] = {
+          ...defaultBreakdown,
+          ...category
+        }
+      }
 
-			return byCategory
-		},
-		{}
-	)
+      byCategory[category.name].quantity += 1
+      byCategory[category.name].transactions.push(transaction)
+      byCategory[category.name].total += transaction.amount
 
-	const byCategory = categories.map(category => ({
-		...category,
-		...defaultBreakdown,
-		...transactionsForThisMonth[category.name]
-	}))
+      return byCategory
+    },
+    {}
+  )
 
-	const entries = Object.entries(byCategory)
+  const byCategory = categories.map(category => ({
+    ...category,
+    ...defaultBreakdown,
+    ...transactionsForThisMonth[category.name]
+  }))
 
-	entries.sort((a, b) => b[1].total - a[1].total)
+  const entries = Object.entries(byCategory)
 
-	return entries.map(([key, value]) => value)
+  entries.sort((a, b) => b[1].total - a[1].total)
+
+  return entries.map(([key, value]) => value)
 }
 
 export default splitIntoCategories
