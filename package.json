@@ -124,7 +124,7 @@
   },
   "devDependencies": {
     "@tsw38/create-react-component": "1.0.1",
-    "@tsw38/otis": "1.0.8",
+    "@tsw38/otis": "^1.0.8",
     "axios": "0.21.1",
     "canvas": "2.6.1",
     "codecov": "3.8.1",
@@ -137,6 +137,23 @@
   "jest": {
     "setupFilesAfterEnv": [
       "<rootDir>/__test__/jest/setup-after-env.js"
-    ]
+    ],
+    "reporters": [
+      [
+        "@tsw38/otis/lib/modules/threshold-ratchet",
+        {
+          "tolerance": 5,
+          "roundDown": true
+        }
+      ]
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 67,
+        "statements": 67,
+        "functions": 62,
+        "branches": 58
+      }
+    }
   }
 }

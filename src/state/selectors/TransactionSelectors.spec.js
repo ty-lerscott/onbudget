@@ -60,11 +60,14 @@ describe('TransactionSelectors', () => {
           app: {
             categories: getFixture(FIXTURE_NAMES.categories).result,
             transactions: getFixture(FIXTURE_NAMES.transactions).result
+          },
+          ui: {
+            date: new Date()
           }
         })
       )
 
-      expect(datasets).toBeArrayOfSize(5)
+      expect(datasets).toBeArrayOfSize(16)
       expect(labels).toEqual(expect.arrayContaining(expected.labels))
 
       clearDateMock()

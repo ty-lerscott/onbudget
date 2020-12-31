@@ -1,45 +1,75 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { screen, advanceTo, clearDateMock } from '@tsw38/otis'
+import { isThisMonth } from 'date-fns'
+
+import {
+  getState,
+  getFixture,
+  FIXTURE_NAMES,
+  renderWithStore
+} from '__test__/utils'
 
 import TransActionHistory from './TransactionHistory'
-import { TestProvider } from 'utils/test/utils'
 
-import state from './__test__/state'
-
-const setup = stateProps =>
-	render(
-		<TestProvider {...stateProps}>
-			<TransActionHistory />
-		</TestProvider>
-	)
+const setup = (store = {}) =>
+  renderWithStore(<TransActionHistory />, { store: getState(store) })
 
 describe('<TransactionHistory />', () => {
-	it('renders the table skeleton if there no transactions passed', () => {
-		const { getByTestId } = setup(state())
+  beforeEach(() => {
+    advanceTo(new Date(2020, 10, 5))
+  })
 
-		expect(getByTestId('TransactionHistoryTable-loading')).toBeTruthy()
-	})
-	it('renders the table empty when given transactions', () => {
-		const { getByTestId, getByText } = setup(
-			state({ hasFetchedTransactionsOnce: true, transactions: [] })
-		)
+  afterEach(() => {
+    clearDateMock()
+  })
 
-		expect(getByTestId('TransactionHistoryTable')).toBeTruthy()
-		expect(
-			getByText("There's no transaction data for this month")
-		).toBeTruthy()
-	})
-	it('renders the table when given transactions', () => {
-		const { getByText } = setup(state({ hasFetchedTransactionsOnce: true }))
+  it('renders the table skeleton if there no transactions passed', () => {
+    setup()
 
-		expect(getByText('Date')).toBeTruthy()
-		expect(getByText('Category')).toBeTruthy()
-		expect(getByText('Description')).toBeTruthy()
-		expect(getByText('Amount')).toBeTruthy()
-		expect(
-			getByText(
-				'POS Debit - Visa Check Card 4244 - SPOTIFY USA 877-7781161 NY'
-			)
-		).toBeTruthy()
-	})
+    expect(
+      screen.getByTestId('TransactionHistoryTable-loading')
+    ).toBeInTheDocument()
+  })
+
+  it('renders the table empty when given transactions', () => {
+    setup({
+      app: {
+        hasFetchedTransactionsOnce: true,
+        transactions: []
+      }
+    })
+
+    expect(screen.getByTestId('TransactionHistoryTable')).toBeInTheDocument()
+    expect(
+      screen.getByText("There's no transaction data for this month")
+    ).toBeInTheDocument()
+  })
+
+  it('renders the table when given transactions', () => {
+    const transactions = getFixture(FIXTURE_NAMES.transactions).result
+
+    setup({
+      ui: {
+        date: new Date()
+      },
+      app: {
+        hasFetchedTransactionsOnce: true,
+        categories: getFixture(FIXTURE_NAMES.categories).result,
+        transactions: getFixture(FIXTURE_NAMES.transactions).result
+      }
+    })
+
+    expect(screen.getByText('Date')).toBeInTheDocument()
+    expect(screen.getByText('Category')).toBeInTheDocument()
+    expect(screen.getByText('Description')).toBeInTheDocument()
+    expect(screen.getByText('Amount')).toBeInTheDocument()
+
+    const thisMonthTransactions = transactions.filter(transaction =>
+      isThisMonth(transaction.date)
+    )
+
+    expect(screen.getAllByRole('row')).toBeArrayOfSize(
+      thisMonthTransactions.length + 1
+    )
+  })
 })

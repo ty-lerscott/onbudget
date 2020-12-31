@@ -74,22 +74,22 @@ describe('<Home>', () => {
     })
 
     expect(getByLabelText('Overall Spending Amount')).toHaveTextContent(
-      '$1,072.48'
+      '$9,871.62'
     )
 
     // Transaction Overview
-    expect(getByLabelText('Revenue Amount')).toHaveTextContent('-$1,072.48')
+    expect(getByLabelText('Revenue Amount')).toHaveTextContent('-$2,251.55')
     expect(getByLabelText('Unplanned Expense Amount')).toHaveTextContent(
-      '$297.93'
+      '$2,974.48'
     )
-    expect(getByLabelText('Bill Amount')).toHaveTextContent('$774.55')
+    expect(getByLabelText('Bill Amount')).toHaveTextContent('$6,897.14')
 
     // AverageDailySpending
     await waitFor(() => {
       expect(queryByTestId('AverageDailySpendingSkeleton')).toBeNull()
     })
     expect(getByLabelText('Average daily spending amount')).toHaveTextContent(
-      '$9.93'
+      '$99.15'
     )
 
     // CategoryList
@@ -97,7 +97,7 @@ describe('<Home>', () => {
       expect(queryAllByTestId('CategorySkeleton')).toBeArrayOfSize(0)
     })
 
-    expect(getAllByTestId('Category')).toBeArrayOfSize(11)
+    expect(getAllByTestId('Category')).toBeArrayOfSize(33)
 
     // StackedCategoryChart
     await waitFor(() => {
