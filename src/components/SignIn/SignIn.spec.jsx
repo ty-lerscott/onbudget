@@ -1,62 +1,59 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
-import { LocalStorageMock } from '@react-mock/localstorage'
+import { screen, userEvent, LocalStorageMock } from '@tsw38/otis'
+
+import { getState, renderWithStore } from '__test__/utils'
 
 import SignIn from './SignIn'
-import { TestProvider } from 'utils/test/utils'
 
-const setup = (providerState = {}, hasRequestedAccess) => {
-	return render(
-		<LocalStorageMock items={{ hasRequestedAccess }}>
-			<TestProvider state={providerState}>
-				<SignIn />
-			</TestProvider>
-		</LocalStorageMock>
-	)
+const setup = (store = {}, hasRequestedAccess) => {
+  return renderWithStore(
+    <LocalStorageMock items={{ hasRequestedAccess }}>
+      <SignIn />
+    </LocalStorageMock>,
+    { store: getState(store) }
+  )
 }
 
 describe('<SignIn />', () => {
-	it('renders the signin form properly', () => {
-		const {
-			getByText,
-			getAllByRole,
-			getAllByText,
-			getByLabelText
-		} = setup()
-		expect(getAllByRole('button', { text: 'Clear' })).toBeTruthy()
-		expect(getAllByText('Sign In')).toHaveLength(2)
-		expect(getByLabelText('Email')).toBeTruthy()
-		expect(getByLabelText('Password')).toBeTruthy()
-		expect(getByText('Request Access')).toBeTruthy()
-		expect(getByText('Forgot Password?')).toBeTruthy()
-	})
-	it('hides request access if previously requested', () => {
-		const { queryByText } = setup({}, true)
+  it('renders the signin form properly', () => {
+    setup()
 
-		expect(queryByText('Request Access')).toBeFalsy()
-	})
+    const { getByText, getByRole, getAllByText, getByLabelText } = screen
 
-	it('can fill out and clear the form', () => {
-		const { getByLabelText, getByText } = setup()
+    expect(getByRole('button', { name: 'Clear' })).toBeInTheDocument()
+    expect(getAllByText('Sign In')).toBeArrayOfSize(2)
+    expect(getByLabelText('Email')).toBeInTheDocument()
+    expect(getByLabelText('Password')).toBeInTheDocument()
+    expect(getByText('Request Access')).toBeInTheDocument()
+    expect(getByText('Forgot Password?')).toBeInTheDocument()
+  })
+  it('hides request access if previously requested', () => {
+    setup({}, true)
 
-		const emailInput = getByLabelText('Email')
-		const passwordInput = getByLabelText('Password')
-		const expected = {
-			email: 'test@gmail.com',
-			password: 'password'
-		}
+    expect(screen.queryByText('Request Access')).toBeNull()
+  })
 
-		fireEvent.change(emailInput, { target: { value: expected.email } })
-		fireEvent.change(passwordInput, {
-			target: { value: expected.password }
-		})
+  it('can fill out and clear the form', () => {
+    setup()
 
-		expect(emailInput.value).toBe(expected.email)
-		expect(passwordInput.value).toBe(expected.password)
+    const emailInput = screen.getByLabelText('Email')
+    const passwordInput = screen.getByLabelText('Password')
+    const expected = {
+      email: 'test@gmail.com',
+      password: 'password'
+    }
 
-		fireEvent.click(getByText('Clear'))
+    userEvent.type(emailInput, expected.email)
+    userEvent.type(passwordInput, expected.password)
 
-		expect(emailInput.value).toBe('')
-		expect(passwordInput.value).toBe('')
-	})
+    expect(emailInput).toHaveDisplayValue(expected.email)
+    expect(passwordInput).toHaveValue(expected.password)
+
+    userEvent.click(screen.getByText('Clear'))
+
+    expect(emailInput).toHaveDisplayValue('')
+    expect(passwordInput).toHaveValue('')
+  })
+
+  //TODO: add sign in test
 })
