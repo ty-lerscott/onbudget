@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: NODE_ENV=test npm ci
-    - run: npm run test:coverage
+    - run: npm t
     - run: npm run coverage:upload
     - run: NODE_ENV=production npm run build
       env:

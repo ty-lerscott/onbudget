@@ -49,7 +49,7 @@
     "firebase": "firebase emulators:start",
     "firebase:deploy": "firebase deploy --only functions",
     "firebase:populate": "firebase emulators:start --export-on-exit=./firebase --import=./firebase",
-    "test": "otis test",
+    "test": "otis test -u",
     "test:watch": "otis test -u -w",
     "coverage:upload": "codecov",
     "crc": "crc"
