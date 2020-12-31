@@ -1,31 +1,29 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { screen, waitFor } from '@tsw38/otis'
+
+import { renderWithStore, getState } from '__test__/utils'
 
 import AppLoading from './AppLoading'
-import { TestProvider } from 'utils/test/utils'
 
-const setup = stateProps =>
-	render(
-		<TestProvider {...stateProps}>
-			<AppLoading />
-		</TestProvider>
-	)
+const render = (store = {}) =>
+  renderWithStore(<AppLoading />, { store: getState(store) })
+
 describe('<AppLoading />', () => {
-	it('When Redux is true - render loading', () => {
-		const { getByTestId } = setup()
+  it('When Redux is true - render loading', () => {
+    render()
 
-		expect(getByTestId('AppLoading')).toBeTruthy()
-	})
+    expect(screen.getByTestId('AppLoading')).toBeInTheDocument()
+  })
 
-	it('When Redux is false - render nothing', () => {
-		const { queryByTestId } = setup({
-			state: {
-				app: {
-					isLoading: false
-				}
-			}
-		})
+  it('When Redux is false - render nothing', async () => {
+    render({
+      app: {
+        isLoading: false
+      }
+    })
 
-		expect(queryByTestId('AppLoading')).toBeFalsy()
-	})
+    await waitFor(() => {
+      expect(screen.queryByTestId('AppLoading')).toBeNull()
+    })
+  })
 })

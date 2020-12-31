@@ -6,7 +6,7 @@ export const CATEGORIES = 'CATEGORIES'
 export const TRANSACTION = 'TRANSACTION'
 export const TRANSACTIONS = 'TRANSACTIONS'
 
-const initialState = {
+export const initialState = {
   isLoading: true,
   categories: [],
   isFetching: false,

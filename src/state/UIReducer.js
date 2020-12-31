@@ -7,7 +7,7 @@ export const LOADING_COMPLETE = 'LOADING_COMPLETE'
 
 const now = new Date()
 
-const initialState = {
+export const initialState = {
   date: startOfMonth(now),
   dashboard: {
     isLoading: {

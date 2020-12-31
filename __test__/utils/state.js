@@ -1,5 +1,8 @@
 import merge from 'deepmerge'
 
+import { initialState as appInitialState } from 'state/AppReducer'
+import { initialState as uiInitialState } from 'state/UIReducer'
+
 const getInitialState = (initialState = {}) =>
   merge(
     {
@@ -8,16 +11,8 @@ const getInitialState = (initialState = {}) =>
           isLoaded: false
         }
       },
-      app: {
-        categories: [],
-        isLoading: false,
-        transactions: [],
-        isFetching: false,
-        hasFetchedTransactionsOnce: true
-      },
-      ui: {
-        date: new Date()
-      }
+      app: appInitialState,
+      ui: uiInitialState
     },
     initialState
   )
