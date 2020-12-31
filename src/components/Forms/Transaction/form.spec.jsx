@@ -1,41 +1,33 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { screen } from '@tsw38/otis'
+
+import { getState, renderWithStore } from '__test__/utils'
 
 import AddTransaction from './form'
-import { TestProvider } from 'utils/test/utils'
 
-const setup = props => {
-	const resetParentModal = jest.fn()
+const render = ({ props, store } = {}) => {
+  const resetParentModal = jest.fn()
 
-	return render(
-		<TestProvider
-			state={{
-				app: {
-					categories: []
-				}
-			}}>
-			<AddTransaction
-				{...props}
-				resetParentModal={resetParentModal}
-				isOpen={true}
-			/>
-		</TestProvider>
-	)
+  return renderWithStore(
+    <AddTransaction
+      {...props}
+      resetParentModal={resetParentModal}
+      isOpen={true}
+    />,
+    { store: getState(store) }
+  )
 }
-//TODO: Edit the Form (date, description)
+
 describe('<AddTransactionForm />', () => {
-	let selectors
+  beforeEach(() => {
+    render()
+  })
 
-	beforeEach(() => {
-		selectors = setup()
-	})
+  it('renders correctly', () => {
+    const testStrings = ['Amount *', 'Category *', 'Date *', 'Description']
 
-	it('renders correctly', () => {
-		const { getByLabelText } = selectors
-
-		expect(getByLabelText('Amount *')).toBeTruthy()
-		expect(getByLabelText('Category *')).toBeTruthy()
-		expect(getByLabelText('Date *')).toBeTruthy()
-		expect(getByLabelText('Description')).toBeTruthy()
-	})
+    testStrings.forEach(str => {
+      expect(screen.getByLabelText(str)).toBeInTheDocument()
+    })
+  })
 })
