@@ -1,7 +1,8 @@
 import merge from 'deepmerge'
 
-import { initialState as appInitialState } from 'state/AppReducer'
 import { initialState as uiInitialState } from 'state/UIReducer'
+import { initialState as appInitialState } from 'state/AppReducer'
+import { initialState as notificationInitialState } from 'state/NotificationsReducer'
 
 const getInitialState = (initialState = {}) =>
   merge(
@@ -11,8 +12,9 @@ const getInitialState = (initialState = {}) =>
           isLoaded: false
         }
       },
+      ui: uiInitialState,
       app: appInitialState,
-      ui: uiInitialState
+      notifications: notificationInitialState
     },
     initialState
   )

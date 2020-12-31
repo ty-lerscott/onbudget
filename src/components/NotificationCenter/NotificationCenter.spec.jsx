@@ -1,50 +1,44 @@
 import React from 'react'
-import { render, waitFor } from '@testing-library/react'
+import { screen, buildFakeModel, fake, sequence } from '@tsw38/otis'
+
+import { renderWithStore, getState } from '__test__/utils'
 
 import NotificationCenter from './NotificationCenter'
-import { TestProvider } from 'utils/test/utils'
 
-const notifications = [
-	{
-		id: '1',
-		subtitle: 'Notification subtitle',
-		type: 'success',
-		isRequired: {} //TODO: what is this
-	},
-	{
-		id: '2',
-		subtitle: 'Notification subtitle',
-		type: 'info',
-		isRequired: {} //TODO: what is this
-	}
-]
+const buildNotification = buildFakeModel('Notification', {
+  fields: {
+    id: sequence().toString(),
+    subtitle: fake(f => f.random.words(5)),
+    type: 'success',
+    isRequired: {}
+  }
+})
 
-const setup = notificationsArr =>
-	render(
-		<TestProvider
-			state={{
-				notifications: notificationsArr
-			}}>
-			<NotificationCenter />
-		</TestProvider>
-	)
+const setup = store =>
+  renderWithStore(<NotificationCenter />, { store: getState(store) })
 
 describe('<NotificationCenter />', () => {
-	beforeEach(() => {
-		jest.useFakeTimers()
-	})
+  beforeEach(() => {
+    jest.useFakeTimers()
+  })
 
-	it('renders a list of notifications', async () => {
-		const { queryAllByRole } = setup(notifications)
+  it('renders a list of notifications', async () => {
+    const notifcationLength = 5
 
-		expect(queryAllByRole('alert')).toHaveLength(2)
-		jest.advanceTimersByTime(10000)
-		expect(queryAllByRole('alert')).toHaveLength(0)
-	})
+    setup({
+      notifications: Array(notifcationLength)
+        .fill(null)
+        .map(e => buildNotification())
+    })
 
-	// Running all pending timers and switching to real timers using Jest
-	afterEach(() => {
-		jest.runOnlyPendingTimers()
-		jest.useRealTimers()
-	})
+    expect(screen.queryAllByRole('alert')).toBeArrayOfSize(notifcationLength)
+    jest.advanceTimersByTime(notifcationLength * 5000)
+    expect(screen.queryAllByRole('alert')).toBeArrayOfSize(0)
+  })
+
+  // Running all pending timers and switching to real timers using Jest
+  afterEach(() => {
+    jest.runOnlyPendingTimers()
+    jest.useRealTimers()
+  })
 })

@@ -124,7 +124,7 @@
   },
   "devDependencies": {
     "@tsw38/create-react-component": "1.0.1",
-    "@tsw38/otis": "1.0.7",
+    "@tsw38/otis": "1.0.8",
     "axios": "0.21.1",
     "canvas": "2.6.1",
     "codecov": "3.8.1",
