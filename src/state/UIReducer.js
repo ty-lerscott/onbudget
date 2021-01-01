@@ -5,10 +5,8 @@ import { TRANSACTION } from './AppReducer'
 export const DATE = 'DATE'
 export const LOADING_COMPLETE = 'LOADING_COMPLETE'
 
-const now = new Date()
-
 export const initialState = {
-  date: startOfMonth(now),
+  date: startOfMonth(new Date()),
   dashboard: {
     isLoading: {
       categoryList: true,

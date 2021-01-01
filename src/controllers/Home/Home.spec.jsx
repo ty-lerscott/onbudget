@@ -24,6 +24,9 @@ describe('<Home>', () => {
 
   it('shows sign in form if not logged in', () => {
     render({
+      ui: {
+        date: new Date()
+      },
       firebase: {
         auth: {
           isLoaded: true
@@ -89,7 +92,7 @@ describe('<Home>', () => {
       expect(queryByTestId('AverageDailySpendingSkeleton')).toBeNull()
     })
     expect(getByLabelText('Average daily spending amount')).toHaveTextContent(
-      '$95.95'
+      '$2,974.48'
     )
 
     // CategoryList

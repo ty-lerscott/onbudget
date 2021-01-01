@@ -16,7 +16,7 @@ import {
   FIXTURE_NAMES
 } from '__test__/utils'
 
-import Form from './form'
+import Form from './add'
 
 const buildDescription = buildFakeModel('Word', {
   fields: {

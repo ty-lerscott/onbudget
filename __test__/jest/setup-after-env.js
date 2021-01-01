@@ -1,4 +1,4 @@
-import { cleanup } from '@tsw38/otis'
+import { cleanup, advanceTo, clearDateMock } from '@tsw38/otis'
 import axios from 'axios'
 import { setupServer } from '__test__/utils'
 
@@ -46,6 +46,10 @@ beforeAll(() => {
   server.beforeAll()
 })
 
+beforeEach(() => {
+  advanceTo(new Date(2020, 10, 5))
+})
+
 afterAll(() => {
   server.afterAll()
 })
@@ -53,4 +57,5 @@ afterAll(() => {
 afterEach(() => {
   server.afterEach()
   cleanup()
+  clearDateMock()
 })

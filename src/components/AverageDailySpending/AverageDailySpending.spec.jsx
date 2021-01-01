@@ -45,6 +45,7 @@ describe('<AverageDailySpending />', () => {
           }
         },
         ui: {
+          date: new Date(),
           dashboard: {
             isLoading: {
               averageDailySpending: false
@@ -57,6 +58,6 @@ describe('<AverageDailySpending />', () => {
       }
     })
 
-    expect(screen.getByText('$5,557.67')).toBeInTheDocument()
+    expect(screen.getByText('$172,287.90')).toBeInTheDocument()
   })
 })

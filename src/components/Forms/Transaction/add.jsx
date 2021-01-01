@@ -1,3 +1,5 @@
+//TODO: This is for Add Transaction, change name to add for consistancy
+
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import React, { useEffect } from 'react'

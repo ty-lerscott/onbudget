@@ -19,7 +19,7 @@ describe('calculateSpending', () => {
         getFixture(FIXTURE_NAMES.transactions).result
       )
 
-      expect(Math.floor(total)).toEqual(5557)
+      expect(Math.floor(total)).toEqual(172287)
     })
   })
 })
