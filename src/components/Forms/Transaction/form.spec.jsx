@@ -40,7 +40,7 @@ const labels = {
   description: 'Description'
 }
 
-describe.only('<AddTransactionForm />', () => {
+describe('<AddTransactionForm />', () => {
   beforeEach(() => {
     advanceTo(new Date(2020, 10, 5))
   })
@@ -148,20 +148,6 @@ describe.only('<AddTransactionForm />', () => {
       expect(
         screen.queryByRole('button', { name: 'Submit' })
       ).toBeInTheDocument()
-    })
-  })
-})
-
-describe('<EditTransactionForm />', () => {
-  beforeEach(() => {
-    render()
-  })
-
-  it('renders correctly', () => {
-    const testStrings = ['Amount *', 'Category *', 'Date *', 'Description']
-
-    testStrings.forEach(str => {
-      expect(screen.getByLabelText(str)).toBeInTheDocument()
     })
   })
 })
