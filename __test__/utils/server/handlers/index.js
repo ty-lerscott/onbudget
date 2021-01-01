@@ -15,6 +15,9 @@ const handlers = [
   rest.post('/transactions', (req, res, ctx) =>
     res(ctx.json(getFixture(FIXTURE_NAMES.transactions)))
   ),
+  rest.post('/addTransaction', (req, res, ctx) =>
+    res(ctx.json(getFixture(FIXTURE_NAMES.addTransaction)))
+  ),
   rest.post('/transactionsByMonth', (req, res, ctx) =>
     res(ctx.json(getFixture(FIXTURE_NAMES.transactionsByMonth)))
   )

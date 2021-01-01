@@ -62,7 +62,7 @@ const categories = (state = initialState.categories, { type, payload }) => {
 const transactions = (state = initialState.transactions, { type, payload }) => {
   switch (type) {
     case `${TRANSACTIONS}_SUCCESS`:
-      return payload
+      return payload || state
     case `DELETE_${TRANSACTION}_SUCCESS`:
       return state.filter(transaction => transaction.id !== payload)
     case `${TRANSACTIONS}_BY_MONTH_SUCCESS`:

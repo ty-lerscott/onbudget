@@ -3,6 +3,7 @@ export const NAMES = {
   addCategory: 'addCategory',
   editCategory: 'editCategory',
   transactions: 'transactions',
+  addTransaction: 'addTransaction',
   transactionsByMonth: 'transactionsByMonth'
 }
 
@@ -13,6 +14,7 @@ const FIXTURES = {
   [NAMES.addCategory]: require(`${fixtureRoot}/addCategory.json`),
   [NAMES.editCategory]: require(`${fixtureRoot}/editCategory.json`),
   [NAMES.transactions]: require(`${fixtureRoot}/transactions.json`),
+  [NAMES.addTransaction]: require(`${fixtureRoot}/addTransaction.json`),
   [NAMES.transactionsByMonth]: require(`${fixtureRoot}/transactionsByMonth.json`)
 }
 
