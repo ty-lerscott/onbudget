@@ -14,7 +14,7 @@ import { TransactionProps } from 'definitions'
 import './AverageDailySpending.scss'
 
 const AverageDailySpending = ({ unplanned, isLoading, ...props }) => {
-  const total = calculateSpending(unplanned)
+  const total = calculateSpending({ date: new Date(), transactions: unplanned })
 
   return (
     <Card

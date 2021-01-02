@@ -123,16 +123,20 @@
     ]
   },
   "devDependencies": {
-    "@tsw38/otis": "1.0.10",
+    "@tsw38/otis": "^1.0.10",
     "axios": "0.21.1",
     "canvas": "2.6.1",
     "codecov": "3.8.1",
     "deepmerge": "4.2.2",
     "firebase-admin": "9.4.2",
+    "jest-date-mock": "^1.0.8",
     "prettier": "2.2.1",
     "source-map-explorer": "2.5.1"
   },
   "jest": {
+    "setupFiles": [
+      "jest-date-mock"
+    ],
     "setupFilesAfterEnv": [
       "<rootDir>/__test__/jest/setup-after-env.js"
     ],
@@ -144,14 +148,6 @@
           "roundDown": true
         }
       ]
-    ],
-    "coverageThreshold": {
-      "global": {
-        "lines": 69,
-        "statements": 70,
-        "functions": 65,
-        "branches": 60
-      }
-    }
+    ]
   }
 }

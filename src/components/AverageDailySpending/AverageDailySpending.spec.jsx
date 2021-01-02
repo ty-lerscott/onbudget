@@ -1,5 +1,5 @@
 import React from 'react'
-import { screen } from '@tsw38/otis'
+import { screen, advanceTo, clearDateMock } from '@tsw38/otis'
 
 import AverageDailySpending from './AverageDailySpending'
 
@@ -26,6 +26,14 @@ const render = ({ componentProps, store } = {}) => {
 }
 
 describe('<AverageDailySpending />', () => {
+  beforeEach(() => {
+    advanceTo(new Date(2020, 10, 5))
+  })
+
+  afterEach(() => {
+    clearDateMock()
+  })
+
   it('renders the skeleton text if app is loading', () => {
     render()
 
@@ -58,6 +66,6 @@ describe('<AverageDailySpending />', () => {
       }
     })
 
-    expect(screen.getByText('$172,287.90')).toBeInTheDocument()
+    expect(screen.getByText('$34,457.58')).toBeInTheDocument()
   })
 })

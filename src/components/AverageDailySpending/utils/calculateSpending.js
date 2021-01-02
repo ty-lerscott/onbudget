@@ -1,11 +1,9 @@
-const now = new Date()
-
-const calculateSpending = transactions => {
+const calculateSpending = ({ date = new Date(), transactions = [] } = {}) => {
   if (!transactions || !Array.isArray(transactions)) {
     return 0
   }
 
-  const dayNumber = now.getDate()
+  const dayNumber = date.getDate()
 
   const total = transactions.reduce((acc, { amount }) => {
     acc += amount
